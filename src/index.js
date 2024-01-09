@@ -71,6 +71,17 @@ const App = ()=> {
     return acc += item.quantity;
   }, 0);
 
+  const cartTotal = cartItems.reduce((acc, item) => {
+    const product = products.find(p => p.id === item.product_id);
+    if (product) {
+      return acc += product.price * item.quantity;
+    } else {
+      return acc;
+    }
+  }, 0);
+
+ 
+
   const login = async(credentials)=> {
     await api.login({ credentials, setAuth });
   }
@@ -107,6 +118,7 @@ const App = ()=> {
                 products = { products }
                 updateOrder = { updateOrder }
                 removeFromCart = { removeFromCart }
+                cartTotal = {cartTotal}
               />
               <Orders
                 orders = { orders }
