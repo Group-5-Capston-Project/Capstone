@@ -5,6 +5,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
   return (
     <div>
       <h2>Products</h2>
+      <h1>Hello World</h1>
       <ul>
         {
           products.map( product => {
