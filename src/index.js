@@ -6,9 +6,13 @@ import Orders from './Orders';
 import Cart from './Cart';
 import Login from './Login';
 import api from './api';
+<<<<<<< HEAD
+import Signup from './Signup';
+=======
 import axios from 'axios';
 import SingleProduct from './SingleProduct';
 
+>>>>>>> main
 
 const App = ()=> {
   const [products, setProducts] = useState([]);
@@ -151,6 +155,9 @@ const App = ()=> {
             </>
         ):(
           <div>
+            <h3>Are you a New Customer? Create Account below to View More Products and Shop</h3>
+            <Signup/>
+            <h3>Existing Customers Please Login Below</h3>
             <Login login={ login }/>
             <Products
               products={ products }
