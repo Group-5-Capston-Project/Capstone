@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link, HashRouter, Routes, Route } from 'react-router-dom';
+import { Link, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Products from './Products';
 import Orders from './Orders';
 import Cart from './Cart';
 import Login from './Login';
 import api from './api';
+<<<<<<< HEAD
+import Signup from './Signup';
+=======
+import axios from 'axios';
+import SingleProduct from './SingleProduct';
+
+>>>>>>> main
 import Profile from './Profile';
 
 const App = ()=> {
@@ -13,6 +20,11 @@ const App = ()=> {
   const [orders, setOrders] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [auth, setAuth] = useState({});
+
+
+  let location = useLocation()
+
+  
 
   const attemptLoginWithToken = async()=> {
     await api.attemptLoginWithToken(setAuth);
@@ -55,6 +67,10 @@ const App = ()=> {
   const updateLineItem = async(lineItem)=> {
     await api.updateLineItem({ lineItem, cart, lineItems, setLineItems });
   };
+  
+  const decrementQuantity = async(lineItem)=> {
+    await api.decrementQuantity({ lineItem, cart, lineItems, setLineItems });
+  };
 
   const updateOrder = async(order)=> {
     await api.updateOrder({ order, setOrders });
@@ -81,6 +97,8 @@ const App = ()=> {
     }
   }, 0);
 
+
+
  
 
   const login = async(credentials)=> {
@@ -106,13 +124,16 @@ const App = ()=> {
               </span>
             </nav>
             <main>
-              <Products
-                auth = { auth }
-                products={ products }
-                cartItems = { cartItems }
-                createLineItem = { createLineItem }
-                updateLineItem = { updateLineItem }
-              />
+
+            <Routes>
+            <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
+              <Route path="/products/:id" element={<SingleProduct products={products} />} />
+            </Routes>
+            
+            </main>
+
+
+            {location.pathname === '/cart' && (
               <Cart
                 cart = { cart }
                 lineItems = { lineItems }
@@ -120,17 +141,25 @@ const App = ()=> {
                 updateOrder = { updateOrder }
                 removeFromCart = { removeFromCart }
                 cartTotal = {cartTotal}
+                incrementQuantity = { updateLineItem }
+                decrementQuantity={decrementQuantity}
               />
+            )}
+            {location.pathname === '/orders' && (
               <Orders
                 orders = { orders }
                 products = { products }
                 lineItems = { lineItems }
               />
               <Profile/>
-            </main>
+            )}
+            
             </>
         ):(
           <div>
+            <h3>Are you a New Customer? Create Account below to View More Products and Shop</h3>
+            <Signup/>
+            <h3>Existing Customers Please Login Below</h3>
             <Login login={ login }/>
             <Products
               products={ products }

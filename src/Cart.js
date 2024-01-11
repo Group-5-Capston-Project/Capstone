@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cart = ({ updateOrder, removeFromCart, lineItems, cart, products, cartTotal })=> {
+const Cart = ({ updateOrder, removeFromCart, lineItems, cart, products, cartTotal, incrementQuantity, decrementQuantity })=> {
   return (
     <div>
       <h2>Cart</h2>
@@ -11,7 +11,21 @@ const Cart = ({ updateOrder, removeFromCart, lineItems, cart, products, cartTota
             return (
               <li key={ lineItem.id }>
                 { product.name }
-                ({ lineItem.quantity }), ${product.price * lineItem.quantity}
+                ({ lineItem.quantity })
+
+                <button onClick={() => {incrementQuantity(lineItem)}}>+</button>
+
+                <button onClick={() => 
+                
+                  {if(lineItem.quantity > 1) {
+                    decrementQuantity(lineItem)
+                  }else {
+                  removeFromCart(lineItem)
+                }}}>-</button>
+                
+                
+                
+                ${product.price * lineItem.quantity}
                 <button onClick={ ()=> removeFromCart(lineItem)}>Remove From Cart</button>
               </li>
             );
