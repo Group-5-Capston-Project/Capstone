@@ -6,6 +6,7 @@ import Orders from './Orders';
 import Cart from './Cart';
 import Login from './Login';
 import api from './api';
+import Profile from './Profile';
 
 const App = ()=> {
   const [products, setProducts] = useState([]);
@@ -125,6 +126,7 @@ const App = ()=> {
                 products = { products }
                 lineItems = { lineItems }
               />
+              <Profile/>
             </main>
             </>
         ):(
