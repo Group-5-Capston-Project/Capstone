@@ -13,6 +13,7 @@ import axios from 'axios';
 import SingleProduct from './SingleProduct';
 
 >>>>>>> main
+import Profile from './Profile';
 
 const App = ()=> {
   const [products, setProducts] = useState([]);
@@ -150,6 +151,7 @@ const App = ()=> {
                 products = { products }
                 lineItems = { lineItems }
               />
+              <Profile/>
             )}
             
             </>

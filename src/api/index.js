@@ -96,7 +96,8 @@ const api = {
   updateOrder,
   removeFromCart,
   attemptLoginWithToken,
-  decrementQuantity
+  decrementQuantity,
+  attemptLoginWithToken,
 };
 
 export default api;
