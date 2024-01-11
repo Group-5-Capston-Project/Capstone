@@ -1,10 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import SearchBar from './SearchBar'
 
 const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=> {
+  const navigate = useNavigate();
   return (
     <div>
       <h2>Products</h2>
+
+      <div className="searchBar">
+        <p>Search Product</p>
+        <SearchBar products={products} />
+      </div>
       
       <ul>
         {
@@ -12,7 +19,13 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
             const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
             return (
               <li key={ product.id }>
-                { product.name }, ${product.price}.00, {product.description}
+                <Link to={`/products/${product.id}`}>
+                { product.name }
+                </Link>
+                , 
+                
+                
+                ${product.price}.00, {product.description}
                 {
                   auth.id ? (
                     cartItem ? <button onClick={ ()=> updateLineItem(cartItem)}>Add Another</button>: <button onClick={ ()=> createLineItem(product)}>Add</button>
