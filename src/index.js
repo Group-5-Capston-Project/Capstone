@@ -6,13 +6,10 @@ import Orders from './Orders';
 import Cart from './Cart';
 import Login from './Login';
 import api from './api';
-<<<<<<< HEAD
 import Signup from './Signup';
-=======
 import axios from 'axios';
 import SingleProduct from './SingleProduct';
 
->>>>>>> main
 import Profile from './Profile';
 
 const App = ()=> {
@@ -118,6 +115,7 @@ const App = ()=> {
               <Link to='/products'>Products ({ products.length })</Link>
               <Link to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
               <Link to='/cart'>Cart ({ cartCount })</Link>
+              <Link to='/profile'>Profile</Link>
               <span>
                 Welcome { auth.username }!
                 <button onClick={ logout }>Logout</button>
@@ -128,6 +126,7 @@ const App = ()=> {
             <Routes>
             <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
               <Route path="/products/:id" element={<SingleProduct products={products} />} />
+              <Route path="/profile" element={ <Profile/>} />
             </Routes>
             
             </main>
@@ -151,7 +150,6 @@ const App = ()=> {
                 products = { products }
                 lineItems = { lineItems }
               />
-              <Profile/>
             )}
             
             </>
