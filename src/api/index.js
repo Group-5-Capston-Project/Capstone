@@ -96,7 +96,7 @@ const api = {
   updateOrder,
   removeFromCart,
   attemptLoginWithToken,
-  decrementQuantity
+  decrementQuantity,
   attemptLoginWithToken,
 };
 
