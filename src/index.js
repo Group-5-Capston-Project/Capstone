@@ -9,6 +9,7 @@ import api from './api';
 import Signup from './Signup';
 import axios from 'axios';
 import Users from './Users';
+import SingleProduct from './SingleProduct';
 
 import Profile from './Profile';
 
@@ -133,7 +134,8 @@ const App = ()=> {
             <main>
 
             <Routes>
-              <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
+            <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
+              <Route path="/products/:id" element={<SingleProduct products={products} createLineItem={createLineItem} />} />
               <Route path="/profile" element={ <Profile/>} />
               <Route path="/users" element={<Users users={users}/>} />
             </Routes>

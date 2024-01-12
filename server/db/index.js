@@ -1,5 +1,7 @@
 const client = require('./client')
 
+
+
 const {
   fetchProducts,
   createProduct
