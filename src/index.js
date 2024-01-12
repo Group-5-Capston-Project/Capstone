@@ -8,6 +8,7 @@ import Login from './Login';
 import api from './api';
 import Signup from './Signup';
 import axios from 'axios';
+import Users from './Users';
 import SingleProduct from './SingleProduct';
 
 import Profile from './Profile';
@@ -17,6 +18,7 @@ const App = ()=> {
   const [orders, setOrders] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [auth, setAuth] = useState({});
+  const [users, setUsers] = useState([]);
 
 
   let location = useLocation()
@@ -55,6 +57,13 @@ const App = ()=> {
       fetchData();
     }
   }, [auth]);
+
+  useEffect(()=> {
+    const fetchData = async()=> {
+      await api.fetchUsers(setUsers);
+    };
+    fetchData();
+  }, []);
 
 
   const createLineItem = async(product)=> {
@@ -112,12 +121,13 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
+              <Link to='/users'>Users ({users.length})</Link>
               <Link to='/products'>Products ({ products.length })</Link>
               <Link to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
               <Link to='/cart'>Cart ({ cartCount })</Link>
               <Link to='/profile'>Profile</Link>
               <span>
-                Welcome { auth.username }!
+                Welcome { auth.username }! 
                 <button onClick={ logout }>Logout</button>
               </span>
             </nav>
@@ -127,6 +137,7 @@ const App = ()=> {
             <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
               <Route path="/products/:id" element={<SingleProduct products={products} createLineItem={createLineItem} />} />
               <Route path="/profile" element={ <Profile/>} />
+              <Route path="/users" element={<Users users={users}/>} />
             </Routes>
             
             </main>
