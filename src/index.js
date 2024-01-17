@@ -6,13 +6,10 @@ import Orders from './Orders';
 import Cart from './Cart';
 import Login from './Login';
 import api from './api';
-<<<<<<< HEAD
 import Signup from './Signup';
-=======
 import axios from 'axios';
 import SingleProduct from './SingleProduct';
 
->>>>>>> main
 
 const App = ()=> {
   const [products, setProducts] = useState([]);
@@ -22,6 +19,8 @@ const App = ()=> {
 
 
   let location = useLocation()
+  //
+  const {pathname} = location
 
   
 
@@ -32,6 +31,8 @@ const App = ()=> {
   useEffect(()=> {
     attemptLoginWithToken();
   }, []);
+
+ 
 
   useEffect(()=> {
     const fetchData = async()=> {
@@ -114,9 +115,9 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
-              <Link to='/products'>Products ({ products.length })</Link>
-              <Link to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
-              <Link to='/cart'>Cart ({ cartCount })</Link>
+              <Link className="navbox" to='/products'>Products ({ products.length })</Link>
+              <Link className="navbox" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
+              <Link className="navbox" to='/cart'>Cart ({ cartCount })</Link>
               <span>
                 Welcome { auth.username }!
                 <button onClick={ logout }>Logout</button>

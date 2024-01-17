@@ -4,6 +4,7 @@ const Orders = ({ orders, products, lineItems })=> {
   return (
     <div>
       <h2>Orders</h2>
+      
       <ul>
         {
           orders.filter(order => !order.is_cart).map( order => {
@@ -36,6 +37,7 @@ const Orders = ({ orders, products, lineItems })=> {
           })
         }
       </ul>
+      
     </div>
   );
 };
