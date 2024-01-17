@@ -1,6 +1,9 @@
 const client = require('./client');
 const { v4 } = require('uuid');
 const uuidv4 = v4;
+const bcrypt = require('bcrypt');
+
+
 
 const fetchUsers = async()=> {
   const SQL = `
@@ -21,6 +24,7 @@ const createUser = async(user)=> {
 
 const updateUser = async(user) => {
     console.log(user)
+    user.password = await bcrypt.hash(user.password, 5);
     const SQL = `
       UPDATE users
       SET username = $1, password = $2, is_admin = $3
