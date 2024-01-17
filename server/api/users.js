@@ -1,10 +1,12 @@
 const {
     fetchUsers,
+    updateUser
   } = require('../db/users');
-  
   const express = require('express');
+  const { isLoggedIn } = require('./middleware');
   const app = express.Router();
-  const { isLoggedIn, isAdmin } = require('./middleware');
+  
+  
   
   app.get('/', async(req, res, next)=> {
     try {
@@ -16,9 +18,17 @@ const {
     }
   });
   
-  app.put('/users/:id', isLoggedIn, isAdmin, (req, res, next)=> {
-    res.send('hello world');
-  });
+  app.put('/:id', async (req, res, next)=> {
+    try {
+      console.log("Hi")
+      const response = await updateUser({ ...req.body, id: req.params.id });
+      res.send(response.rows[0])
+      console.log("response -->", response)
+    } catch (error) {
+      next(error)
+    }
+
+})
   
   
-  module.exports = app;
+  module.exports = app; 

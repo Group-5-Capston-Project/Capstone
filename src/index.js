@@ -65,7 +65,6 @@ const App = ()=> {
     fetchData();
   }, []);
 
-
   const createLineItem = async(product)=> {
     await api.createLineItem({ product, cart, lineItems, setLineItems});
   };
@@ -121,11 +120,10 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
-              <Link to='/users'>Users ({users.length})</Link>
               <Link to='/products'>Products ({ products.length })</Link>
               <Link to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
               <Link to='/cart'>Cart ({ cartCount })</Link>
-              <Link to='/profile'>Profile</Link>
+              <Link to='/users'>Profile ({users.length})</Link>
               <span>
                 Welcome { auth.username }! 
                 <button onClick={ logout }>Logout</button>
@@ -136,8 +134,7 @@ const App = ()=> {
             <Routes>
             <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
               <Route path="/products/:id" element={<SingleProduct products={products} createLineItem={createLineItem} />} />
-              <Route path="/profile" element={ <Profile/>} />
-              <Route path="/users" element={<Users users={users}/>} />
+              <Route path="/users" element={<Profile />} />
             </Routes>
             
             </main>
