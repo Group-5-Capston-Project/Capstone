@@ -165,8 +165,7 @@ const App = ()=> {
               <Link className="navitem" to='/cart'>Cart ({ cartCount })</Link>
               <Link className="navitem" to='/reviews'>Reviews</Link>
               <Link className="navitem" to='/wishlist'>Wish List ({ wishListItems.length})</Link>
-
-              <Link to='/profile'className="navitem">Profile</Link>
+              <Link className="navitem" to='/users'>Profile ({users.length})</Link>
               
               <span>
                 Welcome { auth.username }! 

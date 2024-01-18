@@ -15,6 +15,17 @@ const fetchUsers = async(setUsers)=> {
   setUsers(data);
 };
 
+
+
+  const updateUser = async(user, users, setUsers) => {
+      const response = await axios.put(`/api/users/${user.id}`, {
+        
+      })
+      console.log(response)
+
+  }
+
+
 const createUser = async(setUsers)=> {
   const response = await axios.post('/api/users', {
     username: user.username,
@@ -22,6 +33,7 @@ const createUser = async(setUsers)=> {
   }, getHeaders());
   setUsers([...user, response.data]);
 };
+
 
 const fetchProducts = async(setProducts)=> {
   const response = await axios.get('/api/products');
@@ -144,8 +156,10 @@ const api = {
   attemptLoginWithToken,
   decrementQuantity,
   attemptLoginWithToken,
+  updateUser,
   createUser,
   fetchUsers
+
 };
 
 export default api;
