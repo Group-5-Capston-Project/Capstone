@@ -24,7 +24,7 @@ const {
 } = require('./cart');
 
 const {
-  createShipping
+  createAddress
 } = require ('./ship')
 
 const loadImage = (filePath) => {
@@ -137,7 +137,7 @@ module.exports = {
   updateOrder,
   authenticate,
   findUserByToken,
-  createShipping,
+  createAddress,
   seed,
   client
 };
