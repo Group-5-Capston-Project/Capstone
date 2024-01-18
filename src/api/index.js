@@ -8,6 +8,20 @@ const getHeaders = ()=> {
   };
 };
 
+const fetchUsers = async(setUsers)=> {
+  const {data} = await axios.get('/api/users');
+  console.log(data)
+  setUsers(data);
+};
+
+// const createUser = async(setUsers)=> {
+//   const response = await axios.post('/api/users', {
+//     username: user.username,
+//     password: user.password
+//   }, getHeaders());
+//   setUsers([...user, response.data]);
+// };
+
 const fetchProducts = async(setProducts)=> {
   const response = await axios.get('/api/products');
   setProducts(response.data);
@@ -96,7 +110,10 @@ const api = {
   updateOrder,
   removeFromCart,
   attemptLoginWithToken,
-  decrementQuantity
+  decrementQuantity,
+  attemptLoginWithToken,
+  // createUser,
+  fetchUsers
 };
 
 export default api;

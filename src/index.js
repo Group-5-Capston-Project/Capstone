@@ -8,7 +8,9 @@ import Login from './Login';
 import api from './api';
 import Signup from './Signup';
 import axios from 'axios';
+import Users from './Users';
 import SingleProduct from './SingleProduct';
+import Profile from './Profile';
 
 
 const App = ()=> {
@@ -16,6 +18,7 @@ const App = ()=> {
   const [orders, setOrders] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [auth, setAuth] = useState({});
+  const [users, setUsers] = useState([]);
 
 
   let location = useLocation()
@@ -59,6 +62,12 @@ const App = ()=> {
     }
   }, [auth]);
 
+  useEffect(()=> {
+    const fetchData = async()=> {
+      await api.fetchUsers(setUsers);
+    };
+    fetchData();
+  }, []);
 
   const createLineItem = async(product)=> {
     await api.createLineItem({ product, cart, lineItems, setLineItems});
@@ -115,11 +124,14 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
+
               <Link className="navbox" to='/products'>Products ({ products.length })</Link>
               <Link className="navbox" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
               <Link className="navbox" to='/cart'>Cart ({ cartCount })</Link>
+              <Link className="navbox" to='/users'>Profile ({users.length})</Link>
+
               <span>
-                Welcome { auth.username }!
+                Welcome { auth.username }! 
                 <button onClick={ logout }>Logout</button>
               </span>
             </nav>
@@ -127,7 +139,8 @@ const App = ()=> {
 
             <Routes>
             <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
-              <Route path="/products/:id" element={<SingleProduct products={products} />} />
+              <Route path="/products/:id" element={<SingleProduct products={products} createLineItem={createLineItem} />} />
+              <Route path="/users" element={<Profile />} />
             </Routes>
             
             </main>

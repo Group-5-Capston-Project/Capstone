@@ -1,5 +1,7 @@
 const client = require('./client')
 
+
+
 const {
   fetchProducts,
   createProduct
@@ -8,8 +10,9 @@ const {
 const {
   createUser,
   authenticate,
-  findUserByToken
+  findUserByToken,
 } = require('./auth');
+
 
 const {
   fetchLineItems,
@@ -103,6 +106,7 @@ const seed = async()=> {
   lineItem = await createLineItem({ order_id: cart.id, product_id: bar.id});
   cart.is_cart = false;
   await updateOrder(cart);
+  
 };
 
 module.exports = {
