@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const Signup = () => {
     const [username, setUsername] = useState('')
@@ -16,20 +17,23 @@ const Signup = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label> Username: 
+        <div className='login-container'>
+            <div className='logintitle'>Signup</div>
+            <form className='loginform' onSubmit={handleSubmit}>
+                
                     <input 
+                    placeholder='Username'
                         type="text" 
                     />
-                </label>
-                <label> Password: 
+               
                     <input 
+                    placeholder='Password'
                         type="text" 
                     />
-                </label>
-                <button type="submit">Sign Up</button>
+               
+                <button className='loginbutton' type="submit">Sign Up</button>
             </form>
+            <div className='backbutton'><Link to='/'>Back to home page</Link></div>
         </div>
     )
 }

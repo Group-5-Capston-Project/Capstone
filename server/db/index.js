@@ -4,7 +4,9 @@ const client = require('./client')
 
 const {
   fetchProducts,
-  createProduct
+  createProduct,
+  createReview,
+  fetchReviews,
 } = require('./products');
 
 const {
@@ -23,10 +25,18 @@ const {
   fetchOrders
 } = require('./cart');
 
+const {
+  addToWishList,
+  fetchWishListItems,
+  removeFromWishList,
+} = require('./wishlist');
+
 
 const seed = async()=> {
   const SQL = `
     DROP TABLE IF EXISTS line_items;
+    DROP TABLE IF EXISTS wish_list_items;
+    DROP TABLE IF EXISTS reviews;
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
@@ -63,6 +73,21 @@ const seed = async()=> {
       CONSTRAINT product_and_order_key UNIQUE(product_id, order_id)
     );
 
+    CREATE TABLE reviews(
+      id UUID PRIMARY KEY,
+      product_id UUID,
+      txt TEXT,
+      rating INTEGER NOT NULL
+      );
+
+      CREATE TABLE wish_list_items (
+        id UUID PRIMARY KEY,
+        created_at TIMESTAMP DEFAULT now(),
+        user_id UUID REFERENCES users(id) NOT NULL,
+        product_id UUID REFERENCES products(id) NOT NULL,
+        CONSTRAINT unique_wish_list_item UNIQUE(user_id, product_id)
+      );
+
   `;
   await client.query(SQL);
 
@@ -72,10 +97,17 @@ const seed = async()=> {
     createUser({ username: 'ethyl', password: '1234', is_admin: true})
   ]);
   const [foo, bar, bazz] = await Promise.all([
-    createProduct({ name: 'foo', price: 20, description: 'foo description' }),
-    createProduct({ name: 'bar', price: 30, description: 'bar description' }),
-    createProduct({ name: 'bazz', price: 40, description: 'bazz description' }),
-    createProduct({ name: 'quq', price: 50, description: 'quq description' }),
+    createProduct({ name: 'foo', price: 20, description: 'foo description' },
+    reviews = [{ txt: "meh review", rating: 3 }]),
+
+    createProduct({ name: 'bar', price: 30, description: 'bar description' },
+    reviews = [{ txt: "meh review", rating: 3 }]),
+
+    createProduct({ name: 'bazz', price: 40, description: 'bazz description' },
+    reviews = [{ txt: "meh review", rating: 3 }]),
+
+    createProduct({ name: 'quq', price: 50, description: 'quq description' },
+    reviews = [{ txt: "meh review", rating: 3 }]),
   ]);
   let orders = await fetchOrders(ethyl.id);
   let cart = orders.find(order => order.is_cart);
@@ -99,5 +131,10 @@ module.exports = {
   authenticate,
   findUserByToken,
   seed,
+  addToWishList,
+  fetchWishListItems,
+  removeFromWishList,
+  createReview,
+  fetchReviews,
   client
 };

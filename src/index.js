@@ -10,20 +10,21 @@ import Signup from './Signup';
 import axios from 'axios';
 import Users from './Users';
 import SingleProduct from './SingleProduct';
-
+import Reviews from './Reviews'
 import Profile from './Profile';
+import WishList from './WishList';
+
 
 const App = ()=> {
+  const location = useLocation();
+  
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [auth, setAuth] = useState({});
   const [users, setUsers] = useState([]);
-
-
-  let location = useLocation()
-
-  
+  const [reviews, setReviews] = useState([]);
+  const [wishListItems, setWishListItems] = useState([]);
 
   const attemptLoginWithToken = async()=> {
     await api.attemptLoginWithToken(setAuth);
@@ -58,12 +59,32 @@ const App = ()=> {
     }
   }, [auth]);
 
-  useEffect(()=> {
-    const fetchData = async()=> {
-      await api.fetchUsers(setUsers);
-    };
-    fetchData();
-  }, []);
+  // useEffect(()=> {
+  //   const fetchData = async()=> {
+  //     await api.fetchUsers(setUsers);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //   await api.fetchReviews(setReviews)
+  //   }
+  //   fetchData();
+  // }, []);
+
+  useEffect(() => {
+    if (auth.id) {
+      const fetchData = async () => {
+        await api.fetchWishListItems(auth.id, setWishListItems);
+      };
+      fetchData();
+    }
+  }, [auth]);
+  //
+  // useEffect(() => {
+  //   console.log(`Wishlist updated: ${JSON.stringify(wishListItems)}`);
+  // }, [wishListItems]);
 
   const createLineItem = async(product)=> {
     await api.createLineItem({ product, cart, lineItems, setLineItems});
@@ -86,9 +107,9 @@ const App = ()=> {
   };
 
   const cart = orders.find(order => order.is_cart) || {};
-
+  
   const cartItems = lineItems.filter(lineItem => lineItem.order_id === cart.id);
-
+  
   const cartCount = cartItems.reduce((acc, item)=> {
     return acc += item.quantity;
   }, 0);
@@ -102,9 +123,20 @@ const App = ()=> {
     }
   }, 0);
 
+  const addToWishList = async (productId) => {
+    const result = wishListItems.find(wl => wl.product_id === productId)
+    if (result === undefined) {
+      console.log(`src/addToWishList userId=${auth.id} productId=${productId}`)
+      await api.addToWishList(auth.id, productId, wishListItems, setWishListItems);
+    } else {
+      console.log(`addToWishList productId=${productId} already exists in list`)
+    }
+  }
 
-
- 
+  const removeFromWishList = async (productId) => {
+    console.log(`removeFromWishList userId=${auth.id} productId=${productId}`)
+    await api.removeFromWishList(auth.id, productId, setWishListItems, wishListItems);
+  }
 
   const login = async(credentials)=> {
     await api.login({ credentials, setAuth });
@@ -115,15 +147,19 @@ const App = ()=> {
   }
 
   return (
-    <div>
+    <div className='container'>
       {
         auth.id ? (
           <>
             <nav>
-              <Link to='/products'>Products ({ products.length })</Link>
-              <Link to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
-              <Link to='/cart'>Cart ({ cartCount })</Link>
-              <Link to='/users'>Profile ({users.length})</Link>
+              <Link to='/users' className="navitem">Users ({users.length})</Link>
+              <Link to='/products'className="navitem">Products ({ products.length })</Link>
+              <Link to='/orders'className="navitem">Orders ({ orders.filter(order => !order.is_cart).length })</Link>
+              <Link to='/cart'className="navitem">Cart ({ cartCount })</Link>
+              <Link to='/reviews'className="navitem">Reviews</Link>
+              <Link to='/wishlist'className="navitem">Wish List ({ wishListItems.length})</Link>
+              <Link to='/profile'className="navitem">Profile</Link>
+              
               <span>
                 Welcome { auth.username }! 
                 <button onClick={ logout }>Logout</button>
@@ -132,48 +168,64 @@ const App = ()=> {
             <main>
 
             <Routes>
-            <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem }  />} />
-              <Route path="/products/:id" element={<SingleProduct products={products} createLineItem={createLineItem} />} />
-              <Route path="/users" element={<Profile />} />
+            <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList}   />} />
+              <Route path="/products/:id" element={<SingleProduct products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList} />} />
+              <Route path="/profile" element={ <Profile/>} />
+              <Route path="/users" element={<Users users={users}/>} />
+              <Route path="/reviews" element={<Reviews reviews={reviews} products={products}/>} />
+              <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
+
+              <Route path="/cart" element={<Cart cart = { cart } lineItems = { lineItems } products = { products } updateOrder = { updateOrder } removeFromCart = { removeFromCart } cartTotal = {cartTotal} incrementQuantity = { updateLineItem } decrementQuantity={decrementQuantity} />} />
+
+                <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} /> 
+
             </Routes>
             
             </main>
 
-
-            {location.pathname === '/cart' && (
-              <Cart
-                cart = { cart }
-                lineItems = { lineItems }
-                products = { products }
-                updateOrder = { updateOrder }
-                removeFromCart = { removeFromCart }
-                cartTotal = {cartTotal}
-                incrementQuantity = { updateLineItem }
-                decrementQuantity={decrementQuantity}
-              />
-            )}
-            {location.pathname === '/orders' && (
-              <Orders
-                orders = { orders }
-                products = { products }
-                lineItems = { lineItems }
-              />
-            )}
-            
             </>
         ):(
           <div>
-            <h3>Are you a New Customer? Create Account below to View More Products and Shop</h3>
-            <Signup/>
-            <h3>Existing Customers Please Login Below</h3>
-            <Login login={ login }/>
-            <Products
+
+            
+
+            <div className="header">
+              <div className='logo'><Link to="/">Produce Market</Link></div>
+            
+            <div className='signup'>
+            <Link to="/signup">Sign up</Link>
+            </div>
+
+            <div className='login'>
+            <Link to="/login">Login</Link>
+            </div>
+            </div>
+             
+             <div className='forms'>
+            <Routes>
+              <Route path="/login" element={<Login login={ login }/>}/>
+              <Route path="/signup" element={<Signup />}/>
+            </Routes>
+            </div>
+            
+
+            <Routes>
+              
+            
+              <Route path="/" element={
+                <div className='products-page-nonusers'>
+                  <Products
               products={ products }
               cartItems = { cartItems }
               createLineItem = { createLineItem }
               updateLineItem = { updateLineItem }
               auth = { auth }
             />
+            </div>
+              } />
+            
+            </Routes>
+
           </div>
         )
       }
