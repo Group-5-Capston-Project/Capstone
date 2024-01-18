@@ -8,12 +8,12 @@ const Profile = () => {
     const [password, SetPassword] = useState({})
 
  
-    useEffect(()=> {
-        const fetchData = async()=> {
-          await api.fetchUsers(setUsername);
-        };
-        fetchData();
-      }, []);
+    // useEffect(()=> {
+    //     const fetchData = async()=> {
+    //       await api.fetchUsers(setUsername);
+    //     };
+    //     fetchData();
+    //   }, []);
     
 
     const handleSubmit = (e) => {
