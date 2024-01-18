@@ -107,7 +107,6 @@ const App = ()=> {
   }, 0);
 
 
-
  
 
   const login = async(credentials)=> {
@@ -129,6 +128,7 @@ const App = ()=> {
               <Link className="navbox" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
               <Link className="navbox" to='/cart'>Cart ({ cartCount })</Link>
               <Link className="navbox" to='/users'>Profile ({users.length})</Link>
+              
 
               <span>
                 Welcome { auth.username }! 
