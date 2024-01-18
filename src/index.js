@@ -91,11 +91,7 @@ const App = ()=> {
       fetchData();
     }
   }, [auth]);
-  //
-  // useEffect(() => {
-  //   console.log(`Wishlist updated: ${JSON.stringify(wishListItems)}`);
-  // }, [wishListItems]);
-
+ 
   const createLineItem = async(product)=> {
     await api.createLineItem({ product, cart, lineItems, setLineItems});
   };
@@ -163,12 +159,12 @@ const App = ()=> {
           <>
             <nav>
 
-              <Link to='/users' className="navitem">Users ({users.length})</Link>
-              <Link className="navbox" to='/products'className="navitem">Products ({ products.length })</Link>
-              <Link className="navbox" to='/orders'className="navitem">Orders ({ orders.filter(order => !order.is_cart).length })</Link>
-              <Link className="navbox" to='/cart'className="navitem">Cart ({ cartCount })</Link>
-              <Link className="navbox" to='/reviews'className="navitem">Reviews</Link>
-              <Link to='/wishlist'className="navitem">Wish List ({ wishListItems.length})</Link>
+              <Link className="navitem" to='/users' >Users ({users.length})</Link>
+              <Link className="navitem" to='/products'>Products ({ products.length })</Link>
+              <Link className="navitem" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
+              <Link className="navitem" to='/cart'>Cart ({ cartCount })</Link>
+              <Link className="navitem" to='/reviews'>Reviews</Link>
+              <Link className="navitem" to='/wishlist'>Wish List ({ wishListItems.length})</Link>
 
               <Link to='/profile'className="navitem">Profile</Link>
               
