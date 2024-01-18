@@ -23,6 +23,10 @@ const {
   fetchOrders
 } = require('./cart');
 
+const {
+  createShipping
+} = require ('./ship')
+
 
 const seed = async()=> {
   const SQL = `
@@ -30,6 +34,7 @@ const seed = async()=> {
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS address;
 
     CREATE TABLE users(
       id UUID PRIMARY KEY,
@@ -62,6 +67,18 @@ const seed = async()=> {
       quantity INTEGER DEFAULT 1,
       CONSTRAINT product_and_order_key UNIQUE(product_id, order_id)
     );
+    
+    CREATE TABLE address(
+      id UUID PRIMARY KEY,
+      created_at TIMESTAMP DEFAULT now(),
+      name VARCHAR(25),
+      last_name VARCHAR(25),
+      _address VARCHAR(100), 
+      phone VARCHAR(20)
+    );
+
+
+      
 
   `;
   await client.query(SQL);
@@ -76,6 +93,10 @@ const seed = async()=> {
     createProduct({ name: 'bar', price: 30, description: 'bar description' }),
     createProduct({ name: 'bazz', price: 40, description: 'bazz description' }),
     createProduct({ name: 'quq', price: 50, description: 'quq description' }),
+  ]);
+
+  const [] = await Promise.all([
+    createAddress({ name:'ethyl', last_name: 'doe', _address:'404 Not Found Way', phone: '510-333-3333'})
   ]);
   let orders = await fetchOrders(ethyl.id);
   let cart = orders.find(order => order.is_cart);
@@ -98,6 +119,7 @@ module.exports = {
   updateOrder,
   authenticate,
   findUserByToken,
+  createShipping,
   seed,
   client
 };
