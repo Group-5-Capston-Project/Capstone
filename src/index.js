@@ -175,17 +175,14 @@ const App = ()=> {
             <main>
 
             <Routes>
-            <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList}   />} />
+              <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList}   />} />
               <Route path="/products/:id" element={<SingleProduct products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList} />} />
-              <Route path="/profile" element={ <Profile/>} />
+              <Route path="/users" element={ <Profile/>} />
               <Route path="/users" element={<Users users={users}/>} />
               <Route path="/reviews" element={<Reviews reviews={reviews} products={products}/>} />
               <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
-
               <Route path="/cart" element={<Cart cart = { cart } lineItems = { lineItems } products = { products } updateOrder = { updateOrder } removeFromCart = { removeFromCart } cartTotal = {cartTotal} incrementQuantity = { updateLineItem } decrementQuantity={decrementQuantity} />} />
-
-                <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} /> 
-
+              <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} /> 
             </Routes>
             
             </main>
