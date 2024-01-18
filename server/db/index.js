@@ -24,7 +24,7 @@ const {
 } = require('./cart');
 
 const {
-  createShipping
+  createAddress
 } = require ('./ship')
 
 
@@ -119,7 +119,7 @@ module.exports = {
   updateOrder,
   authenticate,
   findUserByToken,
-  createShipping,
+  createAddress,
   seed,
   client
 };
