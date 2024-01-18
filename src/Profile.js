@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
+import api from './api';
+
 
 const Profile = () => {
     const [username, setUsername] = useState({})
     const [password, SetPassword] = useState({})
 
-    /****** Returns error 404 *****/
-
-    // useEffect(() => {
-    //     const fetchUsers = async() => {
-    //         const response = await axios.get('/api/me')
-    //         console.log(response)
-    //     }
-    //     fetchUsers()
-    // })
+ 
+    useEffect(()=> {
+        const fetchData = async()=> {
+          await api.fetchUsers(setUsername);
+        };
+        fetchData();
+      }, []);
+    
 
     const handleSubmit = (e) => {
         // attempting to update profile settings upon form submit
         e.preventDefault()
-        console.log('Hello World')
+        console.log(username)
     }
+    
 
 return(
     <>
