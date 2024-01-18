@@ -3,8 +3,6 @@ const { v4 } = require('uuid');
 const uuidv4 = v4;
 const bcrypt = require('bcrypt');
 
-
-
 const fetchUsers = async()=> {
   const SQL = `
     SELECT *

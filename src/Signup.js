@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
     const [username, setUsername] = useState('')
@@ -8,28 +10,41 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("hello")
+        console.log("handlesubmit working")
+        
         const user = {
             username, 
-            password
+            password,
+            is_admin: false
         }
+        try{
+            await axios.post('/api/users', user)
+        } catch(error){
+            console.log("error")
+        }
+        alert("You have successfully Registered! Log in with your username and password below!")
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label> Username: 
+        <div className='login-container'>
+            <div className='logintitle'>Signup</div>
+            <form className='loginform' onSubmit={handleSubmit}>
+                
                     <input 
+                    placeholder='Username'
+                        type="text" 
+                        value={username}
+                        onChange={(e)=> {setUsername(e.target.value)}}
+                    />
+               
+                    <input 
+                    placeholder='Password'
                         type="text" 
                     />
-                </label>
-                <label> Password: 
-                    <input 
-                        type="text" 
-                    />
-                </label>
-                <button type="submit">Sign Up</button>
+               
+                <button className='loginbutton' type="submit">Sign Up</button>
             </form>
+            <div className='backbutton'><Link to='/'>Back to home page</Link></div>
         </div>
     )
 }

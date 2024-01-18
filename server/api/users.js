@@ -5,8 +5,7 @@ const {
   const express = require('express');
   const { isLoggedIn } = require('./middleware');
   const app = express.Router();
-  
-  
+  const { isLoggedIn, isAdmin } = require('./middleware');
   
   app.get('/', async(req, res, next)=> {
     try {
@@ -30,5 +29,12 @@ const {
 
 })
   
+  app.post('/', async(req, res, next) => {
+    try{
+      res.send(await createUser(req.body))
+    } catch(error){
+      next(error)
+    }
+  })
   
   module.exports = app; 
