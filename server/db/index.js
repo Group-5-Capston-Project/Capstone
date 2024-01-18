@@ -1,6 +1,6 @@
 const client = require('./client')
-
-
+const path = require('path')
+const fs = require('fs')
 
 const {
   fetchProducts,
@@ -22,6 +22,18 @@ const {
   fetchOrders
 } = require('./cart');
 
+const loadImage = (filePath) => {
+  return new Promise((resolve, reject) => {
+    const fullPath = path.join(__dirname, filePath)
+    fs.readFile(fullPath, 'base64', (err, result) => {
+      if(err) {
+        reject(err)
+      }else{
+        resolve(`data:image/png;base64,${result}`)
+      }
+    })
+  })
+}
 
 const seed = async()=> {
   const SQL = `
@@ -43,7 +55,8 @@ const seed = async()=> {
       created_at TIMESTAMP DEFAULT now(),
       name VARCHAR(100) UNIQUE NOT NULL,
       price INTEGER NOT NULL,
-      description TEXT
+      description TEXT,
+      image TEXT
     );
 
     CREATE TABLE orders(
@@ -70,18 +83,23 @@ const seed = async()=> {
     createUser({ username: 'lucy', password: 'l_password', is_admin: false}),
     createUser({ username: 'ethyl', password: '1234', is_admin: true})
   ]);
-  const [foo, bar, bazz] = await Promise.all([
-    createProduct({ name: 'foo', price: 20, description: 'foo description' }),
-    createProduct({ name: 'bar', price: 30, description: 'bar description' }),
-    createProduct({ name: 'bazz', price: 40, description: 'bazz description' }),
-    createProduct({ name: 'quq', price: 50, description: 'quq description' }),
+
+  const bananaImage = await loadImage('images/banana.jpeg')
+  const orangeImage = await loadImage('images/orange.jpeg')
+  const grapeImage = await loadImage('images/grapes.jpeg')
+
+  let [bananas, oranges, grapes] = await Promise.all([
+    createProduct({ name: 'bananas', price: 20, description: 'foo description', image: bananaImage }),
+    createProduct({ name: 'oranges', price: 30, description: 'bar description', image: orangeImage }),
+    createProduct({ name: 'grapes', price: 40, description: 'bazz description' }),
+    createProduct({ name: 'apples', price: 50, description: 'quq description' }),
   ]);
   let orders = await fetchOrders(ethyl.id);
   let cart = orders.find(order => order.is_cart);
-  let lineItem = await createLineItem({ order_id: cart.id, product_id: foo.id});
+  let lineItem = await createLineItem({ order_id: cart.id, product_id: bananas.id});
   lineItem.quantity++;
   await updateLineItem(lineItem);
-  lineItem = await createLineItem({ order_id: cart.id, product_id: bar.id});
+  lineItem = await createLineItem({ order_id: cart.id, product_id: oranges.id});
   cart.is_cart = false;
   await updateOrder(cart);
 };

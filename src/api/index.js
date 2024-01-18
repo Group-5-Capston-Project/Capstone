@@ -14,13 +14,13 @@ const fetchUsers = async(setUsers)=> {
   setUsers(data);
 };
 
-// const createUser = async(setUsers)=> {
-//   const response = await axios.post('/api/users', {
-//     username: user.username,
-//     password: user.password
-//   }, getHeaders());
-//   setUsers([...user, response.data]);
-// };
+const createUser = async(setUsers)=> {
+  const response = await axios.post('/api/users', {
+    username: user.username,
+    password: user.password
+  }, getHeaders());
+  setUsers([...user, response.data]);
+};
 
 const fetchProducts = async(setProducts)=> {
   const response = await axios.get('/api/products');
@@ -112,7 +112,7 @@ const api = {
   attemptLoginWithToken,
   decrementQuantity,
   attemptLoginWithToken,
-  // createUser,
+  createUser,
   fetchUsers
 };
 
