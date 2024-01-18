@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Signup = () => {
@@ -25,24 +26,25 @@ const Signup = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label> Username: 
+        <div className='login-container'>
+            <div className='logintitle'>Signup</div>
+            <form className='loginform' onSubmit={handleSubmit}>
+                
                     <input 
+                    placeholder='Username'
                         type="text" 
                         value={username}
                         onChange={(e)=> {setUsername(e.target.value)}}
                     />
-                </label>
-                <label> Password: 
-                    <input
-                        type="password" 
-                        value={password}
-                        onChange={(e)=> {setPassword(e.target.value)}}
+               
+                    <input 
+                    placeholder='Password'
+                        type="text" 
                     />
-                </label>
-                <button type="submit">Sign Up</button>
+               
+                <button className='loginbutton' type="submit">Sign Up</button>
             </form>
+            <div className='backbutton'><Link to='/'>Back to home page</Link></div>
         </div>
     )
 }

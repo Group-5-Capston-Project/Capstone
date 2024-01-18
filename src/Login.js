@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 
 const Login = ({ login })=> {
+  const location = useLocation();
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   //
@@ -28,23 +31,40 @@ const Login = ({ login })=> {
     }
   }
   return (
-    //
-    <div>
-    
-    <form onSubmit={ _login }>
+    <div className='login-container'>
+
+      
+<div className='logintitle'>Login</div>
+
+      <form className='loginform' onSubmit={ _login }>
+
       <input
-        placeholder='username'
+        placeholder='Username'
         value={ username }
         onChange={ ev => setUsername(ev.target.value)}
       />
+      
+
+      
       <input
         type='password'
-        placeholder='password'
+        placeholder='Password'
         value={ password }
         onChange={ ev => setPassword(ev.target.value)}
       />
-      <button disabled={!username || !password}>Login</button>
+      
+
+      <button className='loginbutton' disabled={!username || !password}>Login</button>
     </form>
+
+    <div className='backbutton'><Link to='/'>Back to home page</Link></div>
+
+    
+
+
+    
+    
+    
     {
       error ? <p>Incorrect Username or Password</p> : null
     }

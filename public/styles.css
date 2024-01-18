@@ -1,45 +1,258 @@
 body {
-  font-family: verdana;
+  font-family: open sans;
+  margin: 0;
 }
+
+button {
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.forms {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.backbutton {
+  width: auto;
+  text-align: center;
+  font-style: italic;
+  margin-top: 2em;
+  font-weight: 400;
+}
+
+.backbutton a {
+  color: black;
+}
+
+.backbutton a:hover {
+  opacity: 0.5;
+  transition: all 0.4s ease;
+}
+
+
+.loginform input {
+  width: 60%;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 110%;
+  box-sizing: border-box;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 110%;
+  padding: 0.5em;
+  margin-top: 0.5em;
+}
+
+.loginbutton {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #2D5F69;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  box-sizing: border-box;
+  border: none;
+  color: white;
+  font-size: 100%;
+  border-radius: 15px;
+}
+
+.loginbutton:hover {
+  opacity: 0.7;
+  transition: all 0.4s ease;
+}
+
+
+.logintitle {
+  text-align: center;
+  width: 100%;
+  font-size: 160%;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
 
 form {
   display: flex;
   flex-direction: column;
 }
 
-form > * {
+form>* {
   margin: 0.5rem;
 }
 
-.searchlist{
+.searchlist {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-nav{
+.singleproductaddbutton {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+
+.navitem {
+  margin-right: 2em;
+}
+
+.productcontainer {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: space-around;
-  padding: 1rem;
-  border: 3px solid black;
+  flex-wrap: wrap;
+  justify-content: center;
+  clear: both;
+  position: relative;
+}
+
+.productcontainer li {
+  margin-bottom: 4em;
+  width: 15%;
+  margin-right: 2em;
+  margin-left: 2em;
+}
+
+.image_placeholder {
   width: 100%;
-  color: black;
- }
+  height: 10em;
+  background-color: gray;
+}
 
-.navBox{
+.pagetitle {
+  float: left;
+  margin-bottom: 5em;
+  margin-top: 2em;
+  font-size: 180%;
+  position: relative;
+}
+
+.searchbarlabel {
+  width: 40%;
+  margin-bottom: 5em;
+  margin-top: 3em;
+
+  font-size: 110%;
+  float: right;
+}
+
+.searchresults {
+  position: absolute;
+  margin-top: 3em;
+}
+
+.searchbarlabel input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 110%;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  float: right;
+}
+
+.searchbarlabel textarea {
+  width: 80%;
+  height: 8em;
+  padding: 0.5em;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  font-size: 130%;
+  margin-top: 0.5em;
+}
+
+.signup {
+  width: auto;
+  margin-right: 3em;
+  float: right;
+  font-size: 110%;
+  margin-top: 0.5em;
+}
+
+.signup a {
+  color: white;
   text-decoration: none;
-  font-weight: bold;
-  
- }
+}
+
+.login {
+  width: auto;
+  margin-right: 3em;
+  float: right;
+  font-size: 110%;
+  margin-top: 0.5em;
+}
+
+.login a {
+  color: white;
+  text-decoration: none;
+}
+
+.products-page-nonusers {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
-a:visited{
+.login-container {
+  clear: both;
+  margin-top: 3em;
+}
+
+.header {
+  background-color: #2D5F69;
+  width: 100%;
+  padding-top: 2em;
+  padding-bottom: 5em;
+}
+
+.logo {
+  float: left;
+  font-size: 200%;
+  margin-left: 3em;
+}
+
+.logo a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+
+.productname {
+  margin-top: 0.5em;
+  font-weight: 500;
+}
+
+.productname a {
   color: black;
 }
-
-
-h2{
-  text-decoration: underline;
-}
-
-

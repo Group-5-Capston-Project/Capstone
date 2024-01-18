@@ -4,7 +4,9 @@ const fs = require('fs')
 
 const {
   fetchProducts,
-  createProduct
+  createProduct,
+  createReview,
+  fetchReviews,
 } = require('./products');
 
 const {
@@ -22,6 +24,12 @@ const {
   updateOrder,
   fetchOrders
 } = require('./cart');
+
+const {
+  addToWishList,
+  fetchWishListItems,
+  removeFromWishList,
+} = require('./wishlist');
 
 const {
   createAddress
@@ -43,6 +51,8 @@ const loadImage = (filePath) => {
 const seed = async()=> {
   const SQL = `
     DROP TABLE IF EXISTS line_items;
+    DROP TABLE IF EXISTS wish_list_items;
+    DROP TABLE IF EXISTS reviews;
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
@@ -93,6 +103,21 @@ const seed = async()=> {
 
       
 
+    CREATE TABLE reviews(
+      id UUID PRIMARY KEY,
+      product_id UUID,
+      txt TEXT,
+      rating INTEGER NOT NULL
+      );
+
+      CREATE TABLE wish_list_items (
+        id UUID PRIMARY KEY,
+        created_at TIMESTAMP DEFAULT now(),
+        user_id UUID REFERENCES users(id) NOT NULL,
+        product_id UUID REFERENCES products(id) NOT NULL,
+        CONSTRAINT unique_wish_list_item UNIQUE(user_id, product_id)
+      );
+
   `;
   await client.query(SQL);
 
@@ -139,5 +164,10 @@ module.exports = {
   findUserByToken,
   createAddress,
   seed,
+  addToWishList,
+  fetchWishListItems,
+  removeFromWishList,
+  createReview,
+  fetchReviews,
   client
 };

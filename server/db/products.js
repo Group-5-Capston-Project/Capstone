@@ -11,7 +11,26 @@ const fetchProducts = async()=> {
   return response.rows;
 };
 
-const createProduct = async(product)=> {
+const createReview = async (review) => {
+  const SQL = `
+        INSERT INTO reviews (id, product_id, txt, rating)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *
+    `;
+  const response = await client.query(SQL, [review.id, review.product_id, review.txt, review.rating]);
+  return response.rows[0];
+};
+
+const fetchReviews = async () => {
+  const SQL = `
+        SELECT *
+        FROM reviews
+    `;
+  const response = await client.query(SQL);
+  return response.rows;
+};
+
+const createProduct = async(product, reviews=[])=> {
   const SQL = `
     INSERT INTO products (id, name, price, description, image) VALUES($1, $2, $3, $4, $5) RETURNING *
   `;
@@ -23,5 +42,7 @@ const createProduct = async(product)=> {
 
 module.exports = {
   fetchProducts,
-  createProduct
+  createProduct,
+  createReview,
+  fetchReviews,
 };
