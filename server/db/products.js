@@ -32,17 +32,13 @@ const fetchReviews = async () => {
 
 const createProduct = async(product, reviews=[])=> {
   const SQL = `
-    INSERT INTO products (id, name, price, description) VALUES($1, $2, $3, $4) RETURNING *
+    INSERT INTO products (id, name, price, description, image) VALUES($1, $2, $3, $4, $5) RETURNING *
   `;
-  const id = uuidv4()
-  const response = await client.query(SQL, [ id, product.name, product.price, product.description]);
-  if (reviews.length > 0) {
-    reviews.forEach(review => {
-      createReview({ id: uuidv4(), product_id: id, txt: review.txt, rating: review.rating });
-    })
-  }
+  const response = await client.query(SQL, [ uuidv4(), product.name, product.price, product.description, product.image]);
   return response.rows[0];
 };
+
+//create user here 
 
 module.exports = {
   fetchProducts,
@@ -50,4 +46,3 @@ module.exports = {
   createReview,
   fetchReviews,
 };
-

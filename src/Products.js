@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar'
+import VipUsers from './Vip';
 
 const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=> {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
           })
         }
       </ul>
+      <VipUsers />
     </div>
   );
 };

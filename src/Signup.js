@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
     const [username, setUsername] = useState('')
@@ -9,11 +10,19 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("hello")
+        console.log("handlesubmit working")
+        
         const user = {
             username, 
-            password
+            password,
+            is_admin: false
         }
+        try{
+            await axios.post('/api/users', user)
+        } catch(error){
+            console.log("error")
+        }
+        alert("You have successfully Registered! Log in with your username and password below!")
     }
 
     return (
@@ -24,6 +33,8 @@ const Signup = () => {
                     <input 
                     placeholder='Username'
                         type="text" 
+                        value={username}
+                        onChange={(e)=> {setUsername(e.target.value)}}
                     />
                
                     <input 

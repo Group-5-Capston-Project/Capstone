@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
+
 const Login = ({ login })=> {
   const location = useLocation();
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  //
+  const [error, setError] = useState('');
+  
 
   const _login = async(ev)=> {
     ev.preventDefault();
+    //
+    const user = {
+      username,
+      password
+    }
+
+
+    
     try {
       await login({ username, password });
+      
     }
-    catch(ex){
-      console.log(ex.response.data);
+    catch(ev){
+      setError(ev.response.data);
+      
     }
   }
   return (
@@ -48,9 +62,14 @@ const Login = ({ login })=> {
     
 
 
+    
+    
+    
+    {
+      error ? <p>Incorrect Username or Password</p> : null
+    }
+   
     </div>
-    
-    
   );
 }
 

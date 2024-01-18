@@ -15,6 +15,7 @@ import Profile from './Profile';
 import WishList from './WishList';
 
 
+
 const App = ()=> {
   const location = useLocation();
   
@@ -26,6 +27,13 @@ const App = ()=> {
   const [reviews, setReviews] = useState([]);
   const [wishListItems, setWishListItems] = useState([]);
 
+
+ 
+
+  const {pathname} = location
+
+  
+
   const attemptLoginWithToken = async()=> {
     await api.attemptLoginWithToken(setAuth);
   }
@@ -33,6 +41,8 @@ const App = ()=> {
   useEffect(()=> {
     attemptLoginWithToken();
   }, []);
+
+ 
 
   useEffect(()=> {
     const fetchData = async()=> {
@@ -152,12 +162,14 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
+
               <Link to='/users' className="navitem">Users ({users.length})</Link>
-              <Link to='/products'className="navitem">Products ({ products.length })</Link>
-              <Link to='/orders'className="navitem">Orders ({ orders.filter(order => !order.is_cart).length })</Link>
-              <Link to='/cart'className="navitem">Cart ({ cartCount })</Link>
-              <Link to='/reviews'className="navitem">Reviews</Link>
+              <Link className="navbox" to='/products'className="navitem">Products ({ products.length })</Link>
+              <Link className="navbox" to='/orders'className="navitem">Orders ({ orders.filter(order => !order.is_cart).length })</Link>
+              <Link className="navbox" to='/cart'className="navitem">Cart ({ cartCount })</Link>
+              <Link className="navbox" to='/reviews'className="navitem">Reviews</Link>
               <Link to='/wishlist'className="navitem">Wish List ({ wishListItems.length})</Link>
+
               <Link to='/profile'className="navitem">Profile</Link>
               
               <span>

@@ -1,6 +1,6 @@
 const client = require('./client')
-
-
+const path = require('path')
+const fs = require('fs')
 
 const {
   fetchProducts,
@@ -31,6 +31,22 @@ const {
   removeFromWishList,
 } = require('./wishlist');
 
+const {
+  createAddress
+} = require ('./ship')
+
+const loadImage = (filePath) => {
+  return new Promise((resolve, reject) => {
+    const fullPath = path.join(__dirname, filePath)
+    fs.readFile(fullPath, 'base64', (err, result) => {
+      if(err) {
+        reject(err)
+      }else{
+        resolve(`data:image/png;base64,${result}`)
+      }
+    })
+  })
+}
 
 const seed = async()=> {
   const SQL = `
@@ -40,6 +56,7 @@ const seed = async()=> {
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS address;
 
     CREATE TABLE users(
       id UUID PRIMARY KEY,
@@ -54,7 +71,8 @@ const seed = async()=> {
       created_at TIMESTAMP DEFAULT now(),
       name VARCHAR(100) UNIQUE NOT NULL,
       price INTEGER NOT NULL,
-      description TEXT
+      description TEXT,
+      image TEXT
     );
 
     CREATE TABLE orders(
@@ -72,6 +90,18 @@ const seed = async()=> {
       quantity INTEGER DEFAULT 1,
       CONSTRAINT product_and_order_key UNIQUE(product_id, order_id)
     );
+    
+    CREATE TABLE address(
+      id UUID PRIMARY KEY,
+      created_at TIMESTAMP DEFAULT now(),
+      name VARCHAR(25),
+      last_name VARCHAR(25),
+      _address VARCHAR(100), 
+      phone VARCHAR(20)
+    );
+
+
+      
 
     CREATE TABLE reviews(
       id UUID PRIMARY KEY,
@@ -96,25 +126,27 @@ const seed = async()=> {
     createUser({ username: 'lucy', password: 'l_password', is_admin: false}),
     createUser({ username: 'ethyl', password: '1234', is_admin: true})
   ]);
-  const [foo, bar, bazz] = await Promise.all([
-    createProduct({ name: 'foo', price: 20, description: 'foo description' },
-    reviews = [{ txt: "meh review", rating: 3 }]),
 
-    createProduct({ name: 'bar', price: 30, description: 'bar description' },
-    reviews = [{ txt: "meh review", rating: 3 }]),
+  const bananaImage = await loadImage('images/banana.jpeg')
+  const orangeImage = await loadImage('images/orange.jpeg')
+  const grapeImage = await loadImage('images/grapes.jpeg')
 
-    createProduct({ name: 'bazz', price: 40, description: 'bazz description' },
-    reviews = [{ txt: "meh review", rating: 3 }]),
+  let [bananas, oranges, grapes] = await Promise.all([
+    createProduct({ name: 'bananas', price: 20, description: 'foo description', image: bananaImage }),
+    createProduct({ name: 'oranges', price: 30, description: 'bar description', image: orangeImage }),
+    createProduct({ name: 'grapes', price: 40, description: 'bazz description' }),
+    createProduct({ name: 'apples', price: 50, description: 'quq description' }),
+  ]);
 
-    createProduct({ name: 'quq', price: 50, description: 'quq description' },
-    reviews = [{ txt: "meh review", rating: 3 }]),
+  const [] = await Promise.all([
+    createAddress({ name:'ethyl', last_name: 'doe', _address:'404 Not Found Way', phone: '510-333-3333'})
   ]);
   let orders = await fetchOrders(ethyl.id);
   let cart = orders.find(order => order.is_cart);
-  let lineItem = await createLineItem({ order_id: cart.id, product_id: foo.id});
+  let lineItem = await createLineItem({ order_id: cart.id, product_id: bananas.id});
   lineItem.quantity++;
   await updateLineItem(lineItem);
-  lineItem = await createLineItem({ order_id: cart.id, product_id: bar.id});
+  lineItem = await createLineItem({ order_id: cart.id, product_id: oranges.id});
   cart.is_cart = false;
   await updateOrder(cart);
   
@@ -130,6 +162,7 @@ module.exports = {
   updateOrder,
   authenticate,
   findUserByToken,
+  createAddress,
   seed,
   addToWishList,
   fetchWishListItems,
