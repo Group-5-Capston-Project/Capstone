@@ -1,5 +1,4 @@
 import axios from 'axios';
-import wishList from "../WishList";
 
 const getHeaders = ()=> {
   return {
@@ -59,11 +58,11 @@ const createLineItem = async({ product, cart, lineItems, setLineItems })=> {
 };
 
 
-  const fetchReviews = async () => {
-    const response = await axios.get('/api/reviews');
-    console.log(response)
-    setReviews(response.data);
-  }
+const fetchReviews = async (setReviews) => {
+  const response = await axios.get('/api/reviews');
+  console.log(response)
+  setReviews(response.data);
+}
 
 const updateLineItem = async({ lineItem, cart, lineItems, setLineItems })=> {
   const response = await axios.put(`/api/lineItems/${lineItem.id}`, {
@@ -155,11 +154,11 @@ const api = {
   removeFromCart,
   attemptLoginWithToken,
   decrementQuantity,
-  attemptLoginWithToken,
   updateUser,
   createUser,
-  fetchUsers
-
+  fetchUsers,
+  fetchReviews
+ 
 };
 
 export default api;

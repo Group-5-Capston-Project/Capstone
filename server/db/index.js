@@ -132,10 +132,14 @@ const seed = async()=> {
   const grapeImage = await loadImage('images/grapes.jpeg')
 
   let [bananas, oranges, grapes] = await Promise.all([
-    createProduct({ name: 'bananas', price: 20, description: 'foo description', image: bananaImage }),
-    createProduct({ name: 'oranges', price: 30, description: 'bar description', image: orangeImage }),
-    createProduct({ name: 'grapes', price: 40, description: 'bazz description' }),
-    createProduct({ name: 'apples', price: 50, description: 'quq description' }),
+    createProduct({ name: 'bananas', price: 20, description: 'foo description', image: bananaImage },
+        reviews = [{ txt: "meh banana", rating: 3 }]),
+    createProduct({ name: 'oranges', price: 30, description: 'bar description', image: orangeImage },
+        reviews = [{ txt: "good orange", rating: 5 }]),
+    createProduct({ name: 'grapes', price: 40, description: 'bazz description' },
+        reviews = [{ txt: "bad grapes", rating: 1 }]),
+    createProduct({ name: 'apples', price: 50, description: 'quq description' },
+        reviews = [{ txt: "great apple", rating: 4 }]),
   ]);
 
   const [] = await Promise.all([
