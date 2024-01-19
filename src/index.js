@@ -77,12 +77,12 @@ const App = ()=> {
   //   fetchData();
   // }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //   await api.fetchReviews(setReviews)
-  //   }
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      await api.fetchReviews(setReviews)
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (auth.id) {
