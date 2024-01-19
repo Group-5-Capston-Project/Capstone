@@ -4,29 +4,23 @@ import axios from 'axios';
 import api from './api';
 
 
-const Profile = () => {
-    const [users, setUsers] = useState([])
+const Profile = ({users}) => {
     const [username, setUsername] = ('')
-    const [password, setPassword] = ('')
+    const [password, setPassword] = ('')       
+    
 
- 
-    useEffect(()=> {
-        const fetchData = async()=> {
-          await api.fetchUsers(setUsers);
-        };
-        fetchData();
-      }, []);
-
-     
-      
-
-        
-     
-
-    const handleSubmit = (e) => {
-        // attempting to update profile settings upon form submit
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(username)
+        const user = {
+          username, 
+          password,
+          is_admin: false
+      }
+        try{
+          await axios.put(`/api/users/${user.id}`, user)
+      } catch(error){
+          console.log("error")
+      }
     }
     
 
@@ -35,22 +29,21 @@ return(
     <div>
         <h2>Profile</h2>
         <h3>Settings</h3>
-        <ul>
-        {
-          users.map( user => {
-            return (
-              <li key={ user.id }>
-                { user.username }
-              </li>
-            );
-          })
-        }
-      </ul>
         <form onSubmit={handleSubmit}>
             <label>Username:</label>
-            <input type='text' placeholder='Change Username...'></input>
+            <input 
+              type='text' 
+              placeholder='Change Username...'
+              value={username}
+              onChange={(e)=> {setUsername(e.target.value)}}>
+              </input>
             <label>Password:</label>
-            <input type='password' placeholder='Change Password...'></input>
+            <input 
+              type='password' 
+              placeholder='Change Password...'
+              value={password}
+              onChange={(e)=> {setPassword(e.target.value)}}>
+            </input>
             <button type='submit'>Submit Changes</button>
             </form>
     </div>
