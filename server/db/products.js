@@ -13,11 +13,12 @@ const fetchProducts = async()=> {
 
 const createReview = async (review) => {
   const SQL = `
-        INSERT INTO reviews (id, product_id, txt, rating)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO reviews (id, product_id, text)
+        VALUES ($1, $2, $3)
         RETURNING *
     `;
-  const response = await client.query(SQL, [review.id, review.product_id, review.txt, review.rating]);
+  console.log(`db/createReview ${JSON.stringify(review)}`)
+  const response = await client.query(SQL, [uuidv4(), review.product_id, review.text]);
   return response.rows[0];
 };
 
@@ -38,7 +39,7 @@ const createProduct = async(product, reviews=[])=> {
   const response = await client.query(SQL, [ id, product.name, product.price, product.description, product.image]);
   if (reviews.length > 0) {
     reviews.forEach(review => {
-      createReview({ id: uuidv4(), product_id: id, txt: review.txt, rating: review.rating });
+      createReview({ id: uuidv4(), product_id: id, text: review.text });
     })
   }
   return response.rows[0];

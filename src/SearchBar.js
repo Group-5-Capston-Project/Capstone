@@ -21,7 +21,7 @@ const SearchBar = ({products}) => {
             {
                 searchProduct.length > 0 ?
                 <div className='searchresults'>
-                    <p>viewing {filteredproducts.length} products of {products.length}</p>
+                    <p>Viewing {filteredproducts.length} products of {products.length}</p>
 
                     <ul className="searchlist">
                         {filteredproducts.map((product) => {

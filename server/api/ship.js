@@ -1,6 +1,6 @@
 const {
-    createAddress,
-  } = require('../db');
+  createAddress,
+} = require('../db');
 
 const express = require('express');
 const app = express.Router();
