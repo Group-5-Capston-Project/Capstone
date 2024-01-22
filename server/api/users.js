@@ -3,7 +3,6 @@ const {
     updateUser
   } = require('../db/users');
   const express = require('express');
-  const { isLoggedIn } = require('./middleware');
   const app = express.Router();
   const { isLoggedIn, isAdmin } = require('./middleware');
   
@@ -21,8 +20,8 @@ const {
     try {
       console.log(req.body)
       const response = await updateUser({ ...req.body, id: req.params.id });
-      res.send(response)
       console.log("response -->", response)
+      res.send(response)
     } catch (error) {
       next(error)
     }

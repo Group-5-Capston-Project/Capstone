@@ -70,12 +70,12 @@ const App = ()=> {
     }
   }, [auth]);
 
-  // useEffect(()=> {
-  //   const fetchData = async()=> {
-  //     await api.fetchUsers(setUsers);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(()=> {
+    const fetchData = async()=> {
+      await api.fetchUsers(setUsers);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,6 +92,10 @@ const App = ()=> {
       fetchData();
     }
   }, [auth]);
+
+  const updateUser = async(user)=> {
+    await api.updateUser({ user, users, setUsers });
+  };
  
   const createLineItem = async(product)=> {
     await api.createLineItem({ product, cart, lineItems, setLineItems});
@@ -159,14 +163,12 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
-
-              <Link className="navitem" to='/users' >Users ({users.length})</Link>
               <Link className="navitem" to='/products'>Products ({ products.length })</Link>
               <Link className="navitem" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
               <Link className="navitem" to='/cart'>Cart ({ cartCount })</Link>
               <Link className="navitem" to='/reviews'>Reviews</Link>
               <Link className="navitem" to='/wishlist'>Wish List ({ wishListItems.length})</Link>
-              <Link className="navitem" to='/users'>Profile ({users.length})</Link>
+              <Link className="navitem" to= {`/users/${auth.id}`} > Profile ({users.length})</Link>
               
               <span>
                 Welcome { auth.username }! 
@@ -178,8 +180,8 @@ const App = ()=> {
             <Routes>
               <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList}   />} />
               <Route path="/products/:id" element={<SingleProduct products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList} />} />
-              <Route path="/users" element={ <Profile/>} />
-              <Route path="/users" element={<Users users={users}/>} />
+              <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
+              {/* <Route path="/users" element={<Users users={users}/>} /> */}
               <Route path="/reviews" element={<Reviews reviews={reviews} products={products}/>} />
               <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
               <Route path="/cart" element={<Cart cart = { cart } lineItems = { lineItems } products = { products } updateOrder = { updateOrder } removeFromCart = { removeFromCart } cartTotal = {cartTotal} incrementQuantity = { updateLineItem } decrementQuantity={decrementQuantity} />} />
