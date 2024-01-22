@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
-const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, auth, addToWishList }) => {
+const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, auth, addToWishList, reviews }) => {
   const params = useParams();
   const id = params.id;
 
   const navigate = useNavigate();
 
+  
   const index = products.findIndex((product) => product.id === id);
 
   if (index === -1) {
@@ -27,16 +28,30 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
     navigate(`/products/${prevProductId}`);
   };
 
+  
+
   const singleproduct = products[index];
   const cartItem = cartItems.find(lineItem => lineItem.product_id === singleproduct.id);
 
+  const productreviews = reviews.filter(review => review.product_id === singleproduct.id)
+
+ 
+
   return (
-    <div>
-      <br />
+    <div className='page-users-two'>
+      
       <Link to='/products'>Back to all products</Link>
 
-      <h2>Single Product</h2>
-      <h3>{singleproduct.name}</h3>
+      <h2 className='pagetitletwo'></h2>
+
+      <div className='left'>
+      <div className='productimage'>{singleproduct.image ? <img src={singleproduct.image} /> : null}</div>
+      </div>
+
+
+
+      <div className='right'>
+        <h3>{singleproduct.name}</h3>
       <p>${singleproduct.price}.00</p>
       <p>{singleproduct.description}</p>
 
@@ -58,8 +73,9 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
               )}
             </>
           ) : null}
-
-<button onClick={() => addToWishList(singleproduct.id)}>Add To Wish List</button>
+          
+          <button onClick={() => addToWishList(singleproduct.id)}>Add To Wish List</button>
+          
 
           {auth.is_admin ? (
             <Link to={`/products/${singleproduct.id}/edit`}>Edit</Link>
@@ -67,11 +83,37 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
         </li>
       </ul>
 
+
       <br />
-      <button onClick={handlePrevButtonClick}>Previous Product</button>
-      <button onClick={handleNextButtonClick}>Next Product</button>
+      
+
+      <h3>Reviews</h3>
+            <ul>
+                {productreviews.map(review => (
+                  <li key={review.id}>
+                    {review.text}
+                  </li>
+                ))}
+                
+            </ul>
+            
+
+            <div><Link to='/reviews'>Create Review</Link></div>
+
+
+      </div>
+
+
+      <div className='bottom'>
+      <button onClick={handlePrevButtonClick} className='previousbutton'>Previous Product</button>
+      <button onClick={handleNextButtonClick} className='nextbutton'>Next Product</button>
+      </div>
+      
+
     </div>
+    
   );
+  
 };
 
 export default SingleProduct;

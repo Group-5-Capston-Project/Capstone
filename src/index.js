@@ -16,6 +16,7 @@ import WishList from './WishList';
 
 
 
+
 const App = ()=> {
 const location = useLocation();
   
@@ -76,12 +77,21 @@ const [users, setUsers] = useState([]);
   //   fetchData();
   // }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //   await api.fetchReviews(setReviews)
-  //   }
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      await api.fetchReviews(setReviews)
+    }
+    fetchData();
+  }, []);
+
+  const createReview = async (review) => {
+    const p = products.find(p => p.name === review.product)
+    if (p === undefined) {
+      alert(`${p.name} not found`)
+    } else {
+      await api.createReview (auth.id, review, reviews, setReviews, p.id);
+    }
+  };
 
   useEffect(() => {
     if (auth.id) {
@@ -161,35 +171,36 @@ const [users, setUsers] = useState([]);
       {
         auth.id ? (
           <>
+
+          <div className='header'>
+          <div className='logo'><Link to="/products">Green<span>Harvest</span></Link></div>
             <nav>
+
               
-              <Link className="navitem" to='/users' >Users ({users.length})</Link>
-              <Link className="navitem" to='/products'>Products ({ products.length })</Link>
-              <Link className="navitem" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
-              <Link className="navitem" to='/cart'>Cart ({ cartCount })</Link>
-              <Link className="navitem" to='/reviews'>Reviews</Link>
-              <Link className="navitem" to='/wishlist'>Wish List ({ wishListItems.length})</Link>
-              <Link className="navitem" to='/users'>Profile ({users.length})</Link>
+              <div className="navitem"><Link to='/products' className={pathname === "/products" ? "selected" : ""}>Products </Link></div>
+              <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
+              <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
+              <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
+              <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
+              <div className="navitem"><Link to='/users' className={pathname === "/users" ? "selected" : ""}>Profile ({users.length})</Link></div>
               
               <span>
-                Welcome { auth.username }!
-                <button onClick={ logout }>Logout</button>
+                Welcome { auth.username }! 
+                <button onClick={ logout } className='logoutbutton'>Logout</button>
               </span>
             </nav>
+            </div>
             <main>
 
             <Routes>
-            <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList}   />} />
-              <Route path="/products/:id" element={<SingleProduct products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList} />} />
-              <Route path="/profile" element={ <Profile/>} />
+              <Route path="/products" element={<Products products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList}   />} />
+              <Route path="/products/:id" element={<SingleProduct products={products} auth = { auth } cartItems = { cartItems } createLineItem = { createLineItem } updateLineItem = { updateLineItem } addToWishList={addToWishList} reviews={reviews} />} />
+              <Route path="/users" element={ <Profile/>} />
               <Route path="/users" element={<Users users={users}/>} />
-              <Route path="/reviews" element={<Reviews reviews={reviews} products={products}/>} />
+              <Route path="/reviews" element={<Reviews reviews={reviews} products={products} createReview={createReview}/>} />
               <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
-
               <Route path="/cart" element={<Cart cart = { cart } lineItems = { lineItems } products = { products } updateOrder = { updateOrder } removeFromCart = { removeFromCart } cartTotal = {cartTotal} incrementQuantity = { updateLineItem } decrementQuantity={decrementQuantity} />} />
-
-                <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} />
-
+              <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} /> 
             </Routes>
             
             </main>
@@ -222,7 +233,7 @@ const [users, setUsers] = useState([]);
             
 
             <div className="header">
-              <div className='logo'><Link to="/">Produce Market</Link></div>
+              <div className='logo'><Link to="/">Green<span>Harvest</span></Link></div>
             
             <div className='signup'>
             <Link to="/signup">Sign up</Link>

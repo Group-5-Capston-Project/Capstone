@@ -3,9 +3,9 @@ const {
     updateUser
   } = require('../db/users');
   const express = require('express');
+  const { isLoggedIn } = require('./middleware');
   const app = express.Router();
   const { isLoggedIn, isAdmin } = require('./middleware');
-  const { createUser } = require ('../db/auth.js')
   
   app.get('/', async(req, res, next)=> {
     try {
@@ -28,13 +28,13 @@ const {
     }
 
 })
-  
-  app.post('/', async(req, res, next) => {
-    try{
-      res.send(await createUser(req.body))
-    } catch(error){
-      next(error)
-    }
-  })
-  
-  module.exports = app; 
+
+app.post('/', async(req, res, next) => {
+  try{
+    res.send(await createUser(req.body))
+  } catch(error){
+    next(error)
+  }
+})
+
+module.exports = app; 

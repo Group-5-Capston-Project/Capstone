@@ -1,5 +1,4 @@
 import axios from 'axios';
-import wishList from "../WishList";
 
 const getHeaders = ()=> {
   return {
@@ -59,18 +58,27 @@ const createLineItem = async({ product, cart, lineItems, setLineItems })=> {
 };
 
 
-  const fetchReviews = async () => {
-    const response = await axios.get('/api/reviews');
-    console.log(response)
-    setReviews(response.data);
-  }
+const fetchReviews = async (setReviews) => {
+  const response = await axios.get('/api/reviews',getHeaders());
+  console.log(response)
+  setReviews(response.data);
+}
+
+const createReview = async (userId, review, reviews, setReviews, productId) => {
+  console.log(`api/createReview ${JSON.stringify(review)} ${review.reviewtext}`)
+  const response = await axios.post('/api/reviews/create',{
+    product_id: productId,
+    text: review.reviewtext,
+  }, getHeaders());
+  setReviews([...reviews, response.data])
+}
 
 const updateLineItem = async({ lineItem, cart, lineItems, setLineItems })=> {
   const response = await axios.put(`/api/lineItems/${lineItem.id}`, {
     quantity: lineItem.quantity + 1,
     order_id: cart.id
   }, getHeaders());
-  setLineItems(lineItems.map( lineItem => lineItem.id == response.data.id ? response.data: lineItem));
+  setLineItems(lineItems.map( lineItem => lineItem.id === response.data.id ? response.data: lineItem));
 };
 
 const decrementQuantity = async({ lineItem, cart, lineItems, setLineItems })=> {
@@ -78,7 +86,7 @@ const decrementQuantity = async({ lineItem, cart, lineItems, setLineItems })=> {
     quantity: lineItem.quantity - 1,
     order_id: cart.id
   }, getHeaders());
-  setLineItems(lineItems.map( lineItem => lineItem.id == response.data.id ? response.data: lineItem));
+  setLineItems(lineItems.map( lineItem => lineItem.id === response.data.id ? response.data: lineItem));
 };
 
 const updateOrder = async({ order, setOrders })=> {
@@ -148,6 +156,7 @@ const removeFromWishList = async (userId, productId, setWishListItems, wishListI
   setWishListItems(wishListItems.filter( _item => _item.product_id !== productId));
 };
 
+
 const api = {
   login,
   logout,
@@ -160,11 +169,15 @@ const api = {
   removeFromCart,
   attemptLoginWithToken,
   decrementQuantity,
-  attemptLoginWithToken,
   updateUser,
   createUser,
   fetchUsers,
-  updateProduct
+  fetchReviews,
+  fetchWishListItems,
+  addToWishList,
+  removeFromWishList,
+  createReview,
+  updateProduct 
 };
 
 export default api;

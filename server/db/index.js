@@ -107,8 +107,7 @@ const seed = async()=> {
     CREATE TABLE reviews(
       id UUID PRIMARY KEY,
       product_id UUID,
-      txt TEXT,
-      rating INTEGER NOT NULL
+      text TEXT
       );
 
       CREATE TABLE wish_list_items (
@@ -118,6 +117,7 @@ const seed = async()=> {
         product_id UUID REFERENCES products(id) NOT NULL,
         CONSTRAINT unique_wish_list_item UNIQUE(user_id, product_id)
       );
+      
 
   `;
   await client.query(SQL);
@@ -128,15 +128,64 @@ const seed = async()=> {
     createUser({ username: 'ethyl', password: '1234', is_admin: true})
   ]);
 
-  const bananaImage = await loadImage('images/banana.jpeg')
-  const orangeImage = await loadImage('images/orange.jpeg')
-  const grapeImage = await loadImage('images/grapes.jpeg')
+  const bananaImage = await loadImage('images/banana.jpg')
+  const orangeImage = await loadImage('images/orange.jpg')
+  const blackgrapesImage = await loadImage('images/blackgrapes.jpg')
+  const appleImage = await loadImage('images/apple.jpg')
+  const cucumberImage = await loadImage('images/cucumber.jpg')
+  const zucchinisquashImage = await loadImage('images/zucchinisquash.jpg')
+  const blueberriesImage = await loadImage('images/blueberries.jpg')
+  const russetpotatoImage = await loadImage('images/russetpotato.jpg')
+  const greencabbageImage = await loadImage('images/greencabbage.jpg')
+  const carrotsImage = await loadImage('images/carrots.jpg')
+  const greenonionImage = await loadImage('images/greenonion.jpg')
+  const tomatoImage = await loadImage('images/tomato.jpg')
+  const cilantroImage = await loadImage('images/cilantro.jpg')
+  const eggplantImage = await loadImage('images/eggplant.jpg')
+  const romainelettuceImage = await loadImage('images/romainelettuce.jpg')
+  const parsleyImage = await loadImage('images/parsley.jpg')
+  const serranopepperImage = await loadImage('images/serranopepper.jpg')
+  const strawberriesImage = await loadImage('images/strawberries.jpg')
+  const redonionImage = await loadImage('images/redonion.jpg')
+  const kiwiImage = await loadImage('images/kiwi.jpg')
+  const pineappleImage = await loadImage('images/pineapple.jpg')
+  const raspberriesImage = await loadImage('images/raspberries.jpg')
+  const redmangoImage = await loadImage('images/redmango.jpg')
+  const lemonsImage = await loadImage('images/lemons.jpg')
+  
 
   let [bananas, oranges, grapes] = await Promise.all([
-    createProduct({ name: 'bananas', price: 20, description: 'foo description', image: bananaImage }),
-    createProduct({ name: 'oranges', price: 30, description: 'bar description', image: orangeImage }),
-    createProduct({ name: 'grapes', price: 40, description: 'bazz description' }),
-    createProduct({ name: 'apples', price: 50, description: 'quq description' }),
+    createProduct({ name: 'Banana', price: 20, description: 'product description', image: bananaImage },
+        reviews = [{ text: "good banana"}]),
+    createProduct({ name: 'Orange', price: 30, description: 'product description', image: orangeImage},
+        reviews = [{ text: "good orange"}]),
+    createProduct({ name: 'Black Grapes', price: 40, description: 'product description', image: blackgrapesImage },
+        reviews = [{ text: "bad grapes"}]),
+    createProduct({ name: 'Apple', price: 50, description: 'product description', image: appleImage },
+        reviews = [{ text: "great apple"}]),
+
+    createProduct({ name: 'Cucumber', price: 50, description: 'product description', image: cucumberImage }),
+    createProduct({ name: 'Zucchini Squash', price: 50, description: 'product description', image: zucchinisquashImage }),
+    createProduct({ name: 'Blueberries', price: 50, description: 'product description', image: blueberriesImage }),
+    createProduct({ name: 'Russet Potato', price: 50, description: 'product description', image: russetpotatoImage }),
+    createProduct({ name: 'Green Cabbage', price: 50, description: 'product description', image: greencabbageImage }),
+    createProduct({ name: 'Carrots', price: 50, description: 'product description', image: carrotsImage }),
+    createProduct({ name: 'Green Onion', price: 50, description: 'product description', image: greenonionImage }),
+
+    createProduct({ name: 'Tomato', price: 50, description: 'product description', image: tomatoImage }),
+    createProduct({ name: 'Cilantro', price: 50, description: 'product description', image: cilantroImage }),
+    createProduct({ name: 'Eggplant', price: 50, description: 'product description', image: eggplantImage }),
+    createProduct({ name: 'Romaine Lettuce', price: 50, description: 'product description', image: romainelettuceImage }),
+    createProduct({ name: 'Parsley', price: 50, description: 'product description', image: parsleyImage }),
+    createProduct({ name: 'Serrano Pepper', price: 50, description: 'product description', image: serranopepperImage }),
+    createProduct({ name: 'Strawberries', price: 50, description: 'product description', image: strawberriesImage }),
+    createProduct({ name: 'Red Onion', price: 50, description: 'product description', image: redonionImage }),
+    createProduct({ name: 'Kiwi', price: 50, description: 'product description', image: kiwiImage }),
+    createProduct({ name: 'Pineapple', price: 50, description: 'product description', image: pineappleImage }),
+    createProduct({ name: 'Raspberries', price: 50, description: 'product description', image: raspberriesImage }),
+    createProduct({ name: 'Red Mango', price: 50, description: 'product description', image: redmangoImage }),
+    createProduct({ name: 'Lemons', price: 50, description: 'product description', image: lemonsImage }),
+
   ]);
 
   grapes = await updateProduct({...grapes, image: grapeImage})

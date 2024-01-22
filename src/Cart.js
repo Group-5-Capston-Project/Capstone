@@ -2,18 +2,18 @@ import React from 'react';
 
 const Cart = ({ updateOrder, removeFromCart, lineItems, cart, products, cartTotal, incrementQuantity, decrementQuantity })=> {
   return (
-    <div>
-      <h2>Cart</h2>
+    <div className='page-users'>
+      <h2 className='pagetitletwo'>Cart</h2>
       <ul>
         {
           lineItems.filter(lineItem=> lineItem.order_id === cart.id).map( lineItem => {
             const product = products.find(product => product.id === lineItem.product_id) || {};
             return (
-              <li key={ lineItem.id }>
-                { product.name }
-                ({ lineItem.quantity })
+              <li key={ lineItem.id } className='cart-container'>
+              <div> <span> { product.name } </span>- Qty: ({ lineItem.quantity })   - ${product.price * lineItem.quantity}
 
-                <button onClick={() => {incrementQuantity(lineItem)}}>+</button>
+               
+                <button onClick={() => {incrementQuantity(lineItem)}} className='inc-dec-button'>+</button>
 
                 <button onClick={() => 
                 
@@ -21,23 +21,30 @@ const Cart = ({ updateOrder, removeFromCart, lineItems, cart, products, cartTota
                     decrementQuantity(lineItem)
                   }else {
                   removeFromCart(lineItem)
-                }}}>-</button>
+                }}} className='inc-dec-button'>-</button>
+               
+
+                </div>
+
                 
+
+                <button onClick={ ()=> removeFromCart(lineItem)} className='remove-button'>Remove From Cart</button>
+
                 
-                
-                ${product.price * lineItem.quantity}
-                <button onClick={ ()=> removeFromCart(lineItem)}>Remove From Cart</button>
               </li>
             );
           })
         }
       </ul>
-      <div>Total: ${cartTotal}</div>
+      <div className='carttotal'>Order Total: <span>${cartTotal}.00</span></div>
+
+      <div className='create'>
       {
         lineItems.filter(lineItem => lineItem.order_id === cart.id ).length ? <button onClick={()=> {
           updateOrder({...cart, is_cart: false });
-        }}>Create Order</button>: null
+        }} className='create-button'>Create Order</button>: null
       }
+      </div>
     </div>
   );
 };
