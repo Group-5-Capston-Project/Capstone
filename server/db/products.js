@@ -45,6 +45,17 @@ const createProduct = async(product, reviews=[])=> {
   return response.rows[0];
 };
 
+const updateProduct = async(product) => {
+  const SQL = `
+    UPDATE products
+    SET name = $1, image = $2
+    WHERE id = $3
+    RETURNING *
+  `
+  const response = await client.query(SQL, [product.name, product.image, product.id])
+  return response.rows[0]
+}
+
 //create user here 
 
 module.exports = {
@@ -52,4 +63,5 @@ module.exports = {
   createProduct,
   createReview,
   fetchReviews,
+  updateProduct
 };
