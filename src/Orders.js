@@ -2,8 +2,8 @@ import React from 'react';
 
 const Orders = ({ orders, products, lineItems })=> {
   return (
-    <div>
-      <h2>Orders</h2>
+    <div className='page-users'>
+      <h2 className='pagetitletwo'>Orders</h2>
       
       <ul>
         {
@@ -13,7 +13,7 @@ const Orders = ({ orders, products, lineItems })=> {
 
             const orderLineItems = lineItems.filter(lineItem => lineItem.order_id === order.id);
             return (
-              <li key={ order.id }>
+              <li key={ order.id } className='orders-container'>
                 ({ new Date(order.created_at).toLocaleString() })
                 <ul>
                   {
@@ -24,14 +24,14 @@ const Orders = ({ orders, products, lineItems })=> {
 
                       return (
                         <li key={ lineItem.id }>
-                          { product ? `${product.name} - quantity: ${lineItem.quantity}` : '' }
+                          { product ? `${product.name} - Qty: ${lineItem.quantity}` : '' }
                           
                         </li>
                       );
                     })
                   }
                 </ul>
-                <div>Total: ${total}.00</div>
+                <div className='ordertotal'>Total: ${total}.00</div>
               </li>
             );
           })
