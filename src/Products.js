@@ -4,21 +4,21 @@ import SearchBar from './SearchBar'
 import VipUsers from './Vip';
 import ProductImageEditor from './ProductImageEditor';
 
-const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=> {
+const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct})=> {
   const navigate = useNavigate();
   return (
     <div>
       <div className='page-users '>
       <h2 className='pagetitle'>Produce ({ products.length })</h2>
-    
 
-      
+
+
       <div className="searchBar">
         <SearchBar products={products} />
       </div>
       
       <ul className="productcontainer">
-      
+
         {
           products.map( product => {
             const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
@@ -50,7 +50,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
                   auth.is_admin ? (
                     <div>
                       <Link to={`/products/${product.id}/edit`}>Edit</Link>
-                      < ProductImageEditor/>
+                      < ProductImageEditor updateProduct = {updateProduct} product = {product} />
                     </div>
                   ): null
                 }
@@ -62,7 +62,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
           })
         }
       </ul>
-      </div>
+</div>
 
       <VipUsers />
     </div>

@@ -152,6 +152,7 @@ const seed = async()=> {
   const raspberriesImage = await loadImage('images/raspberries.jpg')
   const redmangoImage = await loadImage('images/redmango.jpg')
   const lemonsImage = await loadImage('images/lemons.jpg')
+  const grapeImage = await loadImage('images/grapes.jpeg')
   
 
   let [bananas, oranges, grapes] = await Promise.all([
