@@ -42,7 +42,7 @@ return(
               value={password}
               onChange={(e)=> {setPassword(e.target.value)}}>
             </input>
-            <button type='submit'>Submit Changes</button>
+            <button type='submit' disabled={!username || !password}>Submit Changes</button>
             </form>
     </div>
     </>
