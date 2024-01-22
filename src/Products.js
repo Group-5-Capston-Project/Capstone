@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar'
 import VipUsers from './Vip';
+import ProductImageEditor from './ProductImageEditor';
 
 const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=> {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
 
                 <div className='productname'><Link to={`/products/${product.id}`}>
                 { product.name }
+                { product.image ? <img className='image_placeholder' src={product.image}/> : null}
                 </Link></div>
                 
                 
@@ -42,7 +44,10 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
                   <br />
                 {
                   auth.is_admin ? (
-                    <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                    <div>
+                      <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                      < ProductImageEditor/>
+                    </div>
                   ): null
                 }
               </li>

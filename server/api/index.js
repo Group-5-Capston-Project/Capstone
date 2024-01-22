@@ -8,9 +8,7 @@ app.use('/products', require('./products'));
 app.use('/', require('./auth'));
 app.use('/orders', require('./orders'));
 app.use('/lineItems', require('./lineItems'));
-
 app.use('/wishlist', require('./wishlist'));
-
-
+app.use('/users', require('./users'));
 
 module.exports = app;

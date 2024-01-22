@@ -7,6 +7,7 @@ const {
   createProduct,
   createReview,
   fetchReviews,
+  updateProduct
 } = require('./products');
 
 const {
@@ -138,6 +139,8 @@ const seed = async()=> {
     createProduct({ name: 'apples', price: 50, description: 'quq description' }),
   ]);
 
+  grapes = await updateProduct({...grapes, image: grapeImage})
+
   const [] = await Promise.all([
     createAddress({ name:'ethyl', last_name: 'doe', _address:'404 Not Found Way', phone: '510-333-3333'})
   ]);
@@ -169,5 +172,6 @@ module.exports = {
   removeFromWishList,
   createReview,
   fetchReviews,
-  client
+  client,
+  updateProduct
 };

@@ -17,19 +17,19 @@ import WishList from './WishList';
 
 
 const App = ()=> {
-  const location = useLocation();
+const location = useLocation();
   
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [lineItems, setLineItems] = useState([]);
   const [auth, setAuth] = useState({});
-  const [users, setUsers] = useState([]);
+const [users, setUsers] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [wishListItems, setWishListItems] = useState([]);
 
 
- 
 
+  
   const {pathname} = location
 
   
@@ -69,7 +69,7 @@ const App = ()=> {
     }
   }, [auth]);
 
-  // useEffect(()=> {
+// useEffect(()=> {
   //   const fetchData = async()=> {
   //     await api.fetchUsers(setUsers);
   //   };
@@ -91,7 +91,7 @@ const App = ()=> {
       fetchData();
     }
   }, [auth]);
- 
+
   const createLineItem = async(product)=> {
     await api.createLineItem({ product, cart, lineItems, setLineItems});
   };
@@ -108,14 +108,18 @@ const App = ()=> {
     await api.updateOrder({ order, setOrders });
   };
 
+  const updateProduct = async(product) => {
+    await api.updateProduct({product, products, setProducts})
+  }
+
   const removeFromCart = async(lineItem)=> {
     await api.removeFromCart({ lineItem, lineItems, setLineItems });
   };
 
   const cart = orders.find(order => order.is_cart) || {};
-  
+
   const cartItems = lineItems.filter(lineItem => lineItem.order_id === cart.id);
-  
+
   const cartCount = cartItems.reduce((acc, item)=> {
     return acc += item.quantity;
   }, 0);
@@ -158,7 +162,7 @@ const App = ()=> {
         auth.id ? (
           <>
             <nav>
-
+              
               <Link className="navitem" to='/users' >Users ({users.length})</Link>
               <Link className="navitem" to='/products'>Products ({ products.length })</Link>
               <Link className="navitem" to='/orders'>Orders ({ orders.filter(order => !order.is_cart).length })</Link>
@@ -168,7 +172,7 @@ const App = ()=> {
               <Link className="navitem" to='/users'>Profile ({users.length})</Link>
               
               <span>
-                Welcome { auth.username }! 
+                Welcome { auth.username }!
                 <button onClick={ logout }>Logout</button>
               </span>
             </nav>
@@ -184,16 +188,37 @@ const App = ()=> {
 
               <Route path="/cart" element={<Cart cart = { cart } lineItems = { lineItems } products = { products } updateOrder = { updateOrder } removeFromCart = { removeFromCart } cartTotal = {cartTotal} incrementQuantity = { updateLineItem } decrementQuantity={decrementQuantity} />} />
 
-                <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} /> 
+                <Route path ="/orders" element={<Orders orders = { orders } products = { products } lineItems = { lineItems } />} />
 
             </Routes>
             
             </main>
 
+
+            {location.pathname === '/cart' && (
+              <Cart
+                cart = { cart }
+                lineItems = { lineItems }
+                products = { products }
+                updateOrder = { updateOrder }
+                removeFromCart = { removeFromCart }
+                cartTotal = {cartTotal}
+                incrementQuantity = { updateLineItem }
+                decrementQuantity={decrementQuantity}
+              />
+            )}
+            {location.pathname === '/orders' && (
+              <Orders
+                orders = { orders }
+                products = { products }
+                lineItems = { lineItems }
+              />
+            )}
+            
             </>
         ):(
           <div>
-
+            
             
 
             <div className="header">
@@ -221,14 +246,14 @@ const App = ()=> {
             
               <Route path="/" element={
                 <div className='products-page-nonusers'>
-                  <Products
+            <Products
               products={ products }
               cartItems = { cartItems }
               createLineItem = { createLineItem }
               updateLineItem = { updateLineItem }
               auth = { auth }
             />
-            </div>
+</div>
               } />
             
             </Routes>
