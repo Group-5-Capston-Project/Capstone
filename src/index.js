@@ -13,6 +13,7 @@ import SingleProduct from './SingleProduct';
 import Reviews from './Reviews'
 import Profile from './Profile';
 import WishList from './WishList';
+import Shipping from './Shipping';
 
 
 
@@ -27,10 +28,7 @@ const App = ()=> {
   const [users, setUsers] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [wishListItems, setWishListItems] = useState([]);
-
-
- 
-
+  const [address, setAddress] = useState([]);
   const {pathname} = location
 
   
@@ -76,6 +74,9 @@ const App = ()=> {
   //   };
   //   fetchData();
   // }, []);
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {

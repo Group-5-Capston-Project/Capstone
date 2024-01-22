@@ -12,6 +12,7 @@ app.use('/reviews', require('./reviews'));
 app.use('/wishlist', require('./wishlist'));
 app.use('/users', require('./users'));
 app.use('/ship', require('./ship'));
+app.use('/', require('./ship'));
 
 
 

@@ -3,7 +3,6 @@ const {
     updateUser
   } = require('../db/users');
   const express = require('express');
-  const { isLoggedIn } = require('./middleware');
   const app = express.Router();
   const { isLoggedIn, isAdmin } = require('./middleware');
   

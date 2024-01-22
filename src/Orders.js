@@ -1,4 +1,5 @@
 import React from 'react';
+import Shipping from './Shipping';
 
 const Orders = ({ orders, products, lineItems })=> {
   return (
@@ -37,7 +38,7 @@ const Orders = ({ orders, products, lineItems })=> {
           })
         }
       </ul>
-      
+       <Shipping/>
     </div>
   );
 };
