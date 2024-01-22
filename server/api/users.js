@@ -27,13 +27,13 @@ const {
     }
 
 })
-  
-  app.post('/', async(req, res, next) => {
-    try{
-      res.send(await createUser(req.body))
-    } catch(error){
-      next(error)
-    }
-  })
-  
-  module.exports = app; 
+
+app.post('/', async(req, res, next) => {
+  try{
+    res.send(await createUser(req.body))
+  } catch(error){
+    next(error)
+  }
+})
+
+module.exports = app; 

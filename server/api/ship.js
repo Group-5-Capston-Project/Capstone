@@ -1,14 +1,14 @@
 const {
-    createAddress,
-  } = require('../db');
+  createAddress,
+} = require('../db');
 
 const express = require('express');
 const app = express.Router();
 const { isLoggedIn, isAdmin } = require('./middleware');
 
 app.get('/ship', async(req,res,next) => {
-    console.log("hello world")
-    res.send("get all addresses")
+  console.log("hello world")
+  res.send("get all addresses")
 })
 
 // app.post('/ship', async(req,res,next) => {

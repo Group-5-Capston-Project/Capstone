@@ -7,13 +7,17 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
   const navigate = useNavigate();
   return (
     <div>
-      <h2 className='pagetitle'>Products</h2>
+      <div className='page-users '>
+      <h2 className='pagetitle'>Produce ({ products.length })</h2>
+    
 
+      
       <div className="searchBar">
         <SearchBar products={products} />
       </div>
       
       <ul className="productcontainer">
+      
         {
           products.map( product => {
             const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
@@ -21,14 +25,14 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
               
                 <li key={ product.id }>
 
-                <div className='image_placeholder'></div>
+                <div className='image_placeholder'>{product.image ? <img src={product.image} /> : null}</div>
 
                 <div className='productname'><Link to={`/products/${product.id}`}>
                 { product.name }
                 </Link></div>
                 
                 
-                <br />
+                
                 <p>${product.price}.00</p>
                 
                 <p>{product.description}</p>
@@ -53,6 +57,8 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
           })
         }
       </ul>
+      </div>
+
       <VipUsers />
     </div>
   );

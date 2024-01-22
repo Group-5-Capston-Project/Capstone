@@ -3,8 +3,8 @@ import React from 'react';
 const WishList = ({wishListItems, removeFromWishList, products, auth, cartItems, updateLineItem, createLineItem}) => {
     // console.log(`Wishlist: items=${JSON.stringify(wishListItems)}`)
         return (
-            <div>
-                <h2>Wish List</h2>
+            <div className='page-users'>
+                <h2 className='pagetitletwo'>Wish List</h2>
 
                 <ul>
                     {
@@ -13,8 +13,8 @@ const WishList = ({wishListItems, removeFromWishList, products, auth, cartItems,
                                 const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id)
                                 console.log(`wishlist item = ${JSON.stringify(item)}`)
                                 return (
-                                    <li key={item.id}>
-                                        <span>{product.name}</span>
+                                    <li key={item.id} className='wishlistcontainer'>
+                                        <p>{product.name}</p>
 
                                         {
                                             auth.id ? (
