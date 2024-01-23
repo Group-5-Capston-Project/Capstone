@@ -39,7 +39,9 @@ const Signup = () => {
                
                     <input 
                     placeholder='Password'
-                        type="text" 
+                        type="password" 
+                        value={password}
+                        onChange={(e)=> {setPassword(e.target.value)}}
                     />
                
                 <button className='loginbutton' type="submit">Sign Up</button>

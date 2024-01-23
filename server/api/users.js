@@ -5,6 +5,7 @@ const {
   const express = require('express');
   const app = express.Router();
   const { isLoggedIn, isAdmin } = require('./middleware');
+  const { createUser } = require('../db/auth')
   
   app.get('/', async(req, res, next)=> {
     try {
@@ -18,9 +19,8 @@ const {
   
   app.put('/:id', async (req, res, next)=> {
     try {
-      console.log(req.body)
       const response = await updateUser({ ...req.body, id: req.params.id });
-      console.log("response -->", response)
+      res.send(response)
       res.send(response)
     } catch (error) {
       next(error)

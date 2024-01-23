@@ -33,6 +33,18 @@ const createUser = async(setUsers)=> {
   setUsers([...user, response.data]);
 };
 
+const createAddress = async(setAddress)=> {
+  const response = await axios.post('/api/ship', {
+    name: ship.name,
+    last_name: ship.last_name,
+    _address: ship._address,
+    phone: ship.phone 
+  }, getHeaders());
+  setAddress([...ship, response.data]);
+};
+
+
+
 
 const fetchProducts = async(setProducts)=> {
   const response = await axios.get('/api/products');
@@ -94,6 +106,11 @@ const updateOrder = async({ order, setOrders })=> {
   const response = await axios.get('/api/orders', getHeaders());
   setOrders(response.data);
 };
+
+const updateProduct = async({product, products, setProducts}) => {
+  const response = await axios.put(`/api/products/${product.id}`, product, getHeaders())
+  setProducts(products.map(product => product.id == response.data.id ? response.data : product))
+}
 
 const removeFromCart = async({ lineItem, lineItems, setLineItems })=> {
   const response = await axios.delete(`/api/lineItems/${lineItem.id}`, getHeaders());
@@ -171,8 +188,9 @@ const api = {
   fetchWishListItems,
   addToWishList,
   removeFromWishList,
-  createReview
- 
+  createAddress,
+  createReview,
+  updateProduct 
 };
 
 export default api;
