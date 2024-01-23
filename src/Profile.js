@@ -1,29 +1,27 @@
 import React from 'react';
 import { useState, useEffect } from 'react'; 
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import api from './api';
 
 
-const Profile = ({users}) => {
-    const [username, setUsername] = ('')
-    const [password, setPassword] = ('')       
-    
+const Profile = ({ auth, updateUser}) => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')  
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const user = {
-          username, 
-          password,
-          is_admin: false
-      }
-        try{
-          await axios.put(`/api/users/${user.id}`, user)
-      } catch(error){
-          console.log("error")
-      }
+      e.preventDefault()
+      updateUser( {...auth,
+        username: username,
+        password: password,
+      })
+      setUsername(''),
+      setPassword(''),
+      alert('User info successfully updated.')
+      window.location.reload(false);
+
     }
     
-
 return(
     <>
     <div>
@@ -44,7 +42,7 @@ return(
               value={password}
               onChange={(e)=> {setPassword(e.target.value)}}>
             </input>
-            <button type='submit'>Submit Changes</button>
+            <button type='submit' disabled={!username || !password}>Submit Changes</button>
             </form>
     </div>
     </>

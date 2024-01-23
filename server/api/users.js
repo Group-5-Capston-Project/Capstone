@@ -19,10 +19,9 @@ const {
   
   app.put('/:id', async (req, res, next)=> {
     try {
-      console.log(req.body)
       const response = await updateUser({ ...req.body, id: req.params.id });
       res.send(response)
-      console.log("response -->", response)
+      res.send(response)
     } catch (error) {
       next(error)
     }
