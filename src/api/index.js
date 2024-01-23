@@ -16,12 +16,12 @@ const fetchUsers = async(setUsers)=> {
 
 
 
-  const updateUser = async(user, users, setUsers) => {
-      const response = await axios.put(`/api/users/${user.id}`, {
-        
-      })
-      console.log(response)
-
+  const updateUser = async({user, users, setUsers, auth}) => {
+        const response = await axios.put(`/api/users/${user.id}`, {
+        username: user.username,
+        password: user.password,
+      }, getHeaders());
+      setUsers(users.map( user => user.id == response.data.id ? response.data: user))
   }
 
 
@@ -32,6 +32,18 @@ const createUser = async(setUsers)=> {
   }, getHeaders());
   setUsers([...user, response.data]);
 };
+
+const createAddress = async(setAddress)=> {
+  const response = await axios.post('/api/ship', {
+    name: ship.name,
+    last_name: ship.last_name,
+    _address: ship._address,
+    phone: ship.phone 
+  }, getHeaders());
+  setAddress([...ship, response.data]);
+};
+
+
 
 
 const fetchProducts = async(setProducts)=> {
@@ -176,6 +188,7 @@ const api = {
   fetchWishListItems,
   addToWishList,
   removeFromWishList,
+  createAddress,
   createReview,
   updateProduct 
 };
