@@ -7,6 +7,7 @@ const {
   createProduct,
   createReview,
   fetchReviews,
+  updateProduct
 } = require('./products');
 
 const {
@@ -151,6 +152,7 @@ const seed = async()=> {
   const raspberriesImage = await loadImage('images/raspberries.jpg')
   const redmangoImage = await loadImage('images/redmango.jpg')
   const lemonsImage = await loadImage('images/lemons.jpg')
+  const grapeImage = await loadImage('images/grapes.jpeg')
   
 
   let [bananas, oranges, grapes] = await Promise.all([
@@ -187,6 +189,8 @@ const seed = async()=> {
 
   ]);
 
+  grapes = await updateProduct({...grapes, image: grapeImage})
+
   const [] = await Promise.all([
     createAddress({ name:'ethyl', last_name: 'doe', _address:'404 Not Found Way', phone: '510-333-3333'})
   ]);
@@ -218,5 +222,6 @@ module.exports = {
   removeFromWishList,
   createReview,
   fetchReviews,
-  client
+  client,
+  updateProduct
 };

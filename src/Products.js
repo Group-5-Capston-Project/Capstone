@@ -2,22 +2,23 @@ import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar'
 import VipUsers from './Vip';
+import ProductImageEditor from './ProductImageEditor';
 
-const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=> {
+const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct})=> {
   const navigate = useNavigate();
   return (
     <div>
       <div className='page-users '>
       <h2 className='pagetitle'>Produce ({ products.length })</h2>
-    
 
-      
+
+
       <div className="searchBar">
         <SearchBar products={products} />
       </div>
       
       <ul className="productcontainer">
-      
+
         {
           products.map( product => {
             const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
@@ -29,6 +30,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
 
                 <div className='productname'><Link to={`/products/${product.id}`}>
                 { product.name }
+                { product.image ? <img className='image_placeholder' src={product.image}/> : null}
                 </Link></div>
                 
                 
@@ -46,7 +48,10 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
                   <br />
                 {
                   auth.is_admin ? (
-                    <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                    <div>
+                      <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                      < ProductImageEditor updateProduct = {updateProduct} product = {product} />
+                    </div>
                   ): null
                 }
               </li>
@@ -57,7 +62,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth})=
           })
         }
       </ul>
-      </div>
+</div>
 
       <VipUsers />
     </div>

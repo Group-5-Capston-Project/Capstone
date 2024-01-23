@@ -107,6 +107,11 @@ const updateOrder = async({ order, setOrders })=> {
   setOrders(response.data);
 };
 
+const updateProduct = async({product, products, setProducts}) => {
+  const response = await axios.put(`/api/products/${product.id}`, product, getHeaders())
+  setProducts(products.map(product => product.id == response.data.id ? response.data : product))
+}
+
 const removeFromCart = async({ lineItem, lineItems, setLineItems })=> {
   const response = await axios.delete(`/api/lineItems/${lineItem.id}`, getHeaders());
   setLineItems(lineItems.filter( _lineItem => _lineItem.id !== lineItem.id));
@@ -184,8 +189,8 @@ const api = {
   addToWishList,
   removeFromWishList,
   createAddress,
-  createReview
- 
+  createReview,
+  updateProduct 
 };
 
 export default api;
