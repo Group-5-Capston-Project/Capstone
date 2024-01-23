@@ -26,7 +26,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
               
                 <li key={ product.id }>
 
-                <div className='image_placeholder'>{product.image ? <img src={product.image} /> : null}</div>
+                
 
                 <div className='productname'><Link to={`/products/${product.id}`}>
                 { product.name }
