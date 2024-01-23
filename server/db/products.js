@@ -48,11 +48,11 @@ const createProduct = async(product, reviews=[])=> {
 const updateProduct = async(product) => {
   const SQL = `
     UPDATE products
-    SET name = $1, image = $2
-    WHERE id = $3
+    SET name = $1, image = $2, price = $3, description = $4
+    WHERE id = $5
     RETURNING *
   `
-  const response = await client.query(SQL, [product.name, product.image, product.id])
+  const response = await client.query(SQL, [product.name, product.image, product.price, product.description, product.id])
   return response.rows[0]
 }
 

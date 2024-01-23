@@ -31,8 +31,7 @@ const ReviewsForm = ({ createReview, products }) => {
 
             <form onSubmit={handleSubmit}>
                 
-               
-                    
+
                     <select value={product} onChange={(event) => setProduct(event.target.value)} className='select-product'>
                         <option value='' disabled>Select a product</option>
                     {products.map((p) => (<option key={p.id} value={p.name}>{p.name}
