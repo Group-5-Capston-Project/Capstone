@@ -9,7 +9,7 @@ button {
 
 li {
   list-style-type: none;
-  
+
 }
 
 a {
@@ -113,10 +113,34 @@ form>* {
 }
 
 
-nav {float: right; margin-right: 3em; margin-top: 0.5em; color: white;}
-nav span { margin-left: 5em;}
-.logoutbutton {margin-left:1.5em; background-color: transparent; padding-top: 1em; padding-bottom: 1em; padding-left: 2em; padding-right: 2em; clear: both; border: 1px solid white; color: white;}
-.logoutbutton:hover {background-color: white; color: #2D5F69; transition: all 0.4s ease;}
+nav {
+  float: right;
+  margin-right: 3em;
+  margin-top: 0.5em;
+  color: white;
+}
+
+nav span {
+  margin-left: 5em;
+}
+
+.logoutbutton {
+  margin-left: 1.5em;
+  background-color: transparent;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  clear: both;
+  border: 1px solid white;
+  color: white;
+}
+
+.logoutbutton:hover {
+  background-color: white;
+  color: #2D5F69;
+  transition: all 0.4s ease;
+}
 
 
 .navitem {
@@ -177,6 +201,9 @@ nav span { margin-left: 5em;}
   position: relative;
 }
 
+
+.addproductbutton{margin-left: 5em; float: left; clear: both; margin-bottom: 3em;}
+
 .searchbarlabel {
   width: 40%;
   margin-bottom: 5em;
@@ -198,8 +225,13 @@ nav span { margin-left: 5em;}
   line-height: 1.8em;
 }
 
-.searchresults a{ color: black; }
-.searchresults a:hover { font-weight: 700;}
+.searchresults a {
+  color: black;
+}
+
+.searchresults a:hover {
+  font-weight: 700;
+}
 
 .searchbarlabel input {
   width: 100%;
@@ -261,6 +293,7 @@ nav span { margin-left: 5em;}
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5em;
 }
 
 .page-users-two {
@@ -308,9 +341,24 @@ nav span { margin-left: 5em;}
   color: black;
 }
 
-.button { width:30%; background-color: transparent; border: 2px solid #2D5F69; padding-top: 0.7em; padding-bottom: 0.7em; margin-left: auto; margin-right: auto; font-size: 100%; color: #2D5F69; font-weight: 500;}
+.button {
+  width: 30%;
+  background-color: transparent;
+  border: 2px solid #2D5F69;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 100%;
+  color: #2D5F69;
+  font-weight: 500;
+}
 
-.formtitle {text-align: center; font-weight: 400; font-size: 110%;}
+.formtitle {
+  text-align: center;
+  font-weight: 400;
+  font-size: 110%;
+}
 
 .reviewform {
   width: 50%;
@@ -334,50 +382,191 @@ nav span { margin-left: 5em;}
   margin-top: 0.5em;
 }
 
-.review-product-name {font-weight:700;}
+.review-product-name {
+  font-weight: 700;
+}
 
-.page-users ul {padding: 0;margin: 0; }
+.page-users ul {
+  padding: 0;
+  margin: 0;
+}
 
-.review-container{ width: 40%; margin-bottom: 2em; margin-top: 4em; margin-left: auto; margin-right: auto; text-align: center;  }
+.review-container {
+  width: 40%;
+  margin-bottom: 2em;
+  margin-top: 4em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
-.selected{  font-weight: 600;}
+.selected {
+  font-weight: 600;
+}
 
-.orders-container{  width:40%; margin-left: auto; margin-right: auto; margin-bottom: 2em; text-align: center; line-height: 1.8em;}
+.orders-container {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  text-align: center;
+  line-height: 1.8em;
+}
 
-.ordertotal { font-weight: 600; margin-top: 0.5em;}
+.ordertotal {
+  font-weight: 600;
+  margin-top: 0.5em;
+}
 
-.cart-container { margin-bottom: 3em; text-align: center;}
+.cart-container {
+  margin-bottom: 3em;
+  text-align: center;
+}
 
-.inc-dec-button {  border: 1px solid #2D5F69; background-color: transparent; padding-left: 0.5em; padding-right: 0.5em; margin-left: 0.3em; margin-right: 0.3em;}
-.inc-dec-button:hover{background-color: #2D5F69; color: white; transition: all 0.4s ease;}
+.inc-dec-button {
+  border: 1px solid #2D5F69;
+  background-color: transparent;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.inc-dec-button:hover {
+  background-color: #2D5F69;
+  color: white;
+  transition: all 0.4s ease;
+}
 
 
-.cart-container span { font-weight: 600; }
+.cart-container span {
+  font-weight: 600;
+}
 
-.remove-button{width:17%; background-color: transparent;  margin-left: auto; margin-right: auto; font-size: 100%; color: #2D5F69; font-weight: 500; margin-top: 1em; font-style: italic; border: none;}
-.remove-button:hover {opacity: 0.4; transition: all 0.4s ease;}
+.remove-button {
+  width: 17%;
+  background-color: transparent;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 100%;
+  color: #2D5F69;
+  font-weight: 500;
+  margin-top: 1em;
+  font-style: italic;
+  border: none;
+}
 
-.carttotal{ text-align: center;}
-.carttotal span {font-weight: 700; font-size: 110%;}
+.remove-button:hover {
+  opacity: 0.4;
+  transition: all 0.4s ease;
+}
 
-.create-button{width:100%; background-color: transparent; border: 1px solid #2D5F69; padding-top: 0.7em; padding-bottom: 0.7em; font-size: 90%; color: #2D5F69; font-weight: 500; margin-top: 1.5em;}
-.create-button:hover {background-color: #2D5F69; color: white; transition: all 0.4s ease;}
+.carttotal {
+  text-align: center;
+}
 
-.create{width: 17%; margin-left: auto; margin-right: auto;}
+.carttotal span {
+  font-weight: 700;
+  font-size: 110%;
+}
 
-.select-product {padding-top: 1em; padding-bottom: 1em; width:60%; margin-left: auto; margin-right: auto;}
+.create-button {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #2D5F69;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  font-size: 90%;
+  color: #2D5F69;
+  font-weight: 500;
+  margin-top: 1.5em;
+}
+
+.create-button:hover {
+  background-color: #2D5F69;
+  color: white;
+  transition: all 0.4s ease;
+}
+
+.create {
+  width: 17%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.select-product {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
-.productimage img {margin-left: auto; margin-right: auto; width:100%;;}
+.productimage img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 
-.left {width:45%; height:20em; float: left;}
-.right {width:45%; height:20em; float: right;}
-.right ul {padding:0}
+.productimagecontainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
 
-.bottom {padding-top: 3em; clear: both; float: none; width:35%; height: 3em; margin-left: auto; margin-right: auto;}
+.left {
+  width: 45%;
+  height: 20em;
+  float: left;
+}
 
-.previousbutton {float: left;}
-.nextbutton{float: right;}
+.right {
+  width: 45%;
+  height: 20em;
+  float: right;
+}
 
-.wishlistcontainer {margin-top: 2em; margin-bottom: 4em; width:40%; margin-left: auto; margin-right: auto; text-align: center;}
-.wishlistcontainer button {margin-left: 1em; margin-right: 1em;}
+.right ul {
+  padding: 0
+}
+
+.bottom {
+  padding-top: 3em;
+  clear: both;
+  float: none;
+  width: 35%;
+  height: 3em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.previousbutton {
+  float: left;
+}
+
+.nextbutton {
+  float: right;
+}
+
+.wishlistcontainer {
+  margin-top: 2em;
+  margin-bottom: 4em;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.wishlistcontainer button {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+.centertext {
+  width: 50%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}

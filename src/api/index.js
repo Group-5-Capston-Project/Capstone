@@ -97,7 +97,7 @@ const updateOrder = async({ order, setOrders })=> {
 
 const updateProduct = async({product, products, setProducts}) => {
   const response = await axios.put(`/api/products/${product.id}`, product, getHeaders())
-  setProducts(products.map(product => product.id == response.data.id ? response.data : product))
+  setProducts(products.map(product => product.id === response.data.id ? response.data : product))
 }
 
 const removeFromCart = async({ lineItem, lineItems, setLineItems })=> {
