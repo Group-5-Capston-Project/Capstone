@@ -2,23 +2,39 @@ import React from 'react';
 import { useState} from "react";
 import axios from 'axios';
 
+
 const Shipping = () => {
     const [name, setName] = useState('')
     const [last_name, setLast_name] = useState('')
     const [_address, set_address] = useState('')
     const [phone, setPhone] = useState('')
-
+  
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        
+        e.preventDefault();
 
+      
+        if (name.length == 0) {
+            alert('Invalid Form, name can not be empty')
+            return
+        }
+        if (last_name.length == 0) {
+            alert('Invalid Form, last name can not be empty')
+            return
+        }
+        if (_address.length == 0) {
+            alert('Invalid Form, address can not be empty')
+            return
+        }
+        if (phone.length == 0) {
+            alert('Invalid Form, phone can not be empty')
+            return
+        }
         const ship = {
             name,
             last_name,
             _address,
             phone
-        }
-        
+        } 
         try{
             await axios.post('/api/ship', ship)
         } catch(error){
@@ -30,10 +46,10 @@ const Shipping = () => {
         alert("Thank you for submitting your address!")
         window.location.reload(false);
     }
-     
     return (
         <div>
-            <form onSubmit= {handleSubmit}>
+  
+           <form onSubmit= {handleSubmit}>
                 
                 <h2>Shipping Address</h2>
                 

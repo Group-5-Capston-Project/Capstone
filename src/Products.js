@@ -4,22 +4,20 @@ import SearchBar from './SearchBar'
 import VipUsers from './Vip';
 import ProductImageEditor from './ProductImageEditor';
 
-const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct})=> {
+const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct }) => {
   const navigate = useNavigate();
   return (
     <div>
       <div className='page-users '>
-      <h2 className='pagetitle'>Produce ({ products.length })</h2>
 
+          <h2 className='pagetitle'>Produce ({products.length})</h2>
 
-
-      <div className="searchBar">
-        <SearchBar products={products} />
-      </div>
-      
-      <ul className="productcontainer">
+        <div className="searchBar">
+          <SearchBar products={products} />
+        </div>
 
         {
+
           products.map( product => {
             const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
             return (
@@ -44,25 +42,29 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
                   auth.id ? (
                     cartItem ? <button onClick={ ()=> updateLineItem(cartItem)}>Add Another</button>: <button onClick={ ()=> createLineItem(product)}>Add To Cart</button>
                     ): null 
+
                   }
                   <br />
-                {
-                  auth.is_admin ? (
-                    <div>
-                      <Link to={`/products/${product.id}/edit`}>Edit</Link>
-                      < ProductImageEditor updateProduct = {updateProduct} product = {product} />
-                    </div>
-                  ): null
-                }
-              </li>
 
-              
-              
-            );
-          })
-        }
-      </ul>
-</div>
+                  {
+                    auth.is_admin ? (
+                      <div>
+                        <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                        < ProductImageEditor updateProduct={updateProduct} product={product} />
+                      </div>
+                    ) : null
+                  }
+
+
+                </li>
+
+
+
+              );
+            })
+          }
+        </ul>
+      </div>
 
       <VipUsers />
     </div>

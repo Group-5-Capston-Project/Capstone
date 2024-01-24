@@ -21,7 +21,8 @@ const Profile = ({ auth, updateUser}) => {
       window.location.reload(false);
 
     }
-    
+
+
 return(
     <>
     <div>
