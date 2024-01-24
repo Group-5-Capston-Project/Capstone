@@ -117,7 +117,7 @@ const seed = async()=> {
         product_id UUID REFERENCES products(id) NOT NULL,
         CONSTRAINT unique_wish_list_item UNIQUE(user_id, product_id)
       );
-      
+
 
   `;
   await client.query(SQL);
@@ -152,8 +152,9 @@ const seed = async()=> {
   const raspberriesImage = await loadImage('images/raspberries.jpg')
   const redmangoImage = await loadImage('images/redmango.jpg')
   const lemonsImage = await loadImage('images/lemons.jpg')
-  
-  
+  const grapeImage = await loadImage('images/grapes.jpeg')
+
+
 
   let [bananas, oranges, blackgrapes] = await Promise.all([
     createProduct({ name: 'Banana', price: 20, description: 'product description', image: bananaImage },
@@ -192,6 +193,7 @@ const seed = async()=> {
   const [] = await Promise.all([
     createAddress({ name:'ethyl', last_name: 'doe', _address:'404 Not Found Way', phone: '510-333-3333'})
   ]);
+  
   let orders = await fetchOrders(ethyl.id);
   let cart = orders.find(order => order.is_cart);
   let lineItem = await createLineItem({ order_id: cart.id, product_id: bananas.id});
