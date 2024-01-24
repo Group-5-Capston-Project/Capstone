@@ -17,6 +17,7 @@ import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
 
+
 const App = () => {
 
 
@@ -91,6 +92,12 @@ const App = () => {
     } else {
       await api.createReview(auth.id, review, reviews, setReviews, p.id);
     }
+  };
+
+  
+
+  const createProduct = async (product) => {
+      await api.createProduct(auth.id, product, products, setProducts);
   };
 
   useEffect(() => {
@@ -205,7 +212,7 @@ const App = () => {
 
             
             <Routes>
-                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} />} />
+                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} createProduct={createProduct} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
                 <Route path="/users" element={<Users users={users} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />

@@ -245,5 +245,6 @@ module.exports = {
   createReview,
   fetchReviews,
   client,
-  updateProduct
+  updateProduct,
+  createProduct
 };

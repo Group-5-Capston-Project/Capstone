@@ -202,7 +202,45 @@ nav span {
 }
 
 
-.addproductbutton{margin-left: 5em; float: left; clear: both; margin-bottom: 3em;}
+.addproductbutton{margin-left: 0em; float: left; clear: both; margin-bottom: 3em; width:100%;}
+
+
+
+.createproductform { width: 40%; margin-left: auto; margin-right: auto;}
+
+.createproductform input {
+  width: 100%;
+  margin-bottom: 1em;
+  font-size: 100%;
+  box-sizing: border-box;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 110%;
+  padding: 0.5em;
+  margin-top: 0.5em; margin-left: 0;
+}
+
+.createproductbutton {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #2D5F69;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  box-sizing: border-box;
+  border: none;
+  color: white;
+  font-size: 100%;
+  border-radius: 15px;
+}
+
+.createproductbutton:hover {
+  opacity: 0.7;
+  transition: all 0.4s ease;
+}
 
 .searchbarlabel {
   width: 40%;
@@ -356,8 +394,9 @@ nav span {
 
 .formtitle {
   text-align: center;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 110%;
+  margin-bottom: 1em;
 }
 
 .reviewform {
