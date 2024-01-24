@@ -10,7 +10,6 @@ const getHeaders = ()=> {
 
 const fetchUsers = async(setUsers)=> {
   const {data} = await axios.get('/api/users');
-  console.log(data)
   setUsers(data);
 };
 
@@ -147,7 +146,6 @@ const logout = (setAuth)=> {
 
 
 const fetchWishListItems = async (userId, setWishListItems) => {
-  console.log(`api/fetchWishListItems user=${userId}`)
   const response = await axios.get(`/api/wishlist/${userId}`, getHeaders());
   setWishListItems(response.data);
 };
