@@ -13,8 +13,6 @@ const fetchUsers = async(setUsers)=> {
   setUsers(data);
 };
 
-
-
   const updateUser = async({user, users, setUsers, auth}) => {
         const response = await axios.put(`/api/users/${user.id}`, {
         username: user.username,
@@ -48,6 +46,11 @@ const createAddress = async(setAddress)=> {
 const fetchProducts = async(setProducts)=> {
   const response = await axios.get('/api/products');
   setProducts(response.data);
+};
+
+const fetchVipProducts = async(setVip_Products)=> {
+  const response = await axios.get('/api/vip_products');
+  setVip_Products(response.data);
 };
 
 const fetchOrders = async(setOrders)=> {
@@ -189,7 +192,8 @@ const api = {
   removeFromWishList,
   createAddress,
   createReview,
-  updateProduct 
+  updateProduct,
+  fetchVipProducts
 };
 
 export default api;
