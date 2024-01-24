@@ -12,22 +12,26 @@ const SearchBar = ({products}) => {
 
     return (
         <div>
-            <label>
-                <input type="text" value={searchProduct} onChange={(e) => {setSearchProduct(e.target.value)}}/>
+            <div className="searchbarlabel">
+            <label >
+                <input type="text" placeholder="Search Product" value={searchProduct} onChange={(e) => {setSearchProduct(e.target.value)}}/>
             </label>
+            
+
             {
                 searchProduct.length > 0 ?
-                <div>
-                    <h3>viewing {filteredproducts.length} products of {products.length}</h3>
+                <div className='searchresults'>
+                    <p>Viewing {filteredproducts.length} products of {products.length}</p>
 
                     <ul className="searchlist">
                         {filteredproducts.map((product) => {
-                            return <li key={product.id}>{product.name}</li>
+                            return <li key={product.id}><Link to={`/products/${product.id}`}>{product.name}</Link></li>
                         })}
                     </ul>
                 </div>
                 : null
             }
+            </div>
         </div>
     )
 
