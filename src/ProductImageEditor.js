@@ -1,7 +1,10 @@
 import React from 'react'
 import {useState, useRef, useEffect} from 'react'
 
+
+
 const ProductImageEditor = ({product, updateProduct}) => {
+
 
     const [data, setData] = useState('')
 
@@ -18,7 +21,8 @@ const ProductImageEditor = ({product, updateProduct}) => {
         const reader = new FileReader()
         reader.readAsDataURL(data)
         reader.addEventListener('load', async() => {
-            product = {...product, image: reader.result}
+            product = {...product, image : reader.result}
+
             await updateProduct(product)
         })
         setData('')

@@ -121,6 +121,7 @@ const attemptLoginWithToken = async(setAuth)=> {
     try {
       const response = await axios.get('/api/me', getHeaders());
       setAuth(response.data);
+      console.log(response.data)
     }
     catch(ex){
       if(ex.response.status === 401){
@@ -135,6 +136,7 @@ const login = async({ credentials, setAuth })=> {
   const { token } = response.data;
   window.localStorage.setItem('token', token);
   attemptLoginWithToken(setAuth);
+  console.log(credentials)
 }
 
 const logout = (setAuth)=> {

@@ -169,7 +169,7 @@ const App = () => {
   const logout = () => {
     api.logout(setAuth);
   }
-
+  console.log(auth)
   return (
     <div className='container'>
       {
@@ -185,11 +185,12 @@ const App = () => {
               <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
-              <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
-              <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile</Link></div>
+              <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div
+              <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile </Link></div>
+
               
               <span>
-                Welcome { auth.username }! 
+                Welcome { auth.is_vip ? `${auth.username} VIP User` : auth.username}!
                 <button onClick={ logout } className='logoutbutton'>Logout</button>
               </span>
             
