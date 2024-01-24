@@ -17,10 +17,8 @@ import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
 
-
-
-
 const App = () => {
+
 
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
