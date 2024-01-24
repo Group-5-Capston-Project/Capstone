@@ -17,32 +17,37 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
         </div>
 
         {
+            auth.is_admin ? (
+              <Link to={'/products/add'} className='addproductbutton'>Add product</Link>
+            ) : null
+          }
 
-          products.map( product => {
-            const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
-            return (
-              
-                <li key={ product.id }>
+        <ul className="productcontainer">
 
-                <div className='image_placeholder'>{product.image ? <img src={product.image} /> : null}</div>
+          {
+            products.map(product => {
+              const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
+              return (
 
-                <div className='productname'><Link to={`/products/${product.id}`}>
-                { product.name }
-                {/* { product.image ? <img className='image_placeholder' src={product.image}/> : null} */}
-                </Link></div>
-                
-                
-                
-                <p>${product.price}.00</p>
-                
-                <p>{product.description}</p>
+                <li key={product.id}>
 
 
-                {
-                  auth.id ? (
-                    cartItem ? <button onClick={ ()=> updateLineItem(cartItem)}>Add Another</button>: <button onClick={ ()=> createLineItem(product)}>Add To Cart</button>
-                    ): null 
+                  <div className='productname'><Link to={`/products/${product.id}`}>
+                    {product.name}
+                    {product.image ? <img className='image_placeholder' src={product.image} /> : null}
+                  </Link></div>
 
+
+
+                  <p>${product.price}.00</p>
+
+                  <p>{product.description}</p>
+
+
+                  {
+                    auth.id ? (
+                      cartItem ? <button onClick={() => updateLineItem(cartItem)}>Add Another</button> : <button onClick={() => createLineItem(product)}>Add To Cart</button>
+                    ) : null
                   }
                   <br />
 

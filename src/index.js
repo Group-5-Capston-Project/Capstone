@@ -185,9 +185,13 @@ const App = () => {
               <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
-              <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div
+              <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
               <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile </Link></div>
-
+              {
+              auth.is_admin ? (
+                <div className="navitem"><Link to= {'/users'} className={pathname === "/users" ? "selected" : ""}> Users ({users.length})</Link></div>
+              ) : null
+              }
               
               <span>
                 Welcome { auth.is_vip ? `${auth.username} VIP User` : auth.username}!
@@ -200,10 +204,9 @@ const App = () => {
             <main>
 
             
-              <Routes>
+            <Routes>
                 <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
-                <Route path="/users" element={<Profile />} />
                 <Route path="/users" element={<Users users={users} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
                 <Route path="/reviews" element={<Reviews reviews={reviews} products={products} createReview={createReview} />} />
