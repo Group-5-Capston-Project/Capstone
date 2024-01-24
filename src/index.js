@@ -16,6 +16,7 @@ import WishList from './WishList';
 import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
+import Vip from './Vip'
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [wishListItems, setWishListItems] = useState([]);
+  const [vip_products, setVip_Products] = useState([]);
 
   const [address, setAddress] = useState([]);
 
@@ -47,6 +49,13 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       await api.fetchProducts(setProducts);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await api.fetchVipProducts(setVip_Products);
     };
     fetchData();
   }, []);
@@ -182,6 +191,7 @@ const App = () => {
 
               
               <div className="navitem"><Link to='/products' className={pathname === "/products" ? "selected" : ""}>Products </Link></div>
+              <div className="navitem"><Link to='/vip_products' className={pathname === "/vip_products" ? "selected" : ""}>Vip Products </Link></div>
               <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
@@ -206,6 +216,7 @@ const App = () => {
             
             <Routes>
                 <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} />} />
+                <Route path="/vip_products" element={<Vip vip_products={vip_products} auth={auth} cartItems={cartItems} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
                 <Route path="/users" element={<Users users={users} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />

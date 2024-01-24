@@ -70,8 +70,6 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
           }
         </ul>
       </div>
-
-      <VipUsers />
     </div>
   );
 };

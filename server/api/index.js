@@ -15,6 +15,8 @@ app.use('/users', require('./users'));
 app.use('/users/:id', require('./users'));
 app.use('/ship', require('./ship'));
 app.use('/', require('./ship'));
+app.use('/', require('./vip_products'));
+
 
 
 
