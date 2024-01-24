@@ -30,7 +30,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
 
                 <div className='productname'><Link to={`/products/${product.id}`}>
                 { product.name }
-                { product.image ? <img className='image_placeholder' src={product.image}/> : null}
+                {/* { product.image ? <img className='image_placeholder' src={product.image}/> : null} */}
                 </Link></div>
                 
                 

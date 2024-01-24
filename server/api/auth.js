@@ -5,7 +5,7 @@ const {
 
 const express = require('express');
 const app = express.Router();
-const { isLoggedIn } = require('./middleware');
+const { isLoggedIn, isVip } = require('./middleware');
 
 
 app.post('/login', async(req, res, next)=> {

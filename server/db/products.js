@@ -31,6 +31,7 @@ const fetchReviews = async () => {
   return response.rows;
 };
 
+// general products 
 const createProduct = async(product, reviews=[])=> {
   const SQL = `
     INSERT INTO products (id, name, price, description, image) VALUES($1, $2, $3, $4, $5) RETURNING *
@@ -56,6 +57,17 @@ const updateProduct = async(product) => {
   return response.rows[0]
 }
 
+// vip_products products 
+const createVipProduct = async(vip_product)=> {
+  const SQL = `
+    INSERT INTO vip_products (id, name, price, description, image) VALUES($1, $2, $3, $4, $5) RETURNING *
+  `;
+  const id = uuidv4()
+  const response = await client.query(SQL, [ id, vip_product.name, vip_product.price, vip_product.description, vip_product.image]);
+  return response.rows[0];
+};
+
+
 //create user here 
 
 module.exports = {
@@ -63,5 +75,6 @@ module.exports = {
   createProduct,
   createReview,
   fetchReviews,
-  updateProduct
+  updateProduct,
+  createVipProduct
 };

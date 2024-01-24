@@ -170,7 +170,7 @@ const [users, setUsers] = useState([]);
   const logout = ()=> {
     api.logout(setAuth);
   }
-
+  console.log(auth)
   return (
     <div className='container'>
       {
@@ -187,10 +187,10 @@ const [users, setUsers] = useState([]);
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
               <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
-              <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile ({users.length})</Link></div>
+              <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile </Link></div>
               
               <span>
-                Welcome { auth.username }! 
+                Welcome { auth.is_vip ? `${auth.username} VIP User` : auth.username}!
                 <button onClick={ logout } className='logoutbutton'>Logout</button>
               </span>
             </nav>

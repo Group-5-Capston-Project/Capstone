@@ -7,7 +7,8 @@ const {
   createProduct,
   createReview,
   fetchReviews,
-  updateProduct
+  updateProduct,
+  createVipProduct
 } = require('./products');
 
 const {
@@ -58,16 +59,27 @@ const seed = async()=> {
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS address;
+    DROP TABLE IF EXISTS vip_products;
 
     CREATE TABLE users(
       id UUID PRIMARY KEY,
       created_at TIMESTAMP DEFAULT now(),
       username VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(100) NOT NULL,
-      is_admin BOOLEAN DEFAULT false NOT NULL
+      is_admin BOOLEAN DEFAULT false NOT NULL,
+      is_vip BOOLEAN DEFAULT false NOT NULL
     );
 
     CREATE TABLE products(
+      id UUID PRIMARY KEY,
+      created_at TIMESTAMP DEFAULT now(),
+      name VARCHAR(100) UNIQUE NOT NULL,
+      price INTEGER NOT NULL,
+      description TEXT,
+      image TEXT
+    );
+
+    CREATE TABLE vip_products(
       id UUID PRIMARY KEY,
       created_at TIMESTAMP DEFAULT now(),
       name VARCHAR(100) UNIQUE NOT NULL,
@@ -101,9 +113,6 @@ const seed = async()=> {
       phone VARCHAR(20)
     );
 
-
-      
-
     CREATE TABLE reviews(
       id UUID PRIMARY KEY,
       product_id UUID,
@@ -122,12 +131,25 @@ const seed = async()=> {
   `;
   await client.query(SQL);
 
-  const [moe, lucy, ethyl] = await Promise.all([
-    createUser({ username: 'moe', password: 'm_password', is_admin: false}),
-    createUser({ username: 'lucy', password: 'l_password', is_admin: false}),
-    createUser({ username: 'ethyl', password: '1234', is_admin: true})
+  const [moe, lucy, ethyl, mark] = await Promise.all([
+    createUser({ username: 'moe', password: 'm_password', is_admin: false, is_vip: false}),
+    createUser({ username: 'lucy', password: 'l_password', is_admin: false, is_vip: false}),
+    createUser({ username: 'ethyl', password: '1234', is_admin: true, is_vip: false}),
+    createUser({ username: 'mark', password: '1234', is_admin: true, is_vip: true})
   ]);
 
+  // vip products 
+  const bananaVipImage = await loadImage('images/bananacopy.jpg')
+  const orangeVipImage = await loadImage('images/orangecopy.jpg')
+
+  let [vip_bananas, vip_oranges] = await Promise.all([
+    createVipProduct({ name: 'Banana', price: 20, description: 'product description', image: bananaVipImage },
+        reviews = [{ text: "good banana"}]),
+    createVipProduct({ name: 'Orange', price: 30, description: 'product description', image: orangeVipImage},
+        reviews = [{ text: "good orange"}])
+  ])
+  
+  // general products 
   const bananaImage = await loadImage('images/banana.jpg')
   const orangeImage = await loadImage('images/orange.jpg')
   const blackgrapesImage = await loadImage('images/blackgrapes.jpg')
