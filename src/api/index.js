@@ -10,7 +10,6 @@ const getHeaders = ()=> {
 
 const fetchUsers = async(setUsers)=> {
   const {data} = await axios.get('/api/users');
-  console.log(data)
   setUsers(data);
 };
 
@@ -72,7 +71,6 @@ const createLineItem = async({ product, cart, lineItems, setLineItems })=> {
 
 const fetchReviews = async (setReviews) => {
   const response = await axios.get('/api/reviews',getHeaders());
-  console.log(response)
   setReviews(response.data);
 }
 
@@ -146,7 +144,6 @@ const logout = (setAuth)=> {
 
 
 const fetchWishListItems = async (userId, setWishListItems) => {
-  console.log(`api/fetchWishListItems user=${userId}`)
   const response = await axios.get(`/api/wishlist/${userId}`, getHeaders());
   setWishListItems(response.data);
 };
