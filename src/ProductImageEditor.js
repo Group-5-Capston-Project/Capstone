@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useRef, useEffect} from 'react'
 
-const ProductImageEditor = (updateProduct) => {
+const ProductImageEditor = ({product, updateProduct}) => {
 
     const [data, setData] = useState('')
 
@@ -18,9 +18,13 @@ const ProductImageEditor = (updateProduct) => {
         const reader = new FileReader()
         reader.readAsDataURL(data)
         reader.addEventListener('load', async() => {
-            console.log(reader.result)
+            product = {...product, image: reader.result}
+            await updateProduct(product)
         })
+        setData('')
+        el.current.value = ''
     }
+
     return (
         <div>
             <input type='file' ref={el}/>

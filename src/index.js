@@ -202,8 +202,8 @@ const App = () => {
 
             
               <Routes>
-                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} />} />
-                <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} />} />
+                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} />} />
+                <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
                 <Route path="/users" element={<Profile />} />
                 <Route path="/users" element={<Users users={users} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
@@ -211,7 +211,7 @@ const App = () => {
                 <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
                 <Route path="/cart" element={<Cart cart={cart} lineItems={lineItems} products={products} updateOrder={updateOrder} removeFromCart={removeFromCart} cartTotal={cartTotal} incrementQuantity={updateLineItem} decrementQuantity={decrementQuantity} />} />
                 <Route path="/orders" element={<Orders orders={orders} products={products} lineItems={lineItems} />} />
-                <Route path="/products/:id/edit" element={<EditProduct products={products} updateProduct={updateProduct} auth={auth} />} />
+                <Route path="/products/:id/edit" element={<EditProduct products={products}  auth={auth} updateProduct={updateProduct} />} />
                 <Route path="/products/add" element={<AddProduct products={products} auth={auth} />} />
 
               </Routes>
