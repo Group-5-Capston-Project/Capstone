@@ -6,13 +6,9 @@ import Orders from './Orders';
 import Cart from './Cart';
 import Login from './Login';
 import api from './api';
-<<<<<<< HEAD
 import Signup from './Signup';
-=======
 import axios from 'axios';
 import SingleProduct from './SingleProduct';
-
->>>>>>> main
 
 const App = ()=> {
   const [products, setProducts] = useState([]);
