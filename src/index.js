@@ -188,7 +188,7 @@ const App = () => {
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
               <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
-              <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile ({users.length})</Link></div>
+              <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile</Link></div>
               
               <span>
                 Welcome { auth.username }! 
