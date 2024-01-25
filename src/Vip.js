@@ -60,6 +60,7 @@ const VipUsers = ({vip_products,products, cartItems, createLineItem, updateLineI
                     </ul>
                 </div> 
                 : <h2 className='pagetitle'>You Must be A Vip User to View this Page. Please contact Admin to join VIP customers or for further assistance </h2> }
+
         </div>
     )
 }

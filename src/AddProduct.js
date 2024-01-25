@@ -14,22 +14,30 @@ const AddProduct = ({ products, createProduct }) => {
             name, image, price, description
         }
         createProduct(newproduct)
-    }
+        
+
+        setName('')
+        setPrice('')
+        setDescription('')
+    };
+
+    
 
 
 
     return (
-        <div className='page-users'>
-            <h2 className='pagetitletwo'>Add Product</h2>
+        <div>
+            <div className='formtitle'>Create New Product:</div>
 
-            <form onSubmit={handleSubmit}>
-                <input placeholder='Name...' type="text" value={name} onChange={(event) => {setName(event.target.value)}} />
-                <input placeholder='Price...' type="text" value={price} onChange={(event) => {setPrice(event.target.value)}} />
-                <input placeholder='Description...' type="text" value={description} onChange={(event) => {setDescription(event.target.value)}} />
-
-                <button type="submit">Submit</button>
+            <form className='createproductform' onSubmit={handleSubmit}>               
+                    <input placeholder='Name...' type="text" value={name} onChange={(event) => {setName(event.target.value)}} />
+                    <input placeholder='Price...' type="text" value={price} onChange={(event) => {setPrice(event.target.value)}} />
+                    <input placeholder='Description...' type="text" value={description} onChange={(event) => {setDescription(event.target.value)}} />
+                <button className='createproductbutton' type="submit">Create Product</button>
                 
             </form>
+
+          
 
 
 

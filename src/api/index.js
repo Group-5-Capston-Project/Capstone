@@ -13,6 +13,8 @@ const fetchUsers = async(setUsers)=> {
   setUsers(data);
 };
 
+
+
   const updateUser = async({user, users, setUsers, auth}) => {
         const response = await axios.put(`/api/users/${user.id}`, {
         username: user.username,
@@ -84,6 +86,17 @@ const createReview = async (userId, review, reviews, setReviews, productId) => {
     text: review.reviewtext,
   }, getHeaders());
   setReviews([...reviews, response.data])
+}
+
+const createProduct = async (userId, product, products, setProducts, productId) => {
+  const response = await axios.post('/api/products/add',{
+    product_id: productId,
+    name: product.name,
+    price: product.price,
+    description: product.description,
+    image: product.image
+  }, getHeaders());
+  setProducts([...products, response.data])
 }
 
 const updateLineItem = async({ lineItem, cart, lineItems, setLineItems })=> {
@@ -193,7 +206,7 @@ const api = {
   createAddress,
   createReview,
   updateProduct,
-  fetchVipProducts
+  createProduct 
 };
 
 export default api;

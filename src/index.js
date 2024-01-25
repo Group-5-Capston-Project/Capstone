@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link, HashRouter, Routes, Route } from 'react-router-dom';
+import { Link, HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Products from './Products';
 import Orders from './Orders';
 import Cart from './Cart';
@@ -16,10 +16,11 @@ import WishList from './WishList';
 import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
-import Vip from './Vip'
+
 
 const App = () => {
 
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -28,7 +29,6 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [wishListItems, setWishListItems] = useState([]);
-  const [vip_products, setVip_Products] = useState([]);
 
   const [address, setAddress] = useState([]);
 
@@ -49,13 +49,6 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       await api.fetchProducts(setProducts);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await api.fetchVipProducts(setVip_Products);
     };
     fetchData();
   }, []);
@@ -100,6 +93,12 @@ const App = () => {
     } else {
       await api.createReview(auth.id, review, reviews, setReviews, p.id);
     }
+  };
+
+  
+
+  const createProduct = async (product) => {
+      await api.createProduct(auth.id, product, products, setProducts);
   };
 
   useEffect(() => {
@@ -177,6 +176,7 @@ const App = () => {
 
   const logout = () => {
     api.logout(setAuth);
+    navigate('/');
   }
   console.log(auth)
   return (
@@ -215,8 +215,8 @@ const App = () => {
 
             
             <Routes>
-                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} />} />
                 <Route path="/products/vip_products" element={<Vip vip_products={vip_products} products={products} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} auth={auth} updateProduct={updateProduct} />} />
+                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} createProduct={createProduct} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
                 <Route path="/users" element={<Users users={users} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
@@ -270,6 +270,8 @@ const App = () => {
                   />
                 </div>
               } />
+
+                <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
 
             </Routes>
 
