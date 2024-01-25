@@ -49,7 +49,7 @@ const fetchProducts = async(setProducts)=> {
 };
 
 const fetchVipProducts = async(setVip_Products)=> {
-  const response = await axios.get('/api/vip_products');
+  const response = await axios.get('/api/products/vip_products');
   setVip_Products(response.data);
 };
 

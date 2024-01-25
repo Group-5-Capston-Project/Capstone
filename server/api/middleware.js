@@ -32,5 +32,16 @@ const isVip = (req, res, next) => {
     next(error);
   }
 }
+const isVipProduct = (req, res, next) => {
+  if(req.product.is_vip_product){
+    next()
+  }
+  else {
+    const error = Error('must be vip');
+    error.status = 401;
+    next(error);
+  }
+}
 
-module.exports = { isLoggedIn, isAdmin, isVip }
+
+module.exports = { isLoggedIn, isAdmin, isVip, isVipProduct }
