@@ -1,7 +1,7 @@
 import React from 'react';
 
 const handleSubmit = () => {
-    console.log('hello')
+    console.log('hello!')
 }
 
 const VipUsers = () => {
