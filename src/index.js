@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link, HashRouter, Routes, Route } from 'react-router-dom';
+import { Link, HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Products from './Products';
 import Orders from './Orders';
 import Cart from './Cart';
@@ -20,6 +20,7 @@ import Vip from './Vip'
 
 const App = () => {
 
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -102,6 +103,12 @@ const App = () => {
     }
   };
 
+  
+
+  const createProduct = async (product) => {
+      await api.createProduct(auth.id, product, products, setProducts);
+  };
+
   useEffect(() => {
     if (auth.id) {
       const fetchData = async () => {
@@ -177,6 +184,7 @@ const App = () => {
 
   const logout = () => {
     api.logout(setAuth);
+    navigate('/');
   }
   console.log(auth)
   return (
@@ -270,6 +278,8 @@ const App = () => {
                   />
                 </div>
               } />
+
+                <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
 
             </Routes>
 

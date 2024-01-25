@@ -3,12 +3,16 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar'
 import VipUsers from './Vip';
 import ProductImageEditor from './ProductImageEditor';
+import AddProduct from './AddProduct'
 
-const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct }) => {
+const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct, createProduct }) => {
   const navigate = useNavigate();
+
+  
   return (
     <div>
-      <div className='page-users '>
+      
+      <div className="page-users">
 
           <h2 className='pagetitle'>Produce ({products.length})</h2>
 
@@ -18,7 +22,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
 
         {
             auth.is_admin ? (
-              <Link to={'/products/add'} className='addproductbutton'>Add product</Link>
+              <div className='addproductbutton'><AddProduct createProduct={createProduct} products={products} /></div>
             ) : null
           }
 

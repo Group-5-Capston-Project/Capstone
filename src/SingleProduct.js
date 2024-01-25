@@ -39,8 +39,13 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
 
   return (
     <div className='page-users-two'>
-      
+
+      {auth.id ? (
       <Link to='/products'>Back to all products</Link>
+      ): <Link to='/'>Back to all products</Link>}
+      
+
+      
 
       <h2 className='pagetitletwo'></h2>
 
@@ -52,8 +57,13 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
 
       <div className='right'>
         <h3>{singleproduct.name}</h3>
+
+        {auth.id ? (
+          <>
       <p>${singleproduct.price}.00</p>
       <p>{singleproduct.description}</p>
+      </>
+      ) : null}
 
       <ul className="singleproductaddbutton">
         <li key={singleproduct.id}>
@@ -70,11 +80,11 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
                   
                 </>
                 
-              )}
+                )}
+                <button onClick={() => addToWishList(singleproduct.id)}>Add To Wish List</button>
             </>
           ) : null}
           
-          <button onClick={() => addToWishList(singleproduct.id)}>Add To Wish List</button>
           
 
           {auth.is_admin ? (
@@ -86,7 +96,8 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
 
       <br />
       
-
+      {auth.id ? (
+        <>
       <h3>Reviews</h3>
             <ul>
                 {productreviews.map(review => (
@@ -99,6 +110,16 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
             
 
             <div><Link to='/reviews'>Create Review</Link></div>
+            </>
+          ) : null}
+
+          {!auth.id ? (
+            <>
+          <div>Log in or sign up to see product details</div>
+          <button><Link to="/login">Login</Link></button>
+          <button><Link to="/signup">Sign up</Link></button>
+          </>
+          ) : null}
 
 
       </div>

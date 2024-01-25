@@ -9,7 +9,6 @@ const { createUser } = require('../db/auth')
 
 app.get('/', async(req, res, next)=> {
   try {
-    console.log("Hello World")
     res.send(await fetchUsers());
   }
   catch(ex){

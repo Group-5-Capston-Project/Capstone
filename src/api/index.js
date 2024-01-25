@@ -86,6 +86,17 @@ const createReview = async (userId, review, reviews, setReviews, productId) => {
   setReviews([...reviews, response.data])
 }
 
+const createProduct = async (userId, product, products, setProducts, productId) => {
+  const response = await axios.post('/api/products/add',{
+    product_id: productId,
+    name: product.name,
+    price: product.price,
+    description: product.description,
+    image: product.image
+  }, getHeaders());
+  setProducts([...products, response.data])
+}
+
 const updateLineItem = async({ lineItem, cart, lineItems, setLineItems })=> {
   const response = await axios.put(`/api/lineItems/${lineItem.id}`, {
     quantity: lineItem.quantity + 1,
@@ -193,7 +204,8 @@ const api = {
   createAddress,
   createReview,
   updateProduct,
-  fetchVipProducts
+  fetchVipProducts,
+  createProduct 
 };
 
 export default api;

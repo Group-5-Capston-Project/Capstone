@@ -248,5 +248,5 @@ module.exports = {
   client,
   updateProduct,
   fetchVipProducts,
-  
+  createProduct
 };
