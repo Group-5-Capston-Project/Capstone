@@ -33,9 +33,11 @@ const EditProduct = ({products, updateProduct, product}) => {
     return (
         <div className='page-users'>
             <h2 className='pagetitletwo'>Edit Product</h2>
-            <h2 className='pagetitletwo'>{singleproduct.name}</h2>
+            <p className='editproducttext'>{singleproduct.name}</p>
+            <p className='editproducttext'>{singleproduct.price}</p>
+            <p className='editproducttext'>{singleproduct.description}</p>
 
-            <div className='productimagecontainer'>
+            <div className='editproductimagecontainer'>
                 <div className='productimage'>
                     {singleproduct.image ? <img src={singleproduct.image} alt={singleproduct.name}/> : null}
                 </div>

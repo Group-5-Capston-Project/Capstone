@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 
 const Login = ({ login })=> {
+  const navigate = useNavigate();
   const location = useLocation();
   
   const [username, setUsername] = useState('');
@@ -23,6 +24,7 @@ const Login = ({ login })=> {
     
     try {
       await login({ username, password });
+      navigate('/products')
       
     }
     catch(ev){

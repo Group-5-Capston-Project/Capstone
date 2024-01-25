@@ -7,6 +7,8 @@ import AddProduct from './AddProduct'
 
 const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, updateProduct, createProduct }) => {
   const navigate = useNavigate();
+
+  
   return (
     <div>
       
