@@ -58,16 +58,6 @@ const updateProduct = async(product) => {
 }
 
 // vip_products products 
-
-const fetchVipProducts = async()=> {
-  const SQL = `
-    SELECT *
-    FROM vip_products
-  `;
-  const response = await client.query(SQL);
-  return response.rows;
-};
-
 const createVipProduct = async(vip_product)=> {
   const SQL = `
     INSERT INTO vip_products (id, name, price, description, image) VALUES($1, $2, $3, $4, $5) RETURNING *
@@ -86,6 +76,5 @@ module.exports = {
   createReview,
   fetchReviews,
   updateProduct,
-  createVipProduct,
-  fetchVipProducts
+  createVipProduct
 };
