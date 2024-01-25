@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const handleSubmit = () => {
-    console.log('hello')
+    console.log('hello!')
 }
 
 const VipUsers = ({auth, vip_products}) => {
