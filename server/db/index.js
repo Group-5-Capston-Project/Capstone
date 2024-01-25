@@ -8,7 +8,8 @@ const {
   createReview,
   fetchReviews,
   updateProduct,
-  createVipProduct
+  createVipProduct,
+  fetchVipProducts
 } = require('./products');
 
 const {
@@ -246,5 +247,6 @@ module.exports = {
   fetchReviews,
   client,
   updateProduct,
+  fetchVipProducts,
   createProduct
 };
