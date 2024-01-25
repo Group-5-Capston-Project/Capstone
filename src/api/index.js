@@ -50,6 +50,11 @@ const fetchProducts = async(setProducts)=> {
   setProducts(response.data);
 };
 
+const fetchVipProducts = async(setVip_Products)=> {
+  const response = await axios.get('/api/products/vip_products');
+  setVip_Products(response.data);
+};
+
 const fetchOrders = async(setOrders)=> {
   const response = await axios.get('/api/orders', getHeaders());
   setOrders(response.data);

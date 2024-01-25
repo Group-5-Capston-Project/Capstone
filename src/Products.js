@@ -29,10 +29,12 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
         <ul className="productcontainer">
 
           {
-            products.map(product => {
+            products
+            .filter(product => product.is_vip_product == false)
+            .map(product => {
               const cartItem = cartItems.find(lineItem => lineItem.product_id === product.id);
               return (
-
+                
                 <li key={product.id}>
 
 
@@ -40,8 +42,6 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
                     {product.name}
                     {product.image ? <img className='image_placeholder' src={product.image} /> : null}
                   </Link></div>
-
-
 
                   <p>${product.price}.00</p>
 
@@ -63,12 +63,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
                       </div>
                     ) : null
                   }
-
-
                 </li>
-
-
-
               );
             })
           }
