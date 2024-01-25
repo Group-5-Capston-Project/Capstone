@@ -1,54 +1,36 @@
 import React from 'react';
-import { useState, useEffect } from 'react'; 
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import api from './api';
+import ReviewsForm from './ReviewsForm';
 
+const Reviews = ({ reviews, products, createReview }) => {
+    // Filter products that have reviews
+    const productsWithReviews = products.filter(product =>
+        reviews.some(review => review.product_id === product.id)
+    );
 
-const Profile = ({ auth, updateUser}) => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')  
+    return (
+        <div className='page-users'>
+            <h2 className='pagetitletwo'>Reviews</h2>
 
-    const handleSubmit = async (e) => {
-      e.preventDefault()
-      updateUser( {...auth,
-        username: username,
-        password: password,
-      })
-      setUsername(''),
-      setPassword(''),
-      alert('User info successfully updated.')
-      window.location.reload(false);
+            <ReviewsForm createReview={createReview} products={products} />
 
-    }
-
-
-return(
-    <>
-    <div>
-        <h2>Profile</h2>
-        <h3>Settings</h3>
-        <form onSubmit={handleSubmit}>
-            <label>Username:</label>
-            <input 
-              type='text' 
-              placeholder='Change Username...'
-              value={username}
-              onChange={(e)=> {setUsername(e.target.value)}}>
-              </input>
-            <label>Password:</label>
-            <input 
-              type='password' 
-              placeholder='Change Password...'
-              value={password}
-              onChange={(e)=> {setPassword(e.target.value)}}>
-            </input>
-            <button type='submit' disabled={!username || !password}>Submit Changes</button>
-            </form>
-    </div>
-    </>
-)
-
+            <ul>
+                {productsWithReviews.map(product => (
+                    <li key={product.id} className='review-container'>
+                        <p className='review-product-name'>{product.name}</p>
+                        <ul>
+                            {reviews
+                                .filter(review => review.product_id === product.id)
+                                .map(review => (
+                                    <li key={review.id}>
+                                        {review.text}
+                                    </li>
+                                ))}
+                        </ul>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
-export default Profile
+export default Reviews;
