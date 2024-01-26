@@ -206,7 +206,8 @@ const api = {
   createAddress,
   createReview,
   updateProduct,
-  createProduct 
+  createProduct,
+  fetchVipProducts
 };
 
 export default api;

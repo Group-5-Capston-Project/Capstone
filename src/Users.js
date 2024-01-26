@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar'
 
-const Users = ({ users, auth})=> {
+const Users = ({ users, auth, createUser})=> {
   const navigate = useNavigate();
   return (
     <div>
