@@ -3,7 +3,7 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import ProductImageEditor from './ProductImageEditor';
 
-const VipUsers = ({vip_products,products, cartItems, createLineItem, updateLineItem, auth, updateProduct }) => {
+const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, updateProduct }) => {
     const navigate = useNavigate();
     return (
         <div>

@@ -16,6 +16,7 @@ import WishList from './WishList';
 import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
+import VipUsers from './Vip';
 
 
 const App = () => {
@@ -95,8 +96,9 @@ const App = () => {
     }
   };
 
-  
-
+  const createUser = async (user) => {
+      await api.createUser(auth.id, user, users, setUsers);
+  };
   const createProduct = async (product) => {
       await api.createProduct(auth.id, product, products, setProducts);
   };
@@ -215,10 +217,10 @@ const App = () => {
 
             
             <Routes>
-                <Route path="/products/vip_products" element={<Vip vip_products={vip_products} products={products} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} auth={auth} updateProduct={updateProduct} />} />
+                <Route path="/products/vip_products" element={<VipUsers products={products} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} auth={auth} updateProduct={updateProduct} />} />
                 <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} createProduct={createProduct} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
-                <Route path="/users" element={<Users users={users} />} />
+                <Route path="/users" element={<Users users={users} createUser={createUser} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
                 <Route path="/reviews" element={<Reviews reviews={reviews} products={products} createReview={createReview} />} />
                 <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
