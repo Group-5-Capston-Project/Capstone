@@ -19,6 +19,7 @@ const fetchUsers = async(setUsers)=> {
         const response = await axios.put(`/api/users/${user.id}`, {
         username: user.username,
         password: user.password,
+        is_vip: user.is_vip
       }, getHeaders());
       setUsers(users.map( user => user.id == response.data.id ? response.data: user))
   }
