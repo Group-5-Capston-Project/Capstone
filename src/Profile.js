@@ -7,10 +7,13 @@ import api from './api';
 
 const Profile = ({ auth, updateUser}) => {
     const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')  
+    const [password, setPassword] = useState('')
+
+    
 
     const handleSubmit = async (e) => {
       e.preventDefault()
+
       updateUser( {...auth,
         username: username,
         password: password,
@@ -20,7 +23,9 @@ const Profile = ({ auth, updateUser}) => {
       alert('User info successfully updated.')
       window.location.reload(false);
 
+
     }
+    
 
 
 return(
