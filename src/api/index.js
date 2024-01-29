@@ -18,14 +18,13 @@ const fetchUsers = async(setUsers)=> {
   const updateUser = async({user, users, setUsers, auth}) => {
         const response = await axios.put(`/api/users/${user.id}`, {
         username: user.username,
-        password: user.password,
-        is_vip: user.is_vip
+        password: user.password
       }, getHeaders());
       setUsers(users.map( user => user.id == response.data.id ? response.data: user))
   }
 
 
-const createUser = async(setUsers)=> {
+const createUser = async({user, setUsers})=> {
   const response = await axios.post('/api/users', {
     username: user.username,
     password: user.password

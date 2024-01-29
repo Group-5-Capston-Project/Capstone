@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Signup = () => {
+const Signup = ({createUser}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -15,8 +15,10 @@ const Signup = () => {
         const user = {
             username, 
             password,
-            is_admin: false
+            is_admin: false,
+            is_vip: false
         }
+        // createUser(user)
         try{
             await axios.post('/api/users', user)
         } catch(error){

@@ -253,7 +253,7 @@ const App = () => {
             <div className='forms'>
               <Routes>
                 <Route path="/login" element={<Login login={login} />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/signup" element={<Signup createUser={createUser} />} />
               </Routes>
             </div>
 
