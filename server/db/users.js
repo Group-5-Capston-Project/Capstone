@@ -25,12 +25,12 @@ const updateUser = async(user) => {
   user.password = await bcrypt.hash(user.password, 5);
     const SQL = `
       UPDATE users
-      SET username = $1, password = $2, is_vip = $3
-      WHERE id = $4
+      SET username = $1, password = $2
+      WHERE id = $3
       RETURNING *
   `;
   
-  const response = await client.query(SQL, [user.username, user.password, user.is_vip, user.id]);
+  const response = await client.query(SQL, [user.username, user.password, user.id]);
   console.log(response.rows[0])
   return response.rows[0]
   } 
