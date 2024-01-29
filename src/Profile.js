@@ -8,7 +8,6 @@ import api from './api';
 const Profile = ({ auth, updateUser}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [is_vip, setIs_Vip] = useState('')  
 
     
 
@@ -18,7 +17,6 @@ const Profile = ({ auth, updateUser}) => {
       updateUser( {...auth,
         username: username,
         password: password,
-        is_vip: false ? !onClick() : true 
       })
       setUsername(''),
       setPassword(''),
@@ -50,15 +48,6 @@ return(
               value={password}
               onChange={(e)=> {setPassword(e.target.value)}}>
             </input>
-            <label> Check here to become a VIP member
-              <input
-               type='checkbox'
-               value={is_vip}
-               onClick={() => {
-                setIs_Vip(true)
-               }}>
-              </input>
-            </label>
             <button type='submit' disabled={!username || !password}>Submit Changes</button>
             </form>
     </div>
