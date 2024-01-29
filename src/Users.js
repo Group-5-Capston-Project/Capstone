@@ -15,7 +15,6 @@ const Users = ({ users, auth, createUser})=> {
             return (
               <li key={ user.id }>
                 { user.username } 
-              <button type='checkbox'>Make Vip User</button>
               </li>
             );
           })
