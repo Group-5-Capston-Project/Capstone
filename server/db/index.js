@@ -126,7 +126,7 @@ const seed = async()=> {
     createUser({ username: 'moe', password: 'm_password', is_admin: false, is_vip: false}),
     createUser({ username: 'lucy', password: 'l_password', is_admin: false, is_vip: false}),
     createUser({ username: 'ethyl', password: '1234', is_admin: true, is_vip: false}),
-    createUser({ username: 'mark', password: '1234', is_admin: true, is_vip: true})
+    createUser({ username: 'mark', password: '1234', is_admin: false, is_vip: true})
   ]);
 
   
