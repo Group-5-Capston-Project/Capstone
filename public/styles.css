@@ -659,13 +659,13 @@ nav span {
 }
 
 .left {
-  width: 45%;
+  width: 40%;
   height: 20em;
   float: left;
 }
 
 .right {
-  width: 45%;
+  width: 50%;
   height: 20em;
   margin-bottom: 4em;
   float: right;
@@ -833,6 +833,27 @@ nav span {
   transition: all 0.4s ease;
 }
 
+.addwishbutton {
+  width: 45%;
+  background-color: transparent;
+  border: 2px solid #2D5F69;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  font-size: 90%;
+  color: #2D5F69;
+  font-weight: 500;
+  margin-bottom: 1em;
+  margin-right: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.addwishbutton:hover {
+  background-color: #2D5F69;
+  color: white;
+  transition: all 0.4s ease;
+}
+
 .addbuttontwo {
   width: 40%;
   background-color: transparent;
@@ -912,30 +933,36 @@ nav span {
 }
 
 
-.loginbuttontwo {
-  width: 30%;
+.login_nonuser {
+  padding-left: 2em;
+  padding-right: 2em;
   background-color: transparent;
   border: 2px solid #2D5F69;
   padding-top: 0.7em;
   padding-bottom: 0.7em;
   margin-left: auto;
   margin-right: auto;
-  font-size: 100%;
+  font-size: 90%;
   color: #2D5F69;
   font-weight: 500;
   margin-top: 2em;
   margin-right: 1em;
 }
 
-.loginbuttontwo a {
-  color: #2D5F69;
-}
 
-.loginbuttontwo:hover {
+.login_nonuser:hover {
   background-color: #2D5F69;
+  color: white;
   transition: all 0.4s ease;
 }
 
-.loginbuttontwo:hover a {
-  color: white;
+
+.productdesc {
+  height: 5em
+}
+
+
+
+.loginmessage {
+  margin-bottom: 3em;
 }

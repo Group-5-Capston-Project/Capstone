@@ -48,7 +48,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
                   {auth.id ? (
           <>
       <p>${product.price}.00</p>
-      <p>{product.description}</p>
+      <p className='productdesc'>{product.description}</p>
       </>
       ) : null}
 

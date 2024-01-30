@@ -76,7 +76,7 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
                 </>
                 
                 )}
-                <button onClick={() => addToWishList(singleproduct.id)} className='addbutton'>Add To Wish List</button>
+                <button onClick={() => addToWishList(singleproduct.id)} className='addwishbutton'>Add To Wish List</button>
             </>
           ) : null}
           
@@ -109,13 +109,18 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
             </>
           ) : null}
 
+         
           {!auth.id ? (
             <>
-          <div>Log in or sign up to see product details</div>
-          <button className='loginbuttontwo'><Link to="/login">Login</Link></button>
-          <button className='loginbuttontwo'><Link to="/signup">Sign up</Link></button>
-          </>
+          <div className='loginmessage'>Log in or sign up to see product details</div>
+          <Link to="/login" className='login_nonuser'>Login</Link>
+          <Link to="/signup" className='login_nonuser'>Sign up</Link>
+            </>
+          
           ) : null}
+
+     
+
 
 
       </div>
