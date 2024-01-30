@@ -4,6 +4,7 @@ import SearchBar from './SearchBar'
 
 const Users = ({ users, auth, createUser})=> {
   const navigate = useNavigate();
+  
   return (
     <div>
       <h2>Users</h2>
@@ -13,7 +14,7 @@ const Users = ({ users, auth, createUser})=> {
           users.map( user => {
             return (
               <li key={ user.id }>
-                { user.username }
+                { user.username } 
               </li>
             );
           })
