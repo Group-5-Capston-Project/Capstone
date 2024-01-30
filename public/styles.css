@@ -66,20 +66,19 @@ a {
   width: 30%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #2D5F69;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
-  box-sizing: border-box;
-  border: none;
-  color: white;
+  background-color: transparent;
+  border: 2px solid #2D5F69;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
   font-size: 100%;
-  border-radius: 15px;
+  color: #2D5F69;
+  font-weight: 500;
+  margin-top: 2em;
 }
 
 .loginbutton:hover {
-  opacity: 0.7;
+  background-color: #2D5F69;
+  color: white;
   transition: all 0.4s ease;
 }
 
@@ -910,4 +909,33 @@ nav span {
   background-color: #2D5F69;
   color: white;
   transition: all 0.4s ease;
+}
+
+
+.loginbuttontwo {
+  width: 30%;
+  background-color: transparent;
+  border: 2px solid #2D5F69;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 100%;
+  color: #2D5F69;
+  font-weight: 500;
+  margin-top: 2em;
+  margin-right: 1em;
+}
+
+.loginbuttontwo a {
+  color: #2D5F69;
+}
+
+.loginbuttontwo:hover {
+  background-color: #2D5F69;
+  transition: all 0.4s ease;
+}
+
+.loginbuttontwo:hover a {
+  color: white;
 }

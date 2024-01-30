@@ -14,12 +14,7 @@ const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, up
                         <SearchBar products={products} />
                     </div>
 
-                    {
-                        auth.is_admin ? (
-                        <Link to={'/products/add'} className='addproductbutton'>Add product</Link>
-                        ) : null
-                    }
-
+                    
                     <ul className="productcontainer">
                         {
                            products

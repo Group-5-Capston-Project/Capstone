@@ -112,8 +112,8 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
           {!auth.id ? (
             <>
           <div>Log in or sign up to see product details</div>
-          <button><Link to="/login">Login</Link></button>
-          <button><Link to="/signup">Sign up</Link></button>
+          <button className='loginbuttontwo'><Link to="/login">Login</Link></button>
+          <button className='loginbuttontwo'><Link to="/signup">Sign up</Link></button>
           </>
           ) : null}
 
