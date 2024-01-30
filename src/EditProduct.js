@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 
 const EditProduct = ({products, updateProduct, product}) => {
@@ -28,14 +28,19 @@ const EditProduct = ({products, updateProduct, product}) => {
             singleproduct.description = newDescription
         }
         updateProduct(singleproduct)
+
+        setnewName('');
+        setnewPrice('');
+        setnewDescription('');
+
     }
 
     return (
         <div className='page-users'>
             <h2 className='pagetitletwo'>Edit Product</h2>
-            <p className='editproducttext'>{singleproduct.name}</p>
-            <p className='editproducttext'>{singleproduct.price}</p>
-            <p className='editproducttext'>{singleproduct.description}</p>
+            <p className='editproducttext'>Name: {singleproduct.name}</p>
+            <p className='editproducttext'>Price: ${singleproduct.price}.00</p>
+            <p className='editproducttext'>Description: {singleproduct.description}</p>
 
             <div className='editproductimagecontainer'>
                 <div className='productimage'>
@@ -47,7 +52,7 @@ const EditProduct = ({products, updateProduct, product}) => {
 
          
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='editproductform'>
                     <input placeholder="Edit name..." type="text" value={newName} onChange={(event) => {
                         setnewName(event.target.value)
                     }}/>
@@ -58,7 +63,10 @@ const EditProduct = ({products, updateProduct, product}) => {
                         setnewDescription(event.target.value)
                     }}/>
 
-                    <button type="submit">Submit</button>
+                    <button className='editproductbutton' type="submit">Submit</button>
+
+                    <Link to='/products' className='backbuttonthree'>Back to all products</Link>
+
                 </form>
 
 

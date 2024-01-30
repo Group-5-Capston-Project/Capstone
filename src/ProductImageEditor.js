@@ -31,7 +31,7 @@ const ProductImageEditor = ({product, updateProduct}) => {
 
     return (
         <div>
-            <input type='file' ref={el}/>
+            <input className='editimagebutton' type='file' ref={el}/>
             <br/>
             { 
                 data ? <button onClick={()=> {changeImage()}}>Submit</button> : null

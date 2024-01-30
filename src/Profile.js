@@ -30,10 +30,9 @@ const Profile = ({ auth, updateUser}) => {
 
 return(
     <>
-    <div>
-        <h2>Profile</h2>
-        <h3>Settings</h3>
-        <form onSubmit={handleSubmit}>
+    <div className='page-users'>
+    <h2 className='pagetitletwo'>Profile Settings</h2>
+        <form className='createproductform' onSubmit={handleSubmit}>
             <label>Username:</label>
             <input 
               type='text' 
@@ -48,12 +47,13 @@ return(
               value={password}
               onChange={(e)=> {setPassword(e.target.value)}}>
             </input>
-            <button type='submit' disabled={!username || !password}>Submit Changes</button>
+            <button className='profilebutton' type='submit' disabled={!username || !password}>Submit Changes</button>
             </form>
     </div>
     </>
 )
 
 }
+
 
 export default Profile

@@ -100,8 +100,8 @@ const App = () => {
       await api.createUser(auth.id, user, users, setUsers);
   };
   const createProduct = async (product) => {
-      await api.createProduct(auth.id, product, products, setProducts);
-  };
+    await api.createProduct(auth.id, product, products, setProducts);
+};
 
   useEffect(() => {
     if (auth.id) {
@@ -193,9 +193,9 @@ const App = () => {
 
               
               <div className="navitem"><Link to='/products' className={pathname === "/products" ? "selected" : ""}>Products </Link></div>
-              <div className="navitem"><Link to='/products/vip_products' className={pathname === "/vip_products" ? "selected" : ""}>Vip Products </Link></div>
-              <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
+              <div className="navitem"><Link to='/products/vip_products' className={pathname === "/vip_products" ? "selected" : ""}>VIP Products </Link></div>
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
+              <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
               <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
               <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile </Link></div>
@@ -205,7 +205,7 @@ const App = () => {
               ) : null
               }
               
-              <span>
+              <span className='welcomeusername'>
                 Welcome { auth.is_vip ? `${auth.username} VIP User` : auth.username}!
                 <button onClick={ logout } className='logoutbutton'>Logout</button>
               </span>
@@ -220,7 +220,7 @@ const App = () => {
                 <Route path="/products/vip_products" element={<VipUsers products={products} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} auth={auth} updateProduct={updateProduct} />} />
                 <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} createProduct={createProduct} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
-                <Route path="/users" element={<Users users={users} createUser={createUser} />} />
+                <Route path="/users" element={<Users users={users} createUser={createUser} auth={auth} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
                 <Route path="/reviews" element={<Reviews reviews={reviews} products={products} createReview={createReview} />} />
                 <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />

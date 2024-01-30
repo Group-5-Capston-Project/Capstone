@@ -40,17 +40,22 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
 
                   <div className='productname'><Link to={`/products/${product.id}`}>
                     {product.name}
+                    
                     {product.image ? <img className='image_placeholder' src={product.image} /> : null}
                   </Link></div>
 
-                  <p>${product.price}.00</p>
 
-                  <p>{product.description}</p>
+                  {auth.id ? (
+          <>
+      <p>${product.price}.00</p>
+      <p>{product.description}</p>
+      </>
+      ) : null}
 
-
+                  
                   {
                     auth.id ? (
-                      cartItem ? <button onClick={() => updateLineItem(cartItem)}>Add Another</button> : <button onClick={() => createLineItem(product)}>Add To Cart</button>
+                      cartItem ? <button onClick={() => updateLineItem(cartItem)} className='addtocart'>Add Another</button> : <button onClick={() => createLineItem(product)} className='addtocart'>Add To Cart</button>
                     ) : null
                   }
                   <br />
@@ -58,7 +63,7 @@ const Products = ({ products, cartItems, createLineItem, updateLineItem, auth, u
                   {
                     auth.is_admin ? (
                       <div>
-                        <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                        <Link to={`/products/${product.id}/edit`} className='editbutton'>Edit Product</Link>
                         < ProductImageEditor updateProduct={updateProduct} product={product} />
                       </div>
                     ) : null

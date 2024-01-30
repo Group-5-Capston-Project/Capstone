@@ -19,17 +19,20 @@ const WishList = ({ wishListItems, removeFromWishList, products, auth, cartItems
                                 {
                                     auth.id ? (
                                         cartItem ?
-                                            <button onClick={() => updateLineItem(cartItem)}>Add Another</button> :
-                                            <button onClick={() => createLineItem(product)}>Add To Cart</button>
+                                            <button onClick={() => updateLineItem(cartItem)} className='addbuttontwo'>Add Another</button> :
+                                            <button onClick={() => createLineItem(product)} className='addbuttontwo'>Add To Cart</button>
                                     ) : null
                                 }
 
+                                <div>
                                 <button onClick={() => {
                                     console.log(`on click remove ${auth.id} ${item.product_id}`)
                                     removeFromWishList(item.product_id)
-                                }}>
+                                }} className='remove-button-two'>
                                     Remove from Wish List
                                 </button>
+                                </div>
+                                
                             </li>
 
                         )

@@ -35,14 +35,5 @@ try{
 }
 })
 
-// app.put('/:username', async (req, res, next)=> {
-//   try {
-//     const response = await updateVipUser({ ...req.body });
-//     res.send(response)
-//   } catch (error) {
-//     next(error)
-//   }
-
-// })
 
 module.exports = app; 
