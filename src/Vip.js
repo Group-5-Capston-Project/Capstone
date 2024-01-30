@@ -7,7 +7,7 @@ const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, up
     const navigate = useNavigate();
     return (
         <div>
-            {auth.is_vip ? 
+            {auth.is_vip || auth.is_admin ? 
                 <div className='page-users '>
                     <h2 className='pagetitle'> Thank you {auth.username}! Enjoy only VIP Products Below!</h2>
 
