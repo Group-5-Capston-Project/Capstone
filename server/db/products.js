@@ -46,6 +46,7 @@ const createProduct = async(product, reviews=[])=> {
   return response.rows[0];
 };
 
+
 const updateProduct = async(product) => {
   const SQL = `
     UPDATE products

@@ -49,7 +49,7 @@ const Shipping = () => {
     return (
         <div>
   
-           <form onSubmit= {handleSubmit}>
+           <form className='createproductform' onSubmit= {handleSubmit}>
                 
                 <h2>Shipping Address</h2>
                 
@@ -79,7 +79,7 @@ const Shipping = () => {
                 />
               
                 
-                <button type="submit">Submit</button>
+                <button className='createbutton' type="submit">Submit</button>
                 
             </form>
 

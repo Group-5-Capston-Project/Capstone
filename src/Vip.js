@@ -38,7 +38,7 @@ const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, up
 
                                     {
                                         auth.id ? (
-                                        cartItem ? <button onClick={() => updateLineItem(cartItem)}>Add Another</button> : <button onClick={() => createLineItem(product)}>Add To Cart</button>
+                                        cartItem ? <button onClick={() => updateLineItem(cartItem)} className='addtocart'>Add Another</button> : <button onClick={() => createLineItem(product)} className='addtocart'>Add To Cart</button>
                                         ) : null
                                     }
 
@@ -58,7 +58,7 @@ const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, up
                         }
                     </ul>
                 </div> 
-                : <h2 className='pagetitle'>You Must be A Vip User to View this Page. Please contact Admin to join VIP customers or for further assistance </h2> }
+                : <h2 className='vipmessage'>You must be a VIP user to view this page. Please contact us to join our VIP list!</h2> }
 
         </div>
     )

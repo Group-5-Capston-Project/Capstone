@@ -35,20 +35,7 @@ const updateUser = async(user) => {
   return response.rows[0]
   } 
 
-  // const updateVipUser = async(user) => {
-  //   console.log("user-->", user)
-  //   user.password = await bcrypt.hash(user.password, 5);
-  //   const SQL = `
-  //     UPDATE users
-  //     SET is_vip = $1
-  //     WHERE username = $2
-  //     RETURNING *
-  // `;
-  
-  // const response = await client.query(SQL, [user.is_vip, user.username]);
-  // console.log('response-->', response.rows[0])
-  // return response.rows[0]
-  // } 
+
 
 
 
