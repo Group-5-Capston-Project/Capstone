@@ -16,13 +16,13 @@ const createUser = async(user)=> {
   const SQL = `
     INSERT INTO users (id, username, password) VALUES($1, $2, $3) RETURNING *
   `;
-  const response = await client.query(SQL, [ uuidv4(), user.username, user.password]);
+  const response = await client.query(SQL, [ uuidv4(), user.username, user.password ]);
   return response.rows[0];
 };
 
 const updateUser = async(user) => {
-    console.log(user)
-    user.password = await bcrypt.hash(user.password, 5);
+  console.log(user)
+  user.password = await bcrypt.hash(user.password, 5);
     const SQL = `
       UPDATE users
       SET username = $1, password = $2
@@ -42,5 +42,6 @@ const updateUser = async(user) => {
 module.exports = {
   fetchUsers,
   createUser,
-  updateUser
+  updateUser,
+  // updateVipUser
 };

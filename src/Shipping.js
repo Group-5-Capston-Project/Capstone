@@ -56,7 +56,7 @@ const Shipping = () => {
     return (
         <div>
   
-           <form onSubmit= {handleSubmit}>
+           <form className='createproductform' onSubmit= {handleSubmit}>
                 
                 <h2>Shipping Address</h2>
                 
@@ -89,9 +89,6 @@ const Shipping = () => {
                 <button type="placeYourOrder" > Place Your Order</button>
                 
 
-              
-               
-               
                 
                 </form>
            

@@ -1,6 +1,7 @@
 const {
   fetchUsers,
-  updateUser
+  updateUser,
+  // updateVipUser
 } = require('../db/users');
 const express = require('express');
 const app = express.Router();
@@ -9,7 +10,6 @@ const { createUser } = require('../db/auth')
 
 app.get('/', async(req, res, next)=> {
   try {
-    console.log("Hello World")
     res.send(await fetchUsers());
   }
   catch(ex){
@@ -20,7 +20,6 @@ app.get('/', async(req, res, next)=> {
 app.put('/:id', async (req, res, next)=> {
   try {
     const response = await updateUser({ ...req.body, id: req.params.id });
-    res.send(response)
     res.send(response)
   } catch (error) {
     next(error)
@@ -35,5 +34,6 @@ try{
   next(error)
 }
 })
+
 
 module.exports = app; 

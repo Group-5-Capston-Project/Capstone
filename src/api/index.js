@@ -18,13 +18,13 @@ const fetchUsers = async(setUsers)=> {
   const updateUser = async({user, users, setUsers, auth}) => {
         const response = await axios.put(`/api/users/${user.id}`, {
         username: user.username,
-        password: user.password,
+        password: user.password
       }, getHeaders());
       setUsers(users.map( user => user.id == response.data.id ? response.data: user))
   }
 
 
-const createUser = async(setUsers)=> {
+const createUser = async({user, setUsers})=> {
   const response = await axios.post('/api/users', {
     username: user.username,
     password: user.password
@@ -53,6 +53,11 @@ const fetchAddress = async(setAddress)=> {
 const fetchProducts = async(setProducts)=> {
   const response = await axios.get('/api/products');
   setProducts(response.data);
+};
+
+const fetchVipProducts = async(setVip_Products)=> {
+  const response = await axios.get('/api/products/vip_products');
+  setVip_Products(response.data);
 };
 
 const fetchOrders = async(setOrders)=> {
@@ -86,6 +91,18 @@ const createReview = async (userId, review, reviews, setReviews, productId) => {
     text: review.reviewtext,
   }, getHeaders());
   setReviews([...reviews, response.data])
+}
+
+const createProduct = async (userId, product, products, setProducts, productId) => {
+  const response = await axios.post('/api/products/add',{
+    product_id: productId,
+    name: product.name,
+    price: product.price,
+    description: product.description,
+    image: product.image,
+    is_vip_product: false
+  }, getHeaders());
+  setProducts([...products, response.data])
 }
 
 const updateLineItem = async({ lineItem, cart, lineItems, setLineItems })=> {
@@ -195,7 +212,9 @@ const api = {
   createAddress,
   fetchAddress,
   createReview,
-  updateProduct 
+  updateProduct,
+  createProduct,
+  fetchVipProducts
 };
 
 export default api;

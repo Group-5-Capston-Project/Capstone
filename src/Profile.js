@@ -7,10 +7,13 @@ import api from './api';
 
 const Profile = ({ auth, updateUser}) => {
     const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')  
+    const [password, setPassword] = useState('')
+
+    
 
     const handleSubmit = async (e) => {
       e.preventDefault()
+
       updateUser( {...auth,
         username: username,
         password: password,
@@ -20,15 +23,16 @@ const Profile = ({ auth, updateUser}) => {
       alert('User info successfully updated.')
       window.location.reload(false);
 
+
     }
+    
 
 
 return(
     <>
-    <div>
-        <h2>Profile</h2>
-        <h3>Settings</h3>
-        <form onSubmit={handleSubmit}>
+    <div className='page-users'>
+    <h2 className='pagetitletwo'>Profile Settings</h2>
+        <form className='createproductform' onSubmit={handleSubmit}>
             <label>Username:</label>
             <input 
               type='text' 
@@ -43,12 +47,13 @@ return(
               value={password}
               onChange={(e)=> {setPassword(e.target.value)}}>
             </input>
-            <button type='submit' disabled={!username || !password}>Submit Changes</button>
+            <button className='profilebutton' type='submit' disabled={!username || !password}>Submit Changes</button>
             </form>
     </div>
     </>
 )
 
 }
+
 
 export default Profile

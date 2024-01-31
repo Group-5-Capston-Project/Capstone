@@ -18,6 +18,9 @@ const ReviewsForm = ({ createReview, products }) => {
         } else {
             alert ('product not found');
         }    
+
+        setProduct('');
+        setReviewText('');
         
     };
 

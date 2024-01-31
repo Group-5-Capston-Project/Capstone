@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link, HashRouter, Routes, Route } from 'react-router-dom';
+import { Link, HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Products from './Products';
 import Orders from './Orders';
 import Cart from './Cart';
@@ -16,13 +16,18 @@ import WishList from './WishList';
 import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
+
 import OrderCon from './OrderCon';
 
+
+
+import VipUsers from './Vip';
 
 
 
 const App = () => {
 
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -104,6 +109,13 @@ const App = () => {
     }
   };
 
+  const createUser = async (user) => {
+      await api.createUser(auth.id, user, users, setUsers);
+  };
+  const createProduct = async (product) => {
+    await api.createProduct(auth.id, product, products, setProducts);
+};
+
   useEffect(() => {
     if (auth.id) {
       const fetchData = async () => {
@@ -183,6 +195,7 @@ const App = () => {
 
   const logout = () => {
     api.logout(setAuth);
+    navigate('/');
   }
   console.log(auth)
   return (
@@ -197,8 +210,9 @@ const App = () => {
 
               
               <div className="navitem"><Link to='/products' className={pathname === "/products" ? "selected" : ""}>Products </Link></div>
-              <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
+              <div className="navitem"><Link to='/products/vip_products' className={pathname === "/vip_products" ? "selected" : ""}>VIP Products </Link></div>
               <div className="navitem"><Link to='/cart' className={pathname === "/cart" ? "selected" : ""}>Cart ({ cartCount })</Link></div>
+              <div className="navitem"><Link to='/orders' className={pathname === "/orders" ? "selected" : ""}>Orders ({ orders.filter(order => !order.is_cart).length })</Link></div>
               <div className="navitem"><Link to='/reviews' className={pathname === "/reviews" ? "selected" : ""}>Reviews</Link></div>
               <div className="navitem"><Link to='/wishlist' className={pathname === "/wishlist" ? "selected" : ""}>Wish List ({ wishListItems.length})</Link></div>
               <div className="navitem"><Link to= {`/users/${auth.id}`} className={pathname === "/users:id" ? "selected" : ""}> Profile </Link></div>
@@ -208,7 +222,7 @@ const App = () => {
                 ) : null
               }
               
-              <span>
+              <span className='welcomeusername'>
                 Welcome { auth.is_vip ? `${auth.username} VIP User` : auth.username}!
                 <button onClick={ logout } className='logoutbutton'>Logout</button>
               </span>
@@ -220,9 +234,10 @@ const App = () => {
 
             
             <Routes>
-                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} />} />
+                <Route path="/products/vip_products" element={<VipUsers products={products} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} auth={auth} updateProduct={updateProduct} />} />
+                <Route path="/products" element={<Products products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} updateProduct={updateProduct} createProduct={createProduct} />} />
                 <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
-                <Route path="/users" element={<Users users={users} />} />
+                <Route path="/users" element={<Users users={users} createUser={createUser} auth={auth} />} />
                 <Route path='/users/:id' element={ <Profile auth={ auth } users={ users } updateUser={ updateUser }/>} />
                 <Route path="/reviews" element={<Reviews reviews={reviews} products={products} createReview={createReview} />} />
                 <Route path="/wishlist" element={<WishList wishListItems={wishListItems} addToWishList={addToWishList} removeFromWishList={removeFromWishList} products={products} auth={auth} cartItems={cartItems} updateLineItem={updateLineItem} createLineItem={createLineItem} />} />
@@ -256,7 +271,7 @@ const App = () => {
             <div className='forms'>
               <Routes>
                 <Route path="/login" element={<Login login={login} />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/signup" element={<Signup createUser={createUser} />} />
               </Routes>
             </div>
 
@@ -275,6 +290,8 @@ const App = () => {
                   />
                 </div>
               } />
+
+                <Route path="/products/:id" element={<SingleProduct products={products} auth={auth} cartItems={cartItems} createLineItem={createLineItem} updateLineItem={updateLineItem} addToWishList={addToWishList} reviews={reviews} updateProduct={updateProduct} />} />
 
             </Routes>
 

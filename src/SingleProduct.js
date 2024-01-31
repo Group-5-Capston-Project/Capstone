@@ -39,8 +39,10 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
 
   return (
     <div className='page-users-two'>
-      
-      <Link to='/products'>Back to all products</Link>
+
+      {auth.id ? (
+      <Link to='/products' className='backbuttontwo'>Back to all products</Link>
+      ): <Link to='/' className='backbuttontwo'>Back to all products</Link>}
 
       <h2 className='pagetitletwo'></h2>
 
@@ -48,12 +50,15 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
       <div className='productimage'>{singleproduct.image ? <img src={singleproduct.image} /> : null}</div>
       </div>
 
-
-
       <div className='right'>
-        <h3>{singleproduct.name}</h3>
+        <h3 className='singleproductname'>{singleproduct.name}</h3>
+
+        {auth.id ? (
+          <>
       <p>${singleproduct.price}.00</p>
       <p>{singleproduct.description}</p>
+      </>
+      ) : null}
 
       <ul className="singleproductaddbutton">
         <li key={singleproduct.id}>
@@ -62,23 +67,24 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
           {auth.id ? (
             <>
               {cartItem ? (
-                <button onClick={() => updateLineItem(cartItem)}>Add Another</button>
+                <button onClick={() => updateLineItem(cartItem)} className='addbutton'>Add Another</button>
               ) : (
                 <>
-                  <button onClick={() => createLineItem(singleproduct)}>Add To Cart</button>
+                  <button onClick={() => createLineItem(singleproduct)} className='addbutton'>Add To Cart</button>
 
                   
                 </>
                 
-              )}
+                )}
+                <button onClick={() => addToWishList(singleproduct.id)} className='addbutton'>Add To Wish List</button>
             </>
           ) : null}
           
-          <button onClick={() => addToWishList(singleproduct.id)}>Add To Wish List</button>
           
 
           {auth.is_admin ? (
-            <Link to={`/products/${singleproduct.id}/edit`}>Edit</Link>
+            <div><Link to={`/products/${singleproduct.id}/edit`} className='editbutton'>Edit Product</Link>
+              </div>
           ) : null}
         </li>
       </ul>
@@ -86,7 +92,8 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
 
       <br />
       
-
+      {auth.id ? (
+        <>
       <h3>Reviews</h3>
             <ul>
                 {productreviews.map(review => (
@@ -98,7 +105,17 @@ const SingleProduct = ({ products, cartItems, createLineItem, updateLineItem, au
             </ul>
             
 
-            <div><Link to='/reviews'>Create Review</Link></div>
+            <div ><Link to='/reviews' className='editbutton'>Create Review</Link></div>
+            </>
+          ) : null}
+
+          {!auth.id ? (
+            <>
+          <div>Log in or sign up to see product details</div>
+          <button className='loginbuttontwo'><Link to="/login">Login</Link></button>
+          <button className='loginbuttontwo'><Link to="/signup">Sign up</Link></button>
+          </>
+          ) : null}
 
 
       </div>

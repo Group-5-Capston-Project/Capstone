@@ -60,7 +60,6 @@ const seed = async()=> {
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS address;
-    DROP TABLE IF EXISTS vip_products;
 
     CREATE TABLE users(
       id UUID PRIMARY KEY,
@@ -77,16 +76,8 @@ const seed = async()=> {
       name VARCHAR(100) UNIQUE NOT NULL,
       price INTEGER NOT NULL,
       description TEXT,
-      image TEXT
-    );
-
-    CREATE TABLE vip_products(
-      id UUID PRIMARY KEY,
-      created_at TIMESTAMP DEFAULT now(),
-      name VARCHAR(100) UNIQUE NOT NULL,
-      price INTEGER NOT NULL,
-      description TEXT,
-      image TEXT
+      image TEXT,
+      is_vip_product BOOLEAN DEFAULT false NOT NULL
     );
 
     CREATE TABLE orders(
@@ -136,19 +127,9 @@ const seed = async()=> {
     createUser({ username: 'moe', password: 'm_password', is_admin: false, is_vip: false}),
     createUser({ username: 'lucy', password: 'l_password', is_admin: false, is_vip: false}),
     createUser({ username: 'ethyl', password: '1234', is_admin: true, is_vip: false}),
-    createUser({ username: 'mark', password: '1234', is_admin: true, is_vip: true})
+    createUser({ username: 'mark', password: '1234', is_admin: false, is_vip: true})
   ]);
 
-  // vip products 
-  const bananaVipImage = await loadImage('images/bananacopy.jpg')
-  const orangeVipImage = await loadImage('images/orangecopy.jpg')
-
-  let [vip_bananas, vip_oranges] = await Promise.all([
-    createVipProduct({ name: 'Banana', price: 20, description: 'product description', image: bananaVipImage },
-        reviews = [{ text: "good banana"}]),
-    createVipProduct({ name: 'Orange', price: 30, description: 'product description', image: orangeVipImage},
-        reviews = [{ text: "good orange"}])
-  ])
   
   // general products 
   const bananaImage = await loadImage('images/banana.jpg')
@@ -180,34 +161,34 @@ const seed = async()=> {
 
 
   let [bananas, oranges, blackgrapes] = await Promise.all([
-    createProduct({ name: 'Banana', price: 20, description: 'product description', image: bananaImage },
+    createProduct({ name: 'Banana', price: 20, description: 'Non-GMO Premium Bananas That Will Make You Go Bananas!', image: bananaImage, is_vip_product: true },
         reviews = [{ text: "good banana"}]),
-    createProduct({ name: 'Orange', price: 30, description: 'product description', image: orangeImage},
+    createProduct({ name: 'Orange', price: 30, description: 'Worth Every Dollar Organic and Sweet Oranges!', image: orangeImage, is_vip_product: true},
         reviews = [{ text: "good orange"}]),
-    createProduct({ name: 'Black Grapes', price: 40, description: 'product description', image: blackgrapesImage },
+    createProduct({ name: 'Black Grapes', price: 40, description: 'High-Quality Super Expensive Grapes', image: blackgrapesImage, is_vip_product: false },
         reviews = [{ text: "bad grapes"}]),
-    createProduct({ name: 'Apple', price: 50, description: 'product description', image: appleImage },
+    createProduct({ name: 'Apple', price: 50, description: 'Apples That Deserve An Applause', image: appleImage, is_vip_product: false },
         reviews = [{ text: "great apple"}]),
-    createProduct({ name: 'Cucumber', price: 50, description: 'product description', image: cucumberImage }),
-    createProduct({ name: 'Zucchini Squash', price: 50, description: 'product description', image: zucchinisquashImage }),
-    createProduct({ name: 'Blueberries', price: 50, description: 'product description', image: blueberriesImage }),
-    createProduct({ name: 'Russet Potato', price: 50, description: 'product description', image: russetpotatoImage }),
-    createProduct({ name: 'Green Cabbage', price: 50, description: 'product description', image: greencabbageImage }),
-    createProduct({ name: 'Carrots', price: 50, description: 'product description', image: carrotsImage }),
-    createProduct({ name: 'Green Onion', price: 50, description: 'product description', image: greenonionImage }),
-    createProduct({ name: 'Tomato', price: 50, description: 'product description', image: tomatoImage }),
-    createProduct({ name: 'Cilantro', price: 50, description: 'product description', image: cilantroImage }),
-    createProduct({ name: 'Eggplant', price: 50, description: 'product description', image: eggplantImage }),
-    createProduct({ name: 'Romaine Lettuce', price: 50, description: 'product description', image: romainelettuceImage }),
-    createProduct({ name: 'Parsley', price: 50, description: 'product description', image: parsleyImage }),
-    createProduct({ name: 'Serrano Pepper', price: 50, description: 'product description', image: serranopepperImage }),
-    createProduct({ name: 'Strawberries', price: 50, description: 'product description', image: strawberriesImage }),
-    createProduct({ name: 'Red Onion', price: 50, description: 'product description', image: redonionImage }),
-    createProduct({ name: 'Kiwi', price: 50, description: 'product description', image: kiwiImage }),
-    createProduct({ name: 'Pineapple', price: 50, description: 'product description', image: pineappleImage }),
-    createProduct({ name: 'Raspberries', price: 50, description: 'product description', image: raspberriesImage }),
-    createProduct({ name: 'Red Mango', price: 50, description: 'product description', image: redmangoImage }),
-    createProduct({ name: 'Lemons', price: 50, description: 'product description', image: lemonsImage }),
+    createProduct({ name: 'Cucumber', price: 50, description: 'Fresh Organic Cucumbers From Veggie Tales', image: cucumberImage, is_vip_product: false }),
+    createProduct({ name: 'Zucchini Squash', price: 50, description: 'Fresh and Organic Zucchini Squash (Perfect For Spaghetti) ', image: zucchinisquashImage, is_vip_product: false }),
+    createProduct({ name: 'Blueberries', price: 50, description: 'Blueberries That Turn Red', image: blueberriesImage , is_vip_product: false }),
+    createProduct({ name: 'Russet Potato', price: 50, description: 'const potato = { smilelyFace: (: }', image: russetpotatoImage, is_vip_product: true }),
+    createProduct({ name: 'Green Cabbage', price: 50, description: 'Fresh Organic Green Cabbage', image: greencabbageImage, is_vip_product: false }),
+    createProduct({ name: 'Carrots', price: 50, description: 'Carrots That Care', image: carrotsImage, is_vip_product: false }),
+    createProduct({ name: 'Green Onion', price: 50, description: 'Organic and Fresh Green Onion!', image: greenonionImage, is_vip_product: true }),
+    createProduct({ name: 'Tomato', price: 50, description: 'Fresh And Organic Tomatos', image: tomatoImage, is_vip_product: false }),
+    createProduct({ name: 'Cilantro', price: 50, description: 'Cilantro (This One Is Not Parsley) ', image: cilantroImage, is_vip_product: false }),
+    createProduct({ name: 'Eggplant', price: 50, description: 'Fresh and Organic Eggplants', image: eggplantImage, is_vip_product: false }),
+    createProduct({ name: 'Romaine Lettuce', price: 50, description: 'Insane Romaine Lettuce!', image: romainelettuceImage, is_vip_product: true }),
+    createProduct({ name: 'Parsley', price: 50, description: 'Fresh Parsley (Actually Parsley)', image: parsleyImage , is_vip_product: false}),
+    createProduct({ name: 'Serrano Pepper', price: 50, description: 'Organic and Spicy Serrano Peppers!', image: serranopepperImage , is_vip_product: true}),
+    createProduct({ name: 'Strawberries', price: 50, description: 'Strawberries That Will Leave You In Awe ', image: strawberriesImage , is_vip_product: false}),
+    createProduct({ name: 'Red Onion', price: 50, description: 'Organic Red Onions ', image: redonionImage , is_vip_product: false}),
+    createProduct({ name: 'Kiwi', price: 50, description: 'Fresh and Organic Kiwis ', image: kiwiImage , is_vip_product: false}),
+    createProduct({ name: 'Pineapple', price: 50, description: 'Sweet Organic Pineapples', image: pineappleImage , is_vip_product: false}),
+    createProduct({ name: 'Raspberries', price: 50, description: 'Organic and Tasty Raspberries ', image: raspberriesImage , is_vip_product: false}),
+    createProduct({ name: 'Red Mango', price: 50, description: 'Red Mangos That Are Sweeter Than Other Red Mangos ', image: redmangoImage , is_vip_product: false}),
+    createProduct({ name: 'Lemons', price: 50, description: 'Organic Sweet and Sour Lemons!', image: lemonsImage, is_vip_product: true }),
 
   ]);
 
@@ -247,5 +228,8 @@ module.exports = {
   fetchReviews,
   client,
   updateProduct,
-  fetchAddress
+
+  fetchAddress,
+
+  createProduct
 };
