@@ -4,6 +4,7 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 const OrderCon = ({  orders , address , setAddress }) => {
 
     const navigate = useNavigate();
+    
     return (
       <div >
         <h2>Thank you for your order! </h2>
