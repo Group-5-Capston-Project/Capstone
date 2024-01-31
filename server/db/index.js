@@ -194,9 +194,7 @@ const seed = async()=> {
 
 
 
-  const [] = await Promise.all([
-    createAddress({ name:'ethyl', last_name: 'doe', _address:'404 Not Found Way', phone: '510-333-3333'})
-  ]);
+
   
   let orders = await fetchOrders(ethyl.id);
   let cart = orders.find(order => order.is_cart);
