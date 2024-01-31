@@ -86,7 +86,7 @@ const Shipping = () => {
                 />
               
              
-                <button type="placeYourOrder" > Place Your Order</button>
+                <button className='createbutton' type="placeYourOrder" > Place Your Order</button>
                 
 
                 

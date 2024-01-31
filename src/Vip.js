@@ -29,7 +29,7 @@ const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, up
                                     </Link></div>
 
                                     <p>${product.price}.00</p>
-                                    <p>{product.description}</p>
+                                    <p className='productdesc'>{product.description}</p>
 
                                     {
                                         auth.id ? (
@@ -42,7 +42,7 @@ const VipUsers = ({products, cartItems, createLineItem, updateLineItem, auth, up
                                     {
                                     auth.is_admin ? (
                                         <div>
-                                        <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                                        <Link to={`/products/${product.id}/edit`} className='editbutton'>Edit</Link>
                                         < ProductImageEditor updateProduct={updateProduct} product={product} />
                                         </div>
                                     ) : null
