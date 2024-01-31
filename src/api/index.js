@@ -33,13 +33,18 @@ const createUser = async(setUsers)=> {
 };
 
 const createAddress = async(setAddress)=> {
-  const response = await axios.post('/api/ship', {
+  const response = await axios.post('/api/address', {
     name: ship.name,
     last_name: ship.last_name,
     _address: ship._address,
     phone: ship.phone 
   }, getHeaders());
   setAddress([...ship, response.data]);
+};
+
+const fetchAddress = async(setAddress)=> {
+  const response = await axios.get('/api/address');
+  setAddress(response.data);
 };
 
 
@@ -188,6 +193,7 @@ const api = {
   addToWishList,
   removeFromWishList,
   createAddress,
+  fetchAddress,
   createReview,
   updateProduct 
 };

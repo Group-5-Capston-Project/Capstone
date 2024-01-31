@@ -16,6 +16,10 @@ import WishList from './WishList';
 import Shipping from './Shipping';
 import EditProduct from './EditProduct';
 import AddProduct from './AddProduct';
+import OrderCon from './OrderCon';
+
+
+
 
 const App = () => {
 
@@ -84,6 +88,13 @@ const App = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await api.fetchAddress(setAddress)
+    }
+    fetchData();
+  }, []);
+
   const createReview = async (review) => {
     const p = products.find(p => p.name === review.product)
     if (p === undefined) {
@@ -104,6 +115,10 @@ const App = () => {
 
   const updateUser = async(user)=> {
     await api.updateUser({ user, users, setUsers });
+  };
+
+  const createAddress = async(address)=> {
+    await api.createAddress({ add, address, setAddress });
   };
  
   const createLineItem = async(product)=> {
@@ -190,7 +205,7 @@ const App = () => {
               {
               auth.is_admin ? (
                 <div className="navitem"><Link to= {'/users'} className={pathname === "/users" ? "selected" : ""}> Users ({users.length})</Link></div>
-              ) : null
+                ) : null
               }
               
               <span>
@@ -215,7 +230,8 @@ const App = () => {
                 <Route path="/orders" element={<Orders orders={orders} products={products} lineItems={lineItems} />} />
                 <Route path="/products/:id/edit" element={<EditProduct products={products}  auth={auth} updateProduct={updateProduct} />} />
                 <Route path="/products/add" element={<AddProduct products={products} auth={auth} />} />
-
+                <Route path="shipping/ordercon" element={<OrderCon orders={ orders } address={ address } Address={setAddress}/>}/>
+                
               </Routes>
 
             </main>

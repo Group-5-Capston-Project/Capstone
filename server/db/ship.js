@@ -2,6 +2,15 @@ const client = require('./client');
 const { v4 } = require('uuid');
 const uuidv4 = v4;
 
+const fetchAddress = async()=> {
+  const SQL = `
+    SELECT *
+    FROM address
+  `;
+  const response = await client.query(SQL);
+  return response.rows;
+};
+
 const createAddress = async(address)=> {
     const SQL = `
       INSERT INTO address 
@@ -15,5 +24,6 @@ const createAddress = async(address)=> {
   };
   
   module.exports = {
-    createAddress
+    createAddress,
+    fetchAddress
   };

@@ -2,7 +2,12 @@ import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar'
 
+
+
+
+
 const Users = ({ users, auth})=> {
+  
   const navigate = useNavigate();
   return (
     <div>
@@ -19,7 +24,9 @@ const Users = ({ users, auth})=> {
           })
         }
       </ul>
+
     </div>
+    
   );
 };
 
