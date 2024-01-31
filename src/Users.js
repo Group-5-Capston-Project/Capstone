@@ -33,8 +33,6 @@ const Users = ({ users, auth})=> {
           })
         }
 
-      </ul>
-
       </ol>
 
     </div>
