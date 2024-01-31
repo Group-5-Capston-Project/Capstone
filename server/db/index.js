@@ -34,7 +34,8 @@ const {
 } = require('./wishlist');
 
 const {
-  createAddress
+  createAddress,
+  fetchAddress,
 } = require ('./ship')
 
 const loadImage = (filePath) => {
@@ -227,5 +228,8 @@ module.exports = {
   fetchReviews,
   client,
   updateProduct,
+
+  fetchAddress,
+
   createProduct
 };

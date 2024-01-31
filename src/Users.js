@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
+
+
+
+
 const Users = ({ users, auth})=> {
+  
   const navigate = useNavigate();
 
 
@@ -27,8 +32,13 @@ const Users = ({ users, auth})=> {
             );
           })
         }
+
+      </ul>
+
       </ol>
+
     </div>
+    
   );
 };
 

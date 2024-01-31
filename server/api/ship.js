@@ -1,10 +1,21 @@
 const {
   createAddress,
+  fetchAddress,
+  
 } = require('../db');
 
 const express = require('express');
 const app = express.Router();
 const { isLoggedIn, isAdmin } = require('./middleware');
+
+app.get('/', async (req, res, next) => {
+  try {
+    res.send(await fetchAddress());
+  }
+  catch (ex) {
+    next(ex);
+  }
+});
 
 
 

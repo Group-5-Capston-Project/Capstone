@@ -1,6 +1,9 @@
 import React from 'react';
-import { useState} from "react";
-import axios from 'axios';
+import { useState } from "react";
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import axios from 'axios'
+
+
 
 
 const Shipping = () => {
@@ -8,6 +11,9 @@ const Shipping = () => {
     const [last_name, setLast_name] = useState('')
     const [_address, set_address] = useState('')
     const [phone, setPhone] = useState('')
+    const navigate = useNavigate()
+
+
   
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,7 +42,7 @@ const Shipping = () => {
             phone
         } 
         try{
-            await axios.post('/api/ship', ship)
+            await axios.post('/api/address', ship)
         } catch(error){
         }
         setName(''),
@@ -44,7 +50,8 @@ const Shipping = () => {
         set_address(''),
         setPhone(''),
         alert("Thank you for submitting your address!")
-        window.location.reload(false);
+        
+        navigate("/shipping/ordercon");
     }
     return (
         <div>
@@ -78,10 +85,13 @@ const Shipping = () => {
                 onChange={(e) => {setPhone(e.target.value)}}
                 />
               
+             
+                <button type="placeYourOrder" > Place Your Order</button>
                 
-                <button className='createbutton' type="submit">Submit</button>
+
                 
-            </form>
+                </form>
+           
 
         </div>
     )
